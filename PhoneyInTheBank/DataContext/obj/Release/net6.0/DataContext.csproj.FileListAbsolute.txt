@@ -1,0 +1,17 @@
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\bin\Release\net6.0\DataContext.deps.json
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\bin\Release\net6.0\DataContext.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\bin\Release\net6.0\DataContext.pdb
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\bin\Release\net6.0\Models.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\bin\Release\net6.0\Models.pdb
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\obj\Release\net6.0\DataContext.csproj.AssemblyReference.cache
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\obj\Release\net6.0\DataContext.GeneratedMSBuildEditorConfig.editorconfig
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\obj\Release\net6.0\DataContext.AssemblyInfoInputs.cache
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\obj\Release\net6.0\DataContext.AssemblyInfo.cs
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\obj\Release\net6.0\DataContext.csproj.CoreCompileInputs.cache
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\obj\Release\net6.0\DataContext.csproj.CopyComplete
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\obj\Release\net6.0\DataContext.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\obj\Release\net6.0\refint\DataContext.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\obj\Release\net6.0\DataContext.pdb
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\obj\Release\net6.0\ref\DataContext.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\bin\Release\net6.0\DataContext.runtimeconfig.json
+D:\development\PhoneyInTheBank\PhoneyInTheBank\DataContext\obj\Release\net6.0\DataContext.genruntimeconfig.cache
