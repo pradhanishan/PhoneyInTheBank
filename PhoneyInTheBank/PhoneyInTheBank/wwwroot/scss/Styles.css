@@ -53,3 +53,12 @@
     flex-direction: column;
   }
 }
+.custom-registration-form-container {
+  width: 50%;
+}
+
+@media screen and (max-width: 991.98px) {
+  .custom-registration-form-container {
+    width: 100%;
+  }
+}

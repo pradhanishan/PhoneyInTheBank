@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Neiwpzw6ICUyScXTtgjGtioe1juiDBCjyjmR/A6UtZU=",
+  "Hash": "+ylfrqfR+7KuuDK/gYPC5ysV5cyIgL8Wra6SXnQp/To=",
   "Source": "PhoneyInTheBank",
   "BasePath": "_content/PhoneyInTheBank",
   "Mode": "Default",
@@ -2142,6 +2142,23 @@
       "OriginalItemSpec": "wwwroot\\scss\\dependencies\\layouts\\_home-page-child-container-layout.scss"
     },
     {
+      "Identity": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\PhoneyInTheBank\\wwwroot\\scss\\dependencies\\layouts\\_register_form_container_layout.scss",
+      "SourceId": "PhoneyInTheBank",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\PhoneyInTheBank\\wwwroot\\",
+      "BasePath": "_content/PhoneyInTheBank",
+      "RelativePath": "scss/dependencies/layouts/_register_form_container_layout.scss",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\scss\\dependencies\\layouts\\_register_form_container_layout.scss"
+    },
+    {
       "Identity": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\PhoneyInTheBank\\wwwroot\\scss\\dependencies\\variables\\_border-variables.scss",
       "SourceId": "PhoneyInTheBank",
       "SourceType": "Discovered",
@@ -2157,6 +2174,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\scss\\dependencies\\variables\\_border-variables.scss"
+    },
+    {
+      "Identity": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\PhoneyInTheBank\\wwwroot\\scss\\dependencies\\variables\\_breakpoint-variables.scss",
+      "SourceId": "PhoneyInTheBank",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\PhoneyInTheBank\\wwwroot\\",
+      "BasePath": "_content/PhoneyInTheBank",
+      "RelativePath": "scss/dependencies/variables/_breakpoint-variables.scss",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\scss\\dependencies\\variables\\_breakpoint-variables.scss"
     },
     {
       "Identity": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\PhoneyInTheBank\\wwwroot\\scss\\dependencies\\variables\\_color-variables.scss",

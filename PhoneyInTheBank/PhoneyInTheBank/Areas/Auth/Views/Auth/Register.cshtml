@@ -1,0 +1,46 @@
+﻿@model ViewModels.RegisterVM;
+
+@{
+	ViewData["Title"] = "Register";
+}
+
+<div class="container text-lg-start custom-registration-form-container">
+	<form method="post">
+		<h1>Register</h1>
+		<div class="mb-3">
+			<input type="text" class="form-control" placeholder="username" asp-for="UserName" />
+			<span class="text-danger" asp-validation-for="UserName"></span>
+		</div>
+		<div class="mb-3">
+			<input type="email" class="form-control" placeholder="email address" asp-for="Email" />
+			<span class="text-danger" asp-validation-for="Email"></span>
+		</div>
+		<div class="mb-3">
+			<input type="password" class="form-control" placeholder="password" asp-for="Password" />
+			<span class="text-danger" asp-validation-for="Password"></span>
+		</div>
+		<div class="mb-3">
+			<input type="password" class="form-control" placeholder="confirm password" asp-for="ConfirmPassword" />
+			<span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+		</div>
+		<div class="mb-3">
+			<input type="text" class="form-control" placeholder="age" asp-for="Age" />
+			<span class="text-danger" asp-validation-for="Age"></span>
+		</div>
+		<div class="mb-3">
+			<input type="text" class="form-control" placeholder="phone number" asp-for="PhoneNumber" />
+			<span class="text-danger" asp-validation-for="PhoneNumber"></span>
+		</div>
+		<div class="mb-3">
+			<select class="form-select" asp-for="Country" asp-items="ViewBag.Countries"></select>
+			<span class="text-danger" asp-validation-for="Country"></span>
+		</div>
+		<div class="mb-3">
+			<input type="text" class="form-control" placeholder="city" asp-for="Password" />
+			<span class="text-danger" asp-validation-for="Password"></span>
+		</div>
+		<div class="mb-3">
+			<input type="submit" class="btn btn-primary custom-bg-blue" value="submit" />
+		</div>
+	</form>
+</div>

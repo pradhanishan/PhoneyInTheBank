@@ -15,20 +15,52 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Auth/Views/Auth/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQXV0aFxWaWV3c1xBdXRoXFJlZ2lzdGVyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Auth/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQXV0aFxWaWV3c1xfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Auth/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQXV0aFxWaWV3c1xfVmlld1N0YXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Home/Views/Home/AboutUs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSG9tZVxWaWV3c1xIb21lXEFib3V0VXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Home/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSG9tZVxWaWV3c1xIb21lXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Home/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSG9tZVxWaWV3c1xIb21lXFByaXZhY3kuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Home/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSG9tZVxWaWV3c1xfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Home/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSG9tZVxWaWV3c1xfVmlld1N0YXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Views/Home/AboutUs.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBYm91dFVzLmNzaHRtbA==
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/User/Views/User/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xVc2VyXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/User/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/User/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xfVmlld1N0YXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Views/Shared/Error.cshtml]
