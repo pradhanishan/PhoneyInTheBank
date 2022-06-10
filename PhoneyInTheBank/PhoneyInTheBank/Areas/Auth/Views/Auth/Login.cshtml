@@ -1,0 +1,25 @@
+﻿@model ViewModels.LoginVM
+@{
+	ViewData["Title"] = "Login";
+}
+
+
+<div class="container text-lg-start custom-login-form-container">
+	<form method="post" asp-action="Login" asp-controller="Auth" asp-area="Auth">
+		<div asp-validation-summary="All" class="text-danger"></div>
+		<h1>Login</h1>
+		<div class="mb-3">
+			<input type="email" class="form-control" placeholder="username" asp-for="Email" />
+		</div>
+		<div class="mb-3">
+			<input type="password" class="form-control" placeholder="password" asp-for="Password" />
+		</div>
+		<div class="form-check mb-3">
+			<input class="form-check-input" type="checkbox" asp-for="RememberMe">
+			<label class="form-check-label" asp-for="RememberMe"></label>
+		</div>
+		<div class="mb-3">
+			<input type="submit" class="btn btn-primary custom-bg-blue" value="login" />
+		</div>
+	</form>
+</div>
