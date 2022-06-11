@@ -9,6 +9,12 @@
 		<div asp-validation-summary="All" class="text-danger"></div>
 		<h1>Register</h1>
 		<div class="mb-3">
+			<input type="text" class="form-control" placeholder="first name" asp-for="FirstName" />
+		</div>
+		<div class="mb-3">
+			<input type="text" class="form-control" placeholder="last name (optional)" asp-for="LastName" />
+		</div>
+		<div class="mb-3">
 			<input type="email" class="form-control" placeholder="email address" asp-for="Email" />
 		</div>
 		<div class="mb-3">

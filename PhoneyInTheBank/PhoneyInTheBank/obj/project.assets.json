@@ -3734,6 +3734,20 @@
           "bin/placeholder/Models.dll": {}
         }
       },
+      "Repository/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "DataContext": "1.0.0",
+          "Models": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Repository.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Repository.dll": {}
+        }
+      },
       "Utilities/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -11114,6 +11128,11 @@
       "path": "../Models/Models.csproj",
       "msbuildProject": "../Models/Models.csproj"
     },
+    "Repository/1.0.0": {
+      "type": "project",
+      "path": "../Repository/Repository.csproj",
+      "msbuildProject": "../Repository/Repository.csproj"
+    },
     "Utilities/1.0.0": {
       "type": "project",
       "path": "../Utilities/Utilities.csproj",
@@ -11135,6 +11154,7 @@
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.5",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.5",
       "Models >= 1.0.0",
+      "Repository >= 1.0.0",
       "Utilities >= 1.0.0",
       "ViewModels >= 1.0.0"
     ]
@@ -11171,6 +11191,9 @@
             },
             "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\Models\\Models.csproj": {
               "projectPath": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\Models\\Models.csproj"
+            },
+            "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\Repository\\Repository.csproj": {
+              "projectPath": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\Repository\\Repository.csproj"
             },
             "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\Utilities\\Utilities.csproj": {
               "projectPath": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\Utilities\\Utilities.csproj"

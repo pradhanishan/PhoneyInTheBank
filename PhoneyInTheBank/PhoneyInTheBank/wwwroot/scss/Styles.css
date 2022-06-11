@@ -53,21 +53,39 @@
     flex-direction: column;
   }
 }
-.custom-registration-form-container {
-  width: 50%;
+.custom-body-child-container {
+  display: flex;
+  position: absolute;
+  height: 100%;
 }
 
-@media screen and (max-width: 991.98px) {
-  .custom-registration-form-container {
-    width: 100%;
+.custom-user-info-offset {
+  background-color: #36AE7C;
+}
+
+@keyframes updown {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
   }
 }
-.custom-login-form-container {
-  width: 50%;
+.custom-user-card {
+  background: #187498;
+  display: flex;
+  flex-direction: column;
 }
 
-@media screen and (max-width: 991.98px) {
-  .custom-login-form-container {
-    width: 100%;
+.bounce {
+  animation: updown 2s ease infinite;
+}
+
+@media screen and (max-width: 767.98px) {
+  .custom-user-card {
+    display: none;
   }
 }

@@ -15,6 +15,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank
 build_property._RazorSourceGeneratorDebug = 
 
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Auth/Views/Auth/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQXV0aFxWaWV3c1xBdXRoXExvZ2luLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Auth/Views/Auth/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQXV0aFxWaWV3c1xBdXRoXFJlZ2lzdGVyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

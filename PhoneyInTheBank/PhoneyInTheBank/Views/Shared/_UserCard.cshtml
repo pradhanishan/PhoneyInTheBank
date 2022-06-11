@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+	<div class="custom-user-card px-3 text-white">
+		<div class="row fw-bold text-md-center">
+			<hr />
+			<i class="bi bi-list m-1"></i>
+			<span class="m-2">  Details</span>
+			<hr />
+		</div>
+		<div class="row fw-bold text-md-center">
+			<i class="bi bi-arrow-left-right m-1"></i>
+			<span class="m-2"> Transfer</span>
+			<hr />
+		</div>
+		<div class="row fw-bold text-md-center">
+			<i class="bi bi-coin m-1"></i>
+			<span class="m-2">  Earn</span>
+			<hr />
+		</div>
+		<div class="row fw-bold text-md-center">
+			<i class="bi bi-graph-up-arrow m-1"></i>
+			<span class="m-2">  Loan</span>
+			<hr />
+		</div>
+		<div class="row fw-bold text-md-center">
+			<i class="bi bi-clock-history m-1"></i>
+			<span class="m-2"> History</span>
+			<hr />
+		</div><div class="row fw-bold text-md-center">
+			<i class="bi bi-gift-fill m-1 bounce"></i>
+			<span class="m-2"> Present</span>
+			<hr />
+		</div>
+	</div>
+}
+
+
+

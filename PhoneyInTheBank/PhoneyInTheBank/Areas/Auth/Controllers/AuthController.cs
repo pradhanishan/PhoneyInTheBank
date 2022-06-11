@@ -52,6 +52,8 @@ namespace PhoneyInTheBank.Areas.Auth.Controllers
             var user = new ApplicationUser
             {
                 UserName = obj.Email,
+                FirstName = obj.FirstName,
+                LastName = obj.LastName,
                 Email = obj.Email,
                 City = obj.City,
                 PhoneNumber = obj.PhoneNumber,
@@ -64,6 +66,7 @@ namespace PhoneyInTheBank.Areas.Auth.Controllers
             if (result.Succeeded)
             {
                 // TODO [Important!] -> Email Verification Code
+
 
                 return RedirectToAction("Index", "User", new { area = "User" });
             }
