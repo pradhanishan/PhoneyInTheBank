@@ -1,2 +1,11 @@
 ﻿@import "../variables/_breakpoint-variables.scss";
 
+.custom-login-form-container {
+    width: 50%;
+}
+
+@media screen and (max-width:$breakpoint-m-device) {
+    .custom-login-form-container {
+        width: 100%;
+    }
+}

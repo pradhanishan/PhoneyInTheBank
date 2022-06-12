@@ -5,24 +5,30 @@
 @if (SignInManager.IsSignedIn(User))
 {
 	<div class="custom-user-card px-3 text-white">
-		<div class="row fw-bold text-md-center">
-			<hr />
-			<i class="bi bi-list m-1"></i>
-			<span class="m-2">  Details</span>
-			<hr />
-		</div>
-		<div class="row fw-bold text-md-center">
-			<i class="bi bi-arrow-left-right m-1"></i>
-			<span class="m-2"> Transfer</span>
-			<hr />
-		</div>
+		<a class="text-white text-decoration-none" asp-area="User" asp-controller="User" asp-action="Index">
+			<div class="row fw-bold text-md-center">
+				<hr />
+				<i class="bi bi-graph-up-arrow m-1"></i>
+				<span class="m-2">  Details</span>
+				<hr />
+			</div>
+		</a>
+		<a class="text-white text-decoration-none" asp-area="User" asp-controller="Transaction" asp-action="Transfer">
+
+			<div class="row fw-bold text-md-center">
+				<i class="bi bi-arrow-left-right m-1"></i>
+				<span class="m-2"> Transfer</span>
+				<hr />
+			</div>
+
+		</a>
 		<div class="row fw-bold text-md-center">
 			<i class="bi bi-coin m-1"></i>
 			<span class="m-2">  Earn</span>
 			<hr />
 		</div>
 		<div class="row fw-bold text-md-center">
-			<i class="bi bi-graph-up-arrow m-1"></i>
+			<i class="bi bi-bank"></i>
 			<span class="m-2">  Loan</span>
 			<hr />
 		</div>
@@ -30,9 +36,15 @@
 			<i class="bi bi-clock-history m-1"></i>
 			<span class="m-2"> History</span>
 			<hr />
-		</div><div class="row fw-bold text-md-center">
+		</div>
+		<div class="row fw-bold text-md-center">
 			<i class="bi bi-gift-fill m-1 bounce"></i>
 			<span class="m-2"> Present</span>
+			<hr />
+		</div>
+		<div class="row fw-bold text-md-center">
+			<i class="bi bi-gear"></i>
+			<span class="m-2"> Settings</span>
 			<hr />
 		</div>
 	</div>

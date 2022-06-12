@@ -53,10 +53,29 @@
     flex-direction: column;
   }
 }
+.custom-registration-form-container {
+  width: 50%;
+}
+
+@media screen and (max-width: 991.98px) {
+  .custom-registration-form-container {
+    width: 100%;
+  }
+}
+.custom-login-form-container {
+  width: 50%;
+}
+
+@media screen and (max-width: 991.98px) {
+  .custom-login-form-container {
+    width: 100%;
+  }
+}
 .custom-body-child-container {
   display: flex;
   position: absolute;
-  height: 100%;
+  height: 90%;
+  width: 100%;
 }
 
 .custom-user-info-offset {
@@ -88,4 +107,12 @@
   .custom-user-card {
     display: none;
   }
+}
+.custom-footer {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 10%;
 }
