@@ -57,7 +57,7 @@ namespace PhoneyInTheBank.Areas.User.Controllers
                 return View();
             }
 
-            // If Donate To AI is selected, subtract from operative Account
+            // If Donate To AI is selected then subtract from operative Account
             if (transfer.DonateToAI)
             {
                 if (bankAccount.OperativeAmount < 0 || bankAccount.OperativeAmount < transfer.Amount)
