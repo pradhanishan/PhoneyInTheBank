@@ -39,17 +39,36 @@ namespace PhoneyInTheBank.Areas.User.Controllers
             }
 
             var username = User.Identity?.Name;
-            if (username == null) return NotFound();
+            if (username == null)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid User");
+                return View();
+            }
             ApplicationUser user = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
-            if (user == null) return NotFound();
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid User");
+                return View();
+            }
             BankAccount bankAccount = _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
-            if (bankAccount == null) return NotFound();
+            if (bankAccount == null)
+            {
+                ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
+                return View();
+            }
 
+            // If Donate To AI is selected, subtract from operative Account
             if (transfer.DonateToAI)
             {
+                if (bankAccount.OperativeAmount < 0 || bankAccount.OperativeAmount<transfer.Amount)
+				{
+                    ModelState.AddModelError(string.Empty, "You do not have enough funds to process this requrest.");
+                    return View();
+				}
                 bankAccount.OperativeAmount -= transfer.Amount;
             }
 
+            // If Donate to AI is not selected, transfer money between Operative and Investment account.
             if (!transfer.DonateToAI)
             {
                 if (transfer.TransferType != "oti" && transfer.TransferType != "ito")
@@ -59,11 +78,21 @@ namespace PhoneyInTheBank.Areas.User.Controllers
                 }
                 if (transfer.TransferType == "oti")
                 {
+                    if (bankAccount.OperativeAmount < 0 || bankAccount.OperativeAmount < transfer.Amount)
+                    {
+                        ModelState.AddModelError(string.Empty, "You do not have enough funds to process this requrest.");
+                        return View();
+                    }
                     bankAccount.OperativeAmount -= transfer.Amount;
                     bankAccount.InvestmentAmount += transfer.Amount;
                 }
                 if (transfer.TransferType == "ito")
                 {
+                    if (bankAccount.InvestmentAmount < 0 || bankAccount.OperativeAmount < transfer.Amount)
+                    {
+                        ModelState.AddModelError(string.Empty, "You do not have enough funds to process this requrest.");
+                        return View();
+                    }
                     bankAccount.OperativeAmount += transfer.Amount;
                     bankAccount.InvestmentAmount -= transfer.Amount;
                 }
