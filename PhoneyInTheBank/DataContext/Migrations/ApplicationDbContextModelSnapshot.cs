@@ -159,6 +159,48 @@ namespace DataContext.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Models.Loan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("ActiveFlag")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("BankAccountId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<float>("InterestRate")
+                        .HasColumnType("real");
+
+                    b.Property<float>("LeftToPay")
+                        .HasColumnType("real");
+
+                    b.Property<float>("LeftToPayWithInterest")
+                        .HasColumnType("real");
+
+                    b.Property<float>("LoanAmount")
+                        .HasColumnType("real");
+
+                    b.Property<float>("LoanAmountWithInterest")
+                        .HasColumnType("real");
+
+                    b.Property<DateTimeOffset>("UpdatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BankAccountId");
+
+                    b.ToTable("Loans", (string)null);
+                });
+
             modelBuilder.Entity("PhoneyInTheBank.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -349,6 +391,17 @@ namespace DataContext.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Models.Loan", b =>
+                {
+                    b.HasOne("PhoneyInTheBank.Models.BankAccount", "BankAccount")
+                        .WithMany()
+                        .HasForeignKey("BankAccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BankAccount");
                 });
 
             modelBuilder.Entity("PhoneyInTheBank.Models.BankAccount", b =>

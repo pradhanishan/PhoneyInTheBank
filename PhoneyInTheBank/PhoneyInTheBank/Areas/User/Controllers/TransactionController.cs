@@ -88,7 +88,7 @@ namespace PhoneyInTheBank.Areas.User.Controllers
                 }
                 if (transfer.TransferType == "ito")
                 {
-                    if (bankAccount.InvestmentAmount < 0 || bankAccount.OperativeAmount < transfer.Amount)
+                    if (bankAccount.InvestmentAmount < 0 || bankAccount.InvestmentAmount < transfer.Amount)
                     {
                         ModelState.AddModelError(string.Empty, "You do not have enough funds to process this requrest.");
                         return View();
@@ -248,7 +248,42 @@ namespace PhoneyInTheBank.Areas.User.Controllers
         // Take Loan from AI
         public IActionResult Loan()
         {
-            return View();
+            var username = User.Identity?.Name;
+            ApplicationUser user = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid User");
+                return View();
+            }
+            BankAccount bankAccount = _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
+            if (bankAccount == null)
+            {
+                ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
+                return View();
+            }
+
+            IEnumerable<LoanVM> loanTypes = new List<LoanVM>()
+            {
+                new LoanVM {
+                    LoanType="Small Loan",
+                    OperativeAmount=bankAccount.OperativeAmount,
+                    InterestRate=25,
+                    LoanAmount = bankAccount.OperativeAmount + bankAccount.OperativeAmount/4
+                    , TotalAmount=bankAccount.OperativeAmount + (2*bankAccount.OperativeAmount/4)},
+                new LoanVM {
+                    LoanType="Average Loan",
+                    OperativeAmount=bankAccount.OperativeAmount,
+                    InterestRate=50,
+                    LoanAmount = bankAccount.OperativeAmount + bankAccount.OperativeAmount/2
+                    , TotalAmount=bankAccount.OperativeAmount + (2*bankAccount.OperativeAmount/2)},
+                new LoanVM {
+                    LoanType="Large Loan",
+                    OperativeAmount=bankAccount.OperativeAmount,
+                    InterestRate=100,
+                    LoanAmount = bankAccount.OperativeAmount + bankAccount.OperativeAmount
+                    , TotalAmount=3 * bankAccount.OperativeAmount},
+            };
+            return View(loanTypes);
         }
 
         // Get a daily random gift

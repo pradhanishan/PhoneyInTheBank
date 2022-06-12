@@ -1,0 +1,61 @@
+﻿@model IEnumerable<ViewModels.LoanVM>;
+@{
+	ViewData["Title"] = "Loan";
+}
+
+<div class="container">
+	<div>
+		<h1>
+			Request Loan
+		</h1>
+		<div>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>
+							Loan Type
+						</th>
+						<th>
+							Your Balance
+						</th>
+						<th>
+							Interest Rate
+						</th>
+						<th>
+							Loan Amount
+						</th>
+						<th>
+							Total Amount to pay
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var loanType in Model)
+					{
+						<tr>
+							<td>@loanType.LoanType</td>
+							<td>@loanType.OperativeAmount</td>
+							<td>@loanType.InterestRate</td>
+							<td>@loanType.LoanAmount</td>
+							<td>@loanType.TotalAmount</td>
+
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+		<div>
+			<h3>Choose the loan type you want to request</h3>
+			<form>
+				<select class="form-select mb-3">
+					<option selected disabled>--Open this select menu--</option>
+					<option value="small loan">small loan</option>
+					<option value="average loan">average loan</option>
+					<option value="large loan">large loan</option>
+				</select>
+				<input type="submit" class="btn btn-primary custom-bg-blue" value="submit"/>
+			</form>
+		</div>
+
+	</div>
+</div>
