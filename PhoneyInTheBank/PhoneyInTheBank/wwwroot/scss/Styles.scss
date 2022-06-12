@@ -1,0 +1,14 @@
+﻿@import "classes/_color-classes.scss";
+@import "classes/_layout-classes.scss";
+@import "classes/_offset-classes.scss";
+@import "classes/_user-card.scss";
+
+
+.custom-footer{
+   display:flex;
+   position:absolute;
+   justify-content:center;
+   align-items:center;
+   width:100%;
+   height:10%;
+}

@@ -1,0 +1,17 @@
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\bin\Release\net6.0\Repository.deps.json
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\bin\Release\net6.0\Repository.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\bin\Release\net6.0\Repository.pdb
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\bin\Release\net6.0\DataContext.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\bin\Release\net6.0\Models.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\bin\Release\net6.0\DataContext.pdb
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\bin\Release\net6.0\Models.pdb
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\obj\Release\net6.0\Repository.csproj.AssemblyReference.cache
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\obj\Release\net6.0\Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\obj\Release\net6.0\Repository.AssemblyInfoInputs.cache
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\obj\Release\net6.0\Repository.AssemblyInfo.cs
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\obj\Release\net6.0\Repository.csproj.CoreCompileInputs.cache
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\obj\Release\net6.0\Repository.csproj.CopyComplete
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\obj\Release\net6.0\Repository.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\obj\Release\net6.0\refint\Repository.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\obj\Release\net6.0\Repository.pdb
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Repository\obj\Release\net6.0\ref\Repository.dll

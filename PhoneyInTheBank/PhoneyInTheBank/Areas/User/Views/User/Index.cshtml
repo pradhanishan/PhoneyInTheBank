@@ -1,0 +1,25 @@
+﻿@model ViewModels.UserBankAccountVM;
+@{
+	ViewData["Title"] = "User-Home";
+}
+
+<h1>Hello @Model.FirstName </h1>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>Account Number</th>
+			<th>Operative Amount</th>
+			<th>Investment Amount</th>
+			<th>Loan Amount</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>@Model.AccountNumber</td>
+			<td>@Model.OperativeAmount</td>
+			<td>@Model.InvestmentAmount</td>
+			<td>@Model.LoanAmount</td>
+		</tr>
+
+	</tbody>
+</table>

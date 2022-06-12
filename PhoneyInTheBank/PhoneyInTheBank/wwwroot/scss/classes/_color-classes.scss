@@ -1,0 +1,37 @@
+﻿@import "../dependencies/variables/_color-variables.scss";
+
+// Background Colors
+
+.custom-bg-blue {
+    background-color: $blue;
+}
+
+.custom-bg-red {
+    background-color: $red;
+}
+
+.custom-bg-yellow {
+    background-color: $yellow;
+}
+
+.custom-bg-green {
+    background-color: $green;
+}
+
+// Text Colors
+
+.custom-text-blue{
+    color:$blue;
+}
+
+.custom-text-red {
+    color: $red;
+}
+
+.custom-text-yellow {
+    color: $yellow;
+}
+
+.custom-text-green {
+    color: $green;
+}
