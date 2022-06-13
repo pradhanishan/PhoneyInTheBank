@@ -361,7 +361,7 @@ namespace PhoneyInTheBank.Areas.User.Controllers
             }
 
             bankAccount.OperativeAmount += loan.LoanAmount;
-            bankAccount.LoanAmount = loan.LoanAmount;
+            bankAccount.LoanAmount = loan.LoanAmountWithInterest;
 
             _unitOfWork.Loan.Add(loan);
             _unitOfWork.BankAccount.Update(bankAccount);
@@ -388,7 +388,75 @@ namespace PhoneyInTheBank.Areas.User.Controllers
 
             Loan existingLoan = _unitOfWork.Loan.GetFirstOrDefault(x => x.BankAccount.Equals(bankAccount) && x.ActiveFlag);
 
-            return View(existingLoan);
+            LoanPaymentVM loanPayment = new()
+            {
+                AmountTaken = existingLoan.LoanAmount,
+                InterestRate = existingLoan.InterestRate,
+                AmountWithInterest = existingLoan.LoanAmountWithInterest,
+                AmountLeftToPay = existingLoan.LeftToPayWithInterest,
+                TakenOn = existingLoan.CreatedDate,
+            };
+
+            return View(loanPayment);
+        }
+
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public IActionResult PayLoan(LoanPaymentVM loanPayment)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(loanPayment);
+            }
+
+            var username = User.Identity?.Name;
+            ApplicationUser user = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid User");
+                return View(loanPayment);
+            }
+            BankAccount bankAccount = _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
+            if (bankAccount == null)
+            {
+                ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
+                return View(loanPayment);
+            }
+
+            Loan existingLoan = _unitOfWork.Loan.GetFirstOrDefault(x => x.BankAccount.Equals(bankAccount) && x.ActiveFlag);
+
+            if (loanPayment.ClearanceAmount > existingLoan.LeftToPayWithInterest)
+            {
+
+                ModelState.AddModelError(string.Empty, "You are paying more than you owe!");
+                return View(loanPayment);
+
+
+            }
+            if (bankAccount.OperativeAmount < loanPayment.ClearanceAmount)
+            {
+                ModelState.AddModelError(string.Empty, "You do not have enough funds to pay");
+                return View(loanPayment);
+            }
+
+            bankAccount.OperativeAmount -= loanPayment.ClearanceAmount;
+            bankAccount.LoanAmount -= loanPayment.ClearanceAmount;
+            existingLoan.LeftToPayWithInterest -= loanPayment.ClearanceAmount;
+            loanPayment.AmountLeftToPay -= loanPayment.ClearanceAmount;
+
+            if (existingLoan.LeftToPayWithInterest == 0)
+            {
+                existingLoan.ActiveFlag = false;
+            }
+            existingLoan.UpdatedDate = DateTimeOffset.Now;
+
+            _unitOfWork.BankAccount.Update(bankAccount);
+            _unitOfWork.Loan.Update(existingLoan);
+            _unitOfWork.Save();
+
+            return View(loanPayment);
         }
 
         // Get a daily random gift
