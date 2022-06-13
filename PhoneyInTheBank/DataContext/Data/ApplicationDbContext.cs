@@ -13,13 +13,18 @@ namespace DataContext.Data
         }
 
         public DbSet<BankAccount> BankAccount { get; set; }
-
         public DbSet<Loan> Loan { get; set; }
+        public DbSet<TransactionType> TransactionType { get; set; }
+
+        public DbSet<TransactionHistory> TransactionHistory { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<BankAccount>().ToTable("BankAccounts");
             modelBuilder.Entity<Loan>().ToTable("Loans");
+            modelBuilder.Entity<TransactionType>().ToTable("TransactionTypes");
+            modelBuilder.Entity<TransactionHistory>().ToTable("TransactionHistories");
         }
     }
 }

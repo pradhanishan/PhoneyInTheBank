@@ -10,5 +10,6 @@ namespace Repository.IRepository
     public interface ILoanRepository : IRepository<Loan>
     {
         public void Update(Loan Entity);
+
     }
 }
