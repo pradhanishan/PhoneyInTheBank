@@ -14,6 +14,8 @@ namespace Repository.UnitOfWork
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
 
+        public ILoanRepository Loan { get; private set; }
+
         private readonly ApplicationDbContext _db;
 
         public UnitOfWork(ApplicationDbContext db)
@@ -21,6 +23,7 @@ namespace Repository.UnitOfWork
             _db = db;
             BankAccount = new BankAccountRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
+            Loan = new LoanRepository(_db);
 
         }
 

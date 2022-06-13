@@ -8,6 +8,7 @@ namespace ViewModels
 {
     public class LoanVM
     {
+        public int Id { get; set; }
         public string LoanType { get; set; } = string.Empty;
         public float OperativeAmount { get; set; }
         public float LoanAmount { get; set; }

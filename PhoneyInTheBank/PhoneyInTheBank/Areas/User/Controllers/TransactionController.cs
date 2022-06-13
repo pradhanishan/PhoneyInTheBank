@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 using PhoneyInTheBank.Models;
 using Repository.UnitOfWork;
 using ViewModels;
@@ -265,25 +266,129 @@ namespace PhoneyInTheBank.Areas.User.Controllers
             IEnumerable<LoanVM> loanTypes = new List<LoanVM>()
             {
                 new LoanVM {
+                    Id=1,
                     LoanType="Small Loan",
                     OperativeAmount=bankAccount.OperativeAmount,
                     InterestRate=25,
                     LoanAmount = bankAccount.OperativeAmount + bankAccount.OperativeAmount/4
                     , TotalAmount=bankAccount.OperativeAmount + (2*bankAccount.OperativeAmount/4)},
                 new LoanVM {
+                    Id=2,
                     LoanType="Average Loan",
                     OperativeAmount=bankAccount.OperativeAmount,
                     InterestRate=50,
                     LoanAmount = bankAccount.OperativeAmount + bankAccount.OperativeAmount/2
                     , TotalAmount=bankAccount.OperativeAmount + (2*bankAccount.OperativeAmount/2)},
                 new LoanVM {
+                    Id=3,
                     LoanType="Large Loan",
                     OperativeAmount=bankAccount.OperativeAmount,
                     InterestRate=100,
                     LoanAmount = bankAccount.OperativeAmount + bankAccount.OperativeAmount
                     , TotalAmount=3 * bankAccount.OperativeAmount},
             };
+
+            Loan existingLoan = _unitOfWork.Loan.GetFirstOrDefault(x => x.BankAccount.Equals(bankAccount) && x.ActiveFlag);
+
+            if (existingLoan != null)
+            {
+                return RedirectToAction("PayLoan", "Transaction", new { area = "User" });
+            }
+
             return View(loanTypes);
+        }
+
+        // Apply for loan if you do not have an existing loan
+        public IActionResult ApplyLoan(int? id)
+        {
+            var username = User.Identity?.Name;
+            ApplicationUser user = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid User");
+                return View();
+            }
+            BankAccount bankAccount = _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
+            if (bankAccount == null)
+            {
+                ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
+                return View();
+            }
+
+            IEnumerable<LoanVM> loanTypes = new List<LoanVM>()
+            {
+                new LoanVM {
+                    Id=1,
+                    LoanType="Small Loan",
+                    OperativeAmount=bankAccount.OperativeAmount,
+                    InterestRate=25,
+                    LoanAmount = bankAccount.OperativeAmount + bankAccount.OperativeAmount/4
+                    , TotalAmount=bankAccount.OperativeAmount + (2*bankAccount.OperativeAmount/4)},
+                new LoanVM {
+                    Id=2,
+                    LoanType="Average Loan",
+                    OperativeAmount=bankAccount.OperativeAmount,
+                    InterestRate=50,
+                    LoanAmount = bankAccount.OperativeAmount + bankAccount.OperativeAmount/2
+                    , TotalAmount=bankAccount.OperativeAmount + (2*bankAccount.OperativeAmount/2)},
+                new LoanVM {
+                    Id=3,
+                    LoanType="Large Loan",
+                    OperativeAmount=bankAccount.OperativeAmount,
+                    InterestRate=100,
+                    LoanAmount = bankAccount.OperativeAmount + bankAccount.OperativeAmount
+                    , TotalAmount=3 * bankAccount.OperativeAmount},
+            };
+
+            LoanVM selectedLoanType = loanTypes.FirstOrDefault(x => x.Id == id);
+
+            Loan loan = new()
+            {
+                BankAccount = bankAccount,
+                LoanAmount = selectedLoanType.LoanAmount,
+                LeftToPay = selectedLoanType.LoanAmount,
+                InterestRate = selectedLoanType.InterestRate,
+                LoanAmountWithInterest = selectedLoanType.TotalAmount,
+                LeftToPayWithInterest = selectedLoanType.TotalAmount,
+
+            };
+
+            Loan existingLoan = _unitOfWork.Loan.GetFirstOrDefault(x => x.BankAccount.Equals(bankAccount) && x.ActiveFlag);
+
+            if (existingLoan != null)
+            {
+                return RedirectToAction("Loan", "User", new { area = "User" });
+            }
+
+            bankAccount.OperativeAmount += loan.LoanAmount;
+            bankAccount.LoanAmount = loan.LoanAmount;
+
+            _unitOfWork.Loan.Add(loan);
+            _unitOfWork.BankAccount.Update(bankAccount);
+            _unitOfWork.Save();
+
+            return RedirectToAction("Index", "User", new { area = "User" });
+        }
+
+        public IActionResult PayLoan()
+        {
+            var username = User.Identity?.Name;
+            ApplicationUser user = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid User");
+                return View();
+            }
+            BankAccount bankAccount = _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
+            if (bankAccount == null)
+            {
+                ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
+                return View();
+            }
+
+            Loan existingLoan = _unitOfWork.Loan.GetFirstOrDefault(x => x.BankAccount.Equals(bankAccount) && x.ActiveFlag);
+
+            return View(existingLoan);
         }
 
         // Get a daily random gift

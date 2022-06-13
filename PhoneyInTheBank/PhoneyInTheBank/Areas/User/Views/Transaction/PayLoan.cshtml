@@ -1,0 +1,55 @@
+﻿@model Models.Loan;
+@{
+	ViewData["Title"] = "Pay Loan";
+}
+
+<div class="container">
+	<div class="mb-3">
+		<h1 class="text-danger">
+			You have an open loan to clear.
+		</h1>
+	</div>
+	<div class="mb-3">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Amount Taken</th>
+					<th>Interest Rate</th>
+					<th>Amount with interest</th>
+					<th>Amount left to pay</th>
+					<th>Taken on</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>@Model.LoanAmount</td>
+					<td>@Model.InterestRate</td>
+					<td>@Model.LoanAmountWithInterest</td>
+					<td>@Model.LeftToPayWithInterest</td>
+					<td>@Model.CreatedDate</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="mb-3">
+		<h2 class="text-danger text-decoration-underline">
+			House Policy!
+		</h2>
+		<p>
+			Clear your current loan before applying for another
+		</p>
+		<hr/>
+	</div>
+	<div class="mb-3">
+		<form>
+			<div class="mb-3 col-3">
+				<label class="form-label fw-bold">Enter amount you would like to pay</label>
+				<input type="text" class="form-control" placeholder="Amount less than @Model.LeftToPayWithInterest">
+			</div>
+			<div class="mb-3">
+				<input type="submit" class="btn btn-primary custom-bg-blue" value="submit"/>
+			</div>
+		</form>
+	</div>
+
+</div>

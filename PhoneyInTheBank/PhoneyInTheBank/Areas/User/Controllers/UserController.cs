@@ -68,6 +68,8 @@ namespace PhoneyInTheBank.Areas.User.Controllers
                 AccountNumber = _unitOfWork.BankAccount.GenerateAccountNumber(),
                 ApplicationUser = user,
             };
+
+
             _unitOfWork.BankAccount.Add(bankAccount);
             _unitOfWork.Save();
             return RedirectToAction("Index", "User", new { area = "User" });
