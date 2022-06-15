@@ -51,28 +51,36 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSG9tZVxWaWV3c1xfVmlld1N0YXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Identity/Pages/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Transaction/Views/Earn/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHJhbnNhY3Rpb25cVmlld3NcRWFyblxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/User/Views/Transaction/Earn.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xUcmFuc2FjdGlvblxFYXJuLmNzaHRtbA==
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Transaction/Views/History/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHJhbnNhY3Rpb25cVmlld3NcSGlzdG9yeVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/User/Views/Transaction/History.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xUcmFuc2FjdGlvblxIaXN0b3J5LmNzaHRtbA==
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Transaction/Views/Loan/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHJhbnNhY3Rpb25cVmlld3NcTG9hblxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/User/Views/Transaction/Loan.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xUcmFuc2FjdGlvblxMb2FuLmNzaHRtbA==
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Transaction/Views/Loan/PayLoan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHJhbnNhY3Rpb25cVmlld3NcTG9hblxQYXlMb2FuLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/User/Views/Transaction/PayLoan.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xUcmFuc2FjdGlvblxQYXlMb2FuLmNzaHRtbA==
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Transaction/Views/Present/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHJhbnNhY3Rpb25cVmlld3NcUHJlc2VudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/User/Views/Transaction/Transfer.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlclxWaWV3c1xUcmFuc2FjdGlvblxUcmFuc2Zlci5jc2h0bWw=
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Transaction/Views/Transfer/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHJhbnNhY3Rpb25cVmlld3NcVHJhbnNmZXJcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Transaction/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHJhbnNhY3Rpb25cVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Transaction/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHJhbnNhY3Rpb25cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/User/Views/User/Index.cshtml]

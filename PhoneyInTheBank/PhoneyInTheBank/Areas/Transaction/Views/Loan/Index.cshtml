@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ViewModels.LoanVM>;
+@{
+	ViewData["Title"] = "Loan";
+}
+
+<div class="container">
+	<div>
+		<h1>
+			Request Loan
+		</h1>
+		<div>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>
+							Loan Type
+						</th>
+						<th>
+							Your Balance
+						</th>
+						<th>
+							Interest Rate
+						</th>
+						<th>
+							Loan Amount
+						</th>
+						<th>
+							Total Amount to pay
+						</th>
+						<th>
+							Apply
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var loanType in Model)
+					{
+						<tr>
+							<td>@loanType.LoanType</td>
+							<td>@loanType.OperativeAmount</td>
+							<td>@loanType.InterestRate</td>
+							<td>@loanType.LoanAmount</td>
+							<td>@loanType.TotalAmount</td>
+							<td>
+								<a asp-area="Transaction" asp-controller="Loan" asp-action="ApplyLoan" asp-route-id="@loanType.Id">
+									<i class="bi bi-plus"></i>
+								</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</div>

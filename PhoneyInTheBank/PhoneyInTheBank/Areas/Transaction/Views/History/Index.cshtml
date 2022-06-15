@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ViewModels.TransactionHistoryVM>;
+@{
+	ViewData["Title"] = "Transaction History";
+}
+
+<div class="container">
+	<div class="mb-3">
+		<h1>
+			Here is a list  of your transaction history.
+		</h1>
+	</div>
+	<div class="mb-3">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Transaction Date</th>
+					<th>Amount Sent</th>
+					<th>Amount Received</th>
+					@*<td>TransactionType</td>*@
+					<th>Message</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				@foreach (var transaction in Model)
+				{
+					<tr>
+						<td>@transaction.TransactionDate</td>
+						<td>@transaction.SentAmount</td>
+						<td>@transaction.ReceivedAmount</td>
+						@*<td>@transaction.TransactionType</td>*@
+						<td>@transaction.Message</td>
+					</tr>
+				}
+
+			</tbody>
+		</table>
+	</div>
+	<div>
+		@if ((int)ViewData["CurrentPage"] != 1)
+		{
+			<a class="text-decoration-none custom-text-blue" asp-area="Transaction" asp-controller="History" asp-action="Index" asp-route-startingNumber=@ViewData["StartingNumber"] asp-route-direction="prev"><i class="bi bi-skip-backward-fill"></i> </a>
+		}
+
+		<span class="custom-text-blue fw-bolder mx-3">Page @ViewData["CurrentPage"] / @ViewData["TotalPages"]</span>
+
+		@if ((int)ViewData["CurrentPage"] != (int)ViewData["TotalPages"])
+		{
+			<a class="text-decoration-none custom-text-blue" asp-area="Transaction" asp-controller="History" asp-action="Index" asp-route-startingNumber=@ViewData["StartingNumber"] asp-route-direction="next"> <i class="bi bi-skip-forward-fill"></i></a>
+		}
+
+
+	</div>
+</div>

@@ -13,7 +13,7 @@
 				<hr />
 			</div>
 		</a>
-		<a class="text-white text-decoration-none" asp-area="User" asp-controller="Transaction" asp-action="Transfer">
+		<a class="text-white text-decoration-none" asp-area="Transaction" asp-controller="Transfer" asp-action="Index">
 
 			<div class="row fw-bold text-md-center">
 				<i class="bi bi-arrow-left-right m-1"></i>
@@ -22,32 +22,34 @@
 			</div>
 
 		</a>
-		<a class="text-white text-decoration-none" asp-area="User" asp-controller="Transaction" asp-action="Earn">
+		<a class="text-white text-decoration-none" asp-area="Transaction" asp-controller="Earn" asp-action="Index">
 			<div class="row fw-bold text-md-center">
 				<i class="bi bi-coin m-1"></i>
 				<span class="m-2">  Earn</span>
 				<hr />
 			</div>
 		</a>
-		<a class="text-white text-decoration-none" asp-area="User" asp-controller="Transaction" asp-action="Loan">
+		<a class="text-white text-decoration-none" asp-area="Transaction" asp-controller="Loan" asp-action="Index">
 			<div class="row fw-bold text-md-center">
 				<i class="bi bi-bank"></i>
 				<span class="m-2">  Loan</span>
 				<hr />
 			</div>
 		</a>
-		<a class="text-white text-decoration-none" asp-area="User" asp-controller="Transaction" asp-action="History" asp-route-startingNumber="0" asp-route-direction="">
+		<a class="text-white text-decoration-none" asp-area="Transaction" asp-controller="History" asp-action="Index" asp-route-startingNumber="0" asp-route-direction="">
 			<div class="row fw-bold text-md-center">
 				<i class="bi bi-clock-history m-1"></i>
 				<span class="m-2"> History</span>
 				<hr />
 			</div>
 		</a>
-		<div class="row fw-bold text-md-center">
-			<i class="bi bi-gift-fill m-1 bounce"></i>
-			<span class="m-2"> Present</span>
-			<hr />
-		</div>
+		<a class="text-white text-decoration-none" asp-area="Transaction" asp-controller="Present" asp-action="Index">
+			<div class="row fw-bold text-md-center">
+				<i class="bi bi-gift-fill m-1 bounce"></i>
+				<span class="m-2"> Present</span>
+				<hr />
+			</div>
+		</a>
 		<div class="row fw-bold text-md-center">
 			<i class="bi bi-gear"></i>
 			<span class="m-2"> Settings</span>
