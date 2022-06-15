@@ -39,14 +39,14 @@
 	<div>
 		@if ((int)ViewData["CurrentPage"] != 1)
 		{
-			<a class="text-decoration-none custom-text-blue" asp-area="User" asp-controller="Transaction" asp-action="History" asp-route-startingNumber=@ViewData["StartingNumber"] asp-route-direction="prev"><i class="bi bi-skip-backward-fill"></i> prev</a>
+			<a class="text-decoration-none custom-text-blue" asp-area="User" asp-controller="Transaction" asp-action="History" asp-route-startingNumber=@ViewData["StartingNumber"] asp-route-direction="prev"><i class="bi bi-skip-backward-fill"></i> </a>
 		}
 
 		<span class="custom-text-blue fw-bolder mx-3">Page @ViewData["CurrentPage"] / @ViewData["TotalPages"]</span>
 
 		@if ((int)ViewData["CurrentPage"] != (int)ViewData["TotalPages"])
 		{
-			<a class="text-decoration-none custom-text-blue" asp-area="User" asp-controller="Transaction" asp-action="History" asp-route-startingNumber=@ViewData["StartingNumber"] asp-route-direction="next">next <i class="bi bi-skip-forward-fill"></i></a>
+			<a class="text-decoration-none custom-text-blue" asp-area="User" asp-controller="Transaction" asp-action="History" asp-route-startingNumber=@ViewData["StartingNumber"] asp-route-direction="next"> <i class="bi bi-skip-forward-fill"></i></a>
 		}
 
 		
