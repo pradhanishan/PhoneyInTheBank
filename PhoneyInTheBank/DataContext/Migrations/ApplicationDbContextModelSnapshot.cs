@@ -209,6 +209,11 @@ namespace DataContext.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
                     b.Property<float>("ReceivedAmount")
                         .HasColumnType("real");
 
@@ -218,8 +223,10 @@ namespace DataContext.Migrations
                     b.Property<DateTimeOffset>("TransactionDate")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("TransactionTypeId")
-                        .HasColumnType("int");
+                    b.Property<string>("TransactionType")
+                        .IsRequired()
+                        .HasMaxLength(4)
+                        .HasColumnType("nvarchar(4)");
 
                     b.Property<string>("User")
                         .IsRequired()
@@ -227,8 +234,6 @@ namespace DataContext.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TransactionTypeId");
 
                     b.ToTable("TransactionHistories", (string)null);
                 });
@@ -457,17 +462,6 @@ namespace DataContext.Migrations
                         .IsRequired();
 
                     b.Navigation("BankAccount");
-                });
-
-            modelBuilder.Entity("Models.TransactionHistory", b =>
-                {
-                    b.HasOne("Models.TransactionType", "TransactionType")
-                        .WithMany()
-                        .HasForeignKey("TransactionTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("TransactionType");
                 });
 
             modelBuilder.Entity("PhoneyInTheBank.Models.BankAccount", b =>

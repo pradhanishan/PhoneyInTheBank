@@ -16,6 +16,8 @@ namespace Repository.UnitOfWork
 
         public ILoanRepository Loan { get; private set; }
 
+        public ITransactionHistoryRepository TransactionHistory { get; private set; }
+
         private readonly ApplicationDbContext _db;
 
         public UnitOfWork(ApplicationDbContext db)
@@ -24,6 +26,7 @@ namespace Repository.UnitOfWork
             BankAccount = new BankAccountRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_db);
             Loan = new LoanRepository(_db);
+            TransactionHistory = new TransactionHistoryRepository(_db);
 
         }
 

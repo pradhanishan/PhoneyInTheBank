@@ -18,14 +18,17 @@ namespace Models
         [Required, MinLength(4), MaxLength(256)]
         public string User { get; set; } = string.Empty;
 
-        [Required]
-        public TransactionType? TransactionType { get; set; }
+        [Required, MinLength(1), MaxLength(4)]
+        public string TransactionType { get; set; } = string.Empty;
 
         [Required]
         public float SentAmount { get; set; }
 
         [Required]
         public float ReceivedAmount { get; set; }
+
+        [Required, MaxLength(256)]
+        public string Message { get; set; } = string.Empty;
 
         [Required]
         public DateTimeOffset TransactionDate { get; set; } = DateTimeOffset.Now;

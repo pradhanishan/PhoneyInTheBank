@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ViewModels.TransactionHistoryVM>;
+@{
+	ViewData["Title"] = "Transaction History";
+}
+
+<div class="container">
+	<div>
+		<h1>
+			Here is a list  of your transaction history.
+		</h1>
+	</div>
+	<div>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<td>Transaction Date</td>
+					<td>Amount Sent</td>
+					<td>Amount Received</td>
+					@*<td>TransactionType</td>*@
+					<td>Message</td>
+				</tr>
+			</thead>
+			<tbody>
+
+				@foreach (var transaction in Model)
+				{
+					<tr>
+						<td>@transaction.TransactionDate</td>
+						<td>@transaction.SentAmount</td>
+						<td>@transaction.ReceivedAmount</td>
+						@*<td>@transaction.TransactionType</td>*@
+						<td>@transaction.Message</td>
+					</tr>
+				}
+
+			</tbody>
+		</table>
+	</div>
+</div>

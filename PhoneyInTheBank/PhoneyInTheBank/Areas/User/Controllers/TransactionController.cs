@@ -58,6 +58,16 @@ namespace PhoneyInTheBank.Areas.User.Controllers
                 return View();
             }
 
+
+            TransactionHistory trx = new()
+            {
+                User = User.Identity.Name,
+                SentAmount = transfer.Amount,
+                ReceivedAmount = 0,
+                TransactionDate = DateTimeOffset.Now,
+            };
+
+
             // If Donate To AI is selected then subtract from operative Account
             if (transfer.DonateToAI)
             {
@@ -66,8 +76,11 @@ namespace PhoneyInTheBank.Areas.User.Controllers
                     ModelState.AddModelError(string.Empty, "You do not have enough funds to process this requrest.");
                     return View();
                 }
+                trx.TransactionType = "D";
+                trx.Message = "Donated " + transfer.Amount.ToString() + " phonies to AI";
                 bankAccount.OperativeAmount -= transfer.Amount;
             }
+
 
             // If Donate to AI is not selected, transfer money between Operative and Investment account.
             if (!transfer.DonateToAI)
@@ -84,6 +97,8 @@ namespace PhoneyInTheBank.Areas.User.Controllers
                         ModelState.AddModelError(string.Empty, "You do not have enough funds to process this requrest.");
                         return View();
                     }
+                    trx.TransactionType = "OI";
+                    trx.Message = "Transferred " + transfer.Amount.ToString() + " phonies from operative to investment account.";
                     bankAccount.OperativeAmount -= transfer.Amount;
                     bankAccount.InvestmentAmount += transfer.Amount;
                 }
@@ -94,12 +109,15 @@ namespace PhoneyInTheBank.Areas.User.Controllers
                         ModelState.AddModelError(string.Empty, "You do not have enough funds to process this requrest.");
                         return View();
                     }
+                    trx.TransactionType = "IO";
+                    trx.Message = "Transferred " + transfer.Amount.ToString() + " phonies from investment to operative account.";
                     bankAccount.OperativeAmount += transfer.Amount;
                     bankAccount.InvestmentAmount -= transfer.Amount;
                 }
             }
 
             _unitOfWork.BankAccount.Update(bankAccount);
+            _unitOfWork.TransactionHistory.Add(trx);
             _unitOfWork.Save();
 
             return RedirectToAction("Index", "User", new { area = "User" });
@@ -228,19 +246,33 @@ namespace PhoneyInTheBank.Areas.User.Controllers
                     break;
             }
 
+            TransactionHistory trx = new()
+            {
+                User = User.Identity.Name,
+                SentAmount = rps.WagerValue,
+                ReceivedAmount = 0,
+                TransactionDate = DateTimeOffset.Now,
+                TransactionType = "E",
+            };
+
             if (rps.TieFlag) return View();
 
             if (!rps.TieFlag && rps.VictoryFlag)
             {
+                trx.ReceivedAmount = trx.SentAmount;
+                trx.SentAmount = 0;
+                trx.Message = "Earned " + trx.ReceivedAmount.ToString() + " phonies by playing rock paper scissors.";
                 bankAccount.OperativeAmount += rps.WagerValue;
             }
 
             if (!rps.TieFlag && !rps.VictoryFlag)
             {
+                trx.Message = "Lost " + trx.SentAmount.ToString() + " phonies by playing rock paper scissors.";
                 bankAccount.OperativeAmount -= rps.WagerValue;
             }
 
             _unitOfWork.BankAccount.Update(bankAccount);
+            _unitOfWork.TransactionHistory.Add(trx);
             _unitOfWork.Save();
 
             return View();
@@ -365,6 +397,16 @@ namespace PhoneyInTheBank.Areas.User.Controllers
 
             _unitOfWork.Loan.Add(loan);
             _unitOfWork.BankAccount.Update(bankAccount);
+
+            TransactionHistory trx = new()
+            {
+                ReceivedAmount = selectedLoanType.LoanAmount,
+                TransactionType = "LT",
+                SentAmount = 0,
+                User = User.Identity.Name,
+                Message = "Took a " + selectedLoanType.LoanType + " of " + selectedLoanType.LoanAmount.ToString() + " phonies ",
+            };
+            _unitOfWork.TransactionHistory.Add(trx);
             _unitOfWork.Save();
 
             return RedirectToAction("Index", "User", new { area = "User" });
@@ -452,8 +494,18 @@ namespace PhoneyInTheBank.Areas.User.Controllers
             }
             existingLoan.UpdatedDate = DateTimeOffset.Now;
 
+            TransactionHistory trx = new()
+            {
+                SentAmount = loanPayment.ClearanceAmount,
+                TransactionType = "LG",
+                ReceivedAmount = 0,
+                User = User.Identity.Name,
+                Message = "Paid " + loanPayment.ClearanceAmount.ToString() + " phonies from loan of " + loanPayment.AmountWithInterest.ToString(),
+            };
+
             _unitOfWork.BankAccount.Update(bankAccount);
             _unitOfWork.Loan.Update(existingLoan);
+            _unitOfWork.TransactionHistory.Add(trx);
             _unitOfWork.Save();
 
             return View(loanPayment);
@@ -463,6 +515,29 @@ namespace PhoneyInTheBank.Areas.User.Controllers
         public IActionResult Present()
         {
             return View();
+        }
+
+        public IActionResult History()
+        {
+
+            IEnumerable<TransactionHistory> transactions = _unitOfWork.TransactionHistory.GetUserTransactions(x => x.User == User.Identity.Name);
+            List<TransactionHistoryVM> transactionsVM = new List<TransactionHistoryVM>();
+            foreach (var transaction in transactions)
+            {
+                TransactionHistoryVM vm = new()
+                {
+                    ReceivedAmount = transaction.ReceivedAmount,
+                    SentAmount = transaction.SentAmount,
+                    TransactionDate = transaction.TransactionDate,
+                    TransactionType = transaction.TransactionType,
+                    Message = transaction.Message,
+                };
+
+                transactionsVM.Add(vm);
+
+            }
+
+            return View(transactionsVM.AsEnumerable());
         }
 
 

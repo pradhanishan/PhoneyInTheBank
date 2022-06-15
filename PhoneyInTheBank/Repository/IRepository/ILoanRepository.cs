@@ -11,5 +11,7 @@ namespace Repository.IRepository
     {
         public void Update(Loan Entity);
 
+
+
     }
 }
