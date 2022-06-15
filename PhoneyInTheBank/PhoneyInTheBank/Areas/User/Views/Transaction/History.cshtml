@@ -4,20 +4,20 @@
 }
 
 <div class="container">
-	<div>
+	<div class="mb-3">
 		<h1>
 			Here is a list  of your transaction history.
 		</h1>
 	</div>
-	<div>
+	<div class="mb-3">
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<td>Transaction Date</td>
-					<td>Amount Sent</td>
-					<td>Amount Received</td>
+					<th>Transaction Date</th>
+					<th>Amount Sent</th>
+					<th>Amount Received</th>
 					@*<td>TransactionType</td>*@
-					<td>Message</td>
+					<th>Message</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,5 +35,20 @@
 
 			</tbody>
 		</table>
+	</div>
+	<div>
+		@if ((int)ViewData["CurrentPage"] != 1)
+		{
+			<a class="text-decoration-none custom-text-blue" asp-area="User" asp-controller="Transaction" asp-action="History" asp-route-startingNumber=@ViewData["StartingNumber"] asp-route-direction="prev"><i class="bi bi-skip-backward-fill"></i> prev</a>
+		}
+
+		<span class="custom-text-blue fw-bolder mx-3">Page @ViewData["CurrentPage"] / @ViewData["TotalPages"]</span>
+
+		@if ((int)ViewData["CurrentPage"] != (int)ViewData["TotalPages"])
+		{
+			<a class="text-decoration-none custom-text-blue" asp-area="User" asp-controller="Transaction" asp-action="History" asp-route-startingNumber=@ViewData["StartingNumber"] asp-route-direction="next">next <i class="bi bi-skip-forward-fill"></i></a>
+		}
+
+		
 	</div>
 </div>
