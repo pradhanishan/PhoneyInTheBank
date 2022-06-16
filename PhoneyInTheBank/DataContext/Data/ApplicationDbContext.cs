@@ -18,6 +18,8 @@ namespace DataContext.Data
 
         public DbSet<TransactionHistory> TransactionHistory { get; set; }
 
+        public DbSet<Present> Present { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -25,6 +27,7 @@ namespace DataContext.Data
             modelBuilder.Entity<Loan>().ToTable("Loans");
             modelBuilder.Entity<TransactionType>().ToTable("TransactionTypes");
             modelBuilder.Entity<TransactionHistory>().ToTable("TransactionHistories");
+            modelBuilder.Entity<Present>().ToTable("Presents");
         }
     }
 }

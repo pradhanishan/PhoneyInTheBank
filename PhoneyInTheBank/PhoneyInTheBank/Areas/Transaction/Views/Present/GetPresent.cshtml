@@ -1,0 +1,37 @@
+﻿@model ViewModels.PresentVM;
+@{
+	ViewData["Title"] = "Present";
+}
+
+<div class="container justify-content-center align-items-center">
+	<div>
+		<h1>
+			Congratulations <i class="fa-solid fa-champagne-glasses"></i>
+		</h1>
+	</div>
+	<div>
+		<div class="mb-3">
+			@switch (Model.PresentType)
+			{
+				case "Legendary":
+					<i class="fa-solid fa-sack-dollar" style="font-size:150px;"></i>
+					break;
+				case "Epic":
+					<i class="fa-solid fa-coins" style="font-size:150px;"></i>
+					break;
+				case "Rare":
+					<i class="fa-solid fa-money-bill-wave" style="font-size:150px;"></i>
+					break;
+				default:
+					<i class="fa-solid fa-piggy-bank" style="font-size:150px;"></i>
+					break;
+			}
+			<div class="mb-3">
+				<span>
+					You received a @Model.PresentType Present of @Model.PresentAmount Phonies <i class="bi bi-exclamation-lg"></i>
+				</span>
+			</div>
+		</div>
+
+	</div>
+</div>

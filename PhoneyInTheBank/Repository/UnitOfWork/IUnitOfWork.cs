@@ -16,6 +16,8 @@ namespace Repository.UnitOfWork
         ILoanRepository Loan { get; }
 
         ITransactionHistoryRepository TransactionHistory { get; }
+
+        IPresentRepository Present { get; }
         void Save();
     }
 }

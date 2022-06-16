@@ -67,8 +67,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHJhbnNhY3Rpb25cVmlld3NcTG9hblxQYXlMb2FuLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Transaction/Views/Present/GetPresent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHJhbnNhY3Rpb25cVmlld3NcUHJlc2VudFxHZXRQcmVzZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Transaction/Views/Present/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHJhbnNhY3Rpb25cVmlld3NcUHJlc2VudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Transaction/Views/Present/PresentUnavailable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHJhbnNhY3Rpb25cVmlld3NcUHJlc2VudFxQcmVzZW50VW5hdmFpbGFibGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Transaction/Views/Transfer/Index.cshtml]
