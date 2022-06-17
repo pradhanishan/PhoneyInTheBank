@@ -148,6 +148,8 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             _unitOfWork.TransactionHistory.Add(trx);
             _unitOfWork.Save();
 
+            TempData["Success"] = "Loan processing completed.";
+
             return RedirectToAction("Index", "User", new { area = "User" });
         }
 
@@ -246,7 +248,9 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             _unitOfWork.TransactionHistory.Add(trx);
             _unitOfWork.Save();
 
-            return View(loanPayment);
+            TempData["Success"] = "Payment Completed.";
+
+            return RedirectToAction("Index", "User", new { Area = "User" });
         }
 
     }

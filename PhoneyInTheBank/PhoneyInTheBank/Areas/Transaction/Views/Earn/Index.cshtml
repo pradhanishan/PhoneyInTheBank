@@ -3,36 +3,76 @@
 	ViewData["Title"] = "Earn";
 }
 
-<div class="container">
-	<div>
+<div class="container custom-earn-container">
+	<div class="custom-earn-child custom-earn-head">
 		<h1>Earn Phoney</h1>
-	</div>
-	<div>
 		<span>
 			You can earn phoney by playing Rock Paper Scissors. Place your wager and try your luck.
-		</span>
-		<div>
-			<div class="mt-3" style="width:50%;">
-				<form method="post" asp-area="Transaction" asp-controller="Earn" asp-area="Index">
-					<div class="mb-3">
-						<label asp-for="WagerValue" class="form-label"></label>
-						<input type="text" class="form-control" placeholder="Enter wager amount here" asp-for="WagerValue" />
+		</span><hr />
+	</div>
+	<div class="custom-earn-child custom-earn-body-1">
+		<div class="mt-3">
+			<form method="post" asp-area="Transaction" asp-controller="Earn" asp-area="Index">
+				<div class="mb-3 custom-earm-money-input-container">
+					<label asp-for="WagerValue" class="form-label fw-bold"></label>
+					<input type="text" class="form-control" placeholder="Enter wager amount here" asp-for="WagerValue" />
+				</div>
+				<input type="text" id="rps-text" asp-for="UserChoice" value="" hidden />
+				<label class="form-label fw-bold" asp-for="UserChoice"></label><br />
+				<div class="custom-earn-buttons-container">
+					<div class="mx-3 custom-earn-button">
+						<button style="background:none;border:none;" id="btn-rock" onclick="selectRock()" class="custom-text-red">
+							<i class="fa-solid fa-hand-back-fist" style="font-size:76px;"></i>
+						</button>
 					</div>
-					<input type="text" id="rps-text" asp-for="UserChoice" value="" hidden />
-					<label class="form-label" asp-for="UserChoice"></label><br />
-					<button style="background:none;border:none;" id="btn-rock" onclick="selectRock()" class="custom-text-red">
-						<i class="fa-solid fa-hand-back-fist" style="font-size:76px;"></i>
-					</button>
-					<button style="background:none;border:none;" onclick="selectPaper()" class="custom-text-green">
-						<i class="fa-solid fa-hand" style="font-size:76px;"></i>
-					</button>
-					<button style="background:none;border:none;" onclick="selectScissor()" class="custom-text-yellow">
-						<i class="fa-solid fa-hand-scissors" style="font-size:76px;"></i>
-					</button>
-					<br />
-					<div asp-validation-summary="All"></div>
-				</form>
-			</div>
+
+					<div class="mx-3 custom-earn-button">
+						<button style="background:none;border:none;" onclick="selectPaper()" class="custom-text-green">
+							<i class="fa-solid fa-hand" style="font-size:76px;"></i>
+						</button>
+					</div>
+					<div class="mx-3 custom-earn-button">
+						<button style="background:none;border:none;" onclick="selectScissor()" class="custom-text-yellow">
+							<i class="fa-solid fa-hand-scissors" style="font-size:76px;"></i>
+						</button>
+					</div>
+				</div>
+				<br />
+				<div class="text-danger" asp-validation-summary="All"></div>
+			</form>
+		</div>
+	</div>
+	<div class="custom-earn-child custom-earn-body-2 mt-3">
+		<div>
+			<label class="fw-bold">Info</label>
+		</div>
+		<div class="custom-earn-table-container mb-3">
+			<table class="table table-bordered table-striped table-hover">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Beats</th>
+						<th>Loses To</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><i class="fa-solid fa-hand-back-fist" style="font-size:40px;"></i></td>
+						<td><i class="fa-solid fa-hand-scissors" style="font-size:40px;"></i></td>
+						<td><i class="fa-solid fa-hand" style="font-size:40px;"></i></td>
+					</tr>
+					<tr>
+						<td><i class="fa-solid fa-hand" style="font-size:40px;"></i></td>
+						<td><i class="fa-solid fa-hand-back-fist" style="font-size:40px;"></i></td>
+						<td><i class="fa-solid fa-hand-scissors" style="font-size:40px;"></i></td>
+					</tr>
+					<tr>
+						<td><i class="fa-solid fa-hand-scissors" style="font-size:40px;"></i></td>
+						<td><i class="fa-solid fa-hand" style="font-size:40px;"></i></td>
+						<td><i class="fa-solid fa-hand-back-fist" style="font-size:40px;"></i></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 

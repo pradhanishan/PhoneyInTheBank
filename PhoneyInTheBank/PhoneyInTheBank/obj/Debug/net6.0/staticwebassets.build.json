@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+nmZXLBNlfBab8k/42tf5+0fWbBQ/aXS9PgV9HCK1FE=",
+  "Hash": "q63djgGxChsexAxpumKv7m7JzQGubb5K79bkBH2DJbM=",
   "Source": "PhoneyInTheBank",
   "BasePath": "_content/PhoneyInTheBank",
   "Mode": "Default",
@@ -2108,6 +2108,23 @@
       "OriginalItemSpec": "wwwroot\\scss\\classes\\_color-classes.scss"
     },
     {
+      "Identity": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\PhoneyInTheBank\\wwwroot\\scss\\classes\\_containers.scss",
+      "SourceId": "PhoneyInTheBank",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\PhoneyInTheBank\\wwwroot\\",
+      "BasePath": "_content/PhoneyInTheBank",
+      "RelativePath": "scss/classes/_containers.scss",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\scss\\classes\\_containers.scss"
+    },
+    {
       "Identity": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\PhoneyInTheBank\\wwwroot\\scss\\classes\\_layout-classes.scss",
       "SourceId": "PhoneyInTheBank",
       "SourceType": "Discovered",
@@ -2140,6 +2157,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\scss\\classes\\_offset-classes.scss"
+    },
+    {
+      "Identity": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\PhoneyInTheBank\\wwwroot\\scss\\classes\\_page-layouts.scss",
+      "SourceId": "PhoneyInTheBank",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\PhoneyInTheBank\\wwwroot\\",
+      "BasePath": "_content/PhoneyInTheBank",
+      "RelativePath": "scss/classes/_page-layouts.scss",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\scss\\classes\\_page-layouts.scss"
     },
     {
       "Identity": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\PhoneyInTheBank\\wwwroot\\scss\\classes\\_user-card.scss",

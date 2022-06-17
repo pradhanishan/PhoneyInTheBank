@@ -67,7 +67,7 @@ namespace PhoneyInTheBank.Areas.Auth.Controllers
             {
                 // TODO [Important!] -> Email Verification Code
 
-
+                TempData["Success"] = "Registered successfully, Login to continue.";
                 return RedirectToAction("Index", "User", new { area = "User" });
             }
             else
@@ -76,6 +76,7 @@ namespace PhoneyInTheBank.Areas.Auth.Controllers
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+                TempData["Success"] = "Registered failed.";
                 return View();
             }
         }
@@ -99,18 +100,22 @@ namespace PhoneyInTheBank.Areas.Auth.Controllers
 
             var result = await _signInManager.PasswordSignInAsync(obj.Email, obj.Password, obj.RememberMe, false);
 
+
             if (result.Succeeded)
             {
+                TempData["Success"] = "Welcome "+obj.Email;
                 return RedirectToAction("Index", "User", new { area = "User" });
             }
             else
             {
                 if (result.IsLockedOut)
                 {
+                    TempData["Error"] = "Your email is locked.";
                     ModelState.AddModelError("Login", "You are locked out.");
                 }
                 else
                 {
+                    TempData["Error"] = "Invalid login credentials.";
                     ModelState.AddModelError("Login", "Failed To Login.");
                 }
                 return View();
@@ -124,7 +129,9 @@ namespace PhoneyInTheBank.Areas.Auth.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
+            TempData["Success"] = "Logged out successfully";
             return RedirectToAction("Index", "Home", new { area = "Home" });
+
         }
     }
 }

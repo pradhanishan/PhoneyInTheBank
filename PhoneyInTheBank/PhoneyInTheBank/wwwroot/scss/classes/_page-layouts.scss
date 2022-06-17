@@ -1,0 +1,65 @@
+﻿@import "../dependencies/variables/_breakpoint-variables.scss";
+
+// Earn Phoney page
+
+.custom-earn-container {
+    display: grid;
+    grid-template-areas: "head head" "body1 body2";
+}
+
+.custom-earn-head {
+    grid-area: head;
+}
+
+.custom-earn-body-1 {
+    grid-area: body1;
+}
+
+.custom-earn-body-2 {
+    grid-area: body2;
+}
+
+.custom-earm-money-input-container{
+    width:50%;
+}
+
+.custom-earn-buttons-container {
+    display: flex;
+}
+
+.custom-earn-button:hover {
+    filter: brightness(150%);
+    transform: scale(1.5);
+}
+
+.custom-earn-table-container{
+    text-align:center;
+}
+
+
+@media screen and (max-width:$breakpoint-l-device) {
+    .custom-earn-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .custom-earm-money-input-container {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:$breakpoint-m-device) {
+    .custom-home-child-container {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        grid-template-rows: repeat(2,1fr);
+    }
+}
+
+@media screen and (max-width:$breakpoint-s-device) {
+    .custom-home-child-container {
+        display: flex;
+        flex-direction: column;
+    }
+}

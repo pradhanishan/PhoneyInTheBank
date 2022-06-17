@@ -9,6 +9,7 @@ namespace ViewModels
 {
     public class RockPaperScissorVM
     {
+		[Display(Name ="Wager amount")]
         public float WagerValue { get; set; }
 
         [Display(Name ="Select your choice")]

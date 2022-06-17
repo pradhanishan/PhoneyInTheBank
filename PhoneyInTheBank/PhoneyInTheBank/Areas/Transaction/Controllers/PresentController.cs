@@ -114,6 +114,10 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 presentVM.PresentType = "Common";
             }
 
+            DateTimeOffset dt = DateTime.UtcNow;
+            present.LastCollectedDate = dt;
+            present.NextPresentAvailableDate = dt.AddDays(1);
+
             BankAccount bankAccount = _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
             bankAccount.OperativeAmount += presentVM.PresentAmount;
 
@@ -125,6 +129,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 Message = "Collected a " + presentVM.PresentType.ToString() + " present of " + presentVM.PresentAmount.ToString() + " phonies."
             };
 
+            _unitOfWork.Present.Update(present);
             _unitOfWork.BankAccount.Update(bankAccount);
             _unitOfWork.TransactionHistory.Add(trx);
             _unitOfWork.Save();

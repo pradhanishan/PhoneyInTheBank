@@ -113,6 +113,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             _unitOfWork.BankAccount.Update(bankAccount);
             _unitOfWork.TransactionHistory.Add(trx);
             _unitOfWork.Save();
+            TempData["Success"] = "Transfer complete.";
 
             return RedirectToAction("Index", "User", new { area = "User" });
         }

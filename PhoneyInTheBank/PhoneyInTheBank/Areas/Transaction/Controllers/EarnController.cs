@@ -69,19 +69,19 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 case "rock":
                     if (rps.AIChoice == "rock")
                     {
-                        ModelState.AddModelError(String.Empty, "Its a tie, you and your opponent both selected rock.");
+                        TempData["Tie"] = "You and your opponent both selected rock.";
                         rps.TieFlag = true;
                         rps.VictoryFlag = false;
                     }
                     else if (rps.AIChoice == "paper")
                     {
-                        ModelState.AddModelError(String.Empty, "You lose, You selected rock, your opponent selected paper.");
+                        TempData["Loss"] = "You selected rock, your opponent selected paper.";
                         rps.TieFlag = false;
                         rps.VictoryFlag = false;
                     }
                     else if (rps.AIChoice == "scissor")
                     {
-                        ModelState.AddModelError(String.Empty, "You win, You selected rock, your opponent selected scissor.");
+                        TempData["Victory"] = "You selected rock, your opponent selected scissor.";
                         rps.TieFlag = false;
                         rps.VictoryFlag = true;
                     }
@@ -93,19 +93,19 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 case "paper":
                     if (rps.AIChoice == "rock")
                     {
-                        ModelState.AddModelError(String.Empty, "You win, You selected paper, your opponent selected rock.");
+                        TempData["Victory"] = "You selected paper, your opponent selected rock.";
                         rps.TieFlag = false;
                         rps.VictoryFlag = true;
                     }
                     else if (rps.AIChoice == "paper")
                     {
-                        ModelState.AddModelError(String.Empty, "Its a tie, you and your opponent both selected paper.");
+                        TempData["Tie"] = "You and your opponent both selected paper.";
                         rps.TieFlag = true;
                         rps.VictoryFlag = false;
                     }
                     else if (rps.AIChoice == "scissor")
                     {
-                        ModelState.AddModelError(String.Empty, "You lose, You selected paper, your opponent selected scissor.");
+                        TempData["Loss"] = "You selected paper, your opponent selected scissor.";
                     }
                     else
                     {
@@ -115,19 +115,20 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 case "scissor":
                     if (rps.AIChoice == "rock")
                     {
-                        ModelState.AddModelError(String.Empty, "You lose, You selected scissor, your opponent selected rock.");
+                        TempData["Loss"] = "You selected scissor, your opponent selected rock.";
                         rps.TieFlag = false;
                         rps.VictoryFlag = false;
                     }
                     else if (rps.AIChoice == "paper")
                     {
-                        ModelState.AddModelError(String.Empty, "You win, You selected scissor, your opponent selected paper.");
+
+                        TempData["Victory"] = "You selected scissor, your opponent selected paper.";
                         rps.TieFlag = false;
                         rps.VictoryFlag = true;
                     }
                     else if (rps.AIChoice == "scissor")
                     {
-                        ModelState.AddModelError(String.Empty, "Its a tie, you and your opponent both selected scissor.");
+                        TempData["Tie"] = "You and your opponent both selected scissor.";
                         rps.TieFlag = true;
                         rps.VictoryFlag = false;
                     }
@@ -150,7 +151,8 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 TransactionType = "E",
             };
 
-            if (rps.TieFlag) return View();
+            if (rps.TieFlag) { }
+
 
             if (!rps.TieFlag && rps.VictoryFlag)
             {
