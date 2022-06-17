@@ -1,10 +1,15 @@
 ﻿@import "../dependencies/variables/_breakpoint-variables.scss";
 
-// Earn Phoney page
+/*--------------------------------------------------------
+Transaction/Earn - [START]
+--------------------------------------------------------*/
+
+
 
 .custom-earn-container {
     display: grid;
     grid-template-areas: "head head" "body1 body2";
+
 }
 
 .custom-earn-head {
@@ -34,10 +39,11 @@
 
 .custom-earn-table-container{
     text-align:center;
+    width:50%;
 }
 
 
-@media screen and (max-width:$breakpoint-l-device) {
+@media screen and (max-width:$breakpoint-m-device) {
     .custom-earn-container {
         display: flex;
         flex-direction: column;
@@ -61,5 +67,62 @@
     .custom-home-child-container {
         display: flex;
         flex-direction: column;
+    }
+}
+
+/*--------------------------------------------------------
+Transaction/Loan - [START]
+--------------------------------------------------------*/
+
+.custom-loan-body{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    grid-template-rows:auto;
+    width:100%;
+    justify-content:space-between;
+}
+
+@media screen and (max-width:$breakpoint-l-device) {
+    .custom-loan-body {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media screen and (max-width:$breakpoint-s-device) {
+    .custom-loan-body {
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+    }
+}
+
+/*--------------------------------------------------------
+Transaction/PayLoan - [START]
+--------------------------------------------------------*/
+
+
+.custom-pay-loan-input{
+    width:50%;
+}
+
+@media screen and (max-width:$breakpoint-s-device) {
+    .custom-pay-loan-input {
+        width: 100%;
+    }
+}
+
+/*--------------------------------------------------------
+Transaction/Transfer - [START]
+--------------------------------------------------------*/
+
+.custom-transfer-container {
+    width:50%;
+}
+
+
+@media screen and (max-width:$breakpoint-s-device) {
+    .custom-transfer-container {
+        width: 100%;
     }
 }

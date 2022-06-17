@@ -19,7 +19,7 @@
 	</script>
 }
 
-@*@if (TempData["Victory"] != null)
+@if (TempData["Victory"] != null)
 {
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -42,4 +42,4 @@
 	<script type="text/javascript">
 		swal("Its a tie!", '@TempData["Tie"]', "warning");
 	</script>
-}*@
+}

@@ -3,13 +3,13 @@
 	ViewData["Title"] = "Pay Loan";
 }
 
-<div class="container">
-	<div class="mb-3">
+<div class="container custom-payloan-container">
+	<div class=" custom-pay-loan-child m-3">
 		<h1 class="text-danger">
 			You have an open loan to clear.
 		</h1>
 	</div>
-	<div class="mb-3">
+	<div class=" custom-pay-loan-child m-3">
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
@@ -31,7 +31,7 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="mb-3">
+	<div class="custom-pay-loan-child m-3">
 		<h2 class="text-danger text-decoration-underline">
 			House Rules!
 		</h2>
@@ -40,16 +40,16 @@
 		</p>
 		<hr />
 	</div>
-	<div class="mb-3">
+	<div class="custom-pay-loan-child m-3">
 		<form method="post" asp-area="Transaction" asp-controller="Loan" asp-action="PayLoan">
-			<div class="mb-3 col-3">
+			<div class="mb-3">
 				<input hidden type="text" asp-for="AmountTaken" />
 				<input hidden type="text" asp-for="InterestRate" />
 				<input hidden type="text" asp-for="AmountWithInterest" />
 				<input hidden type="text" asp-for="AmountLeftToPay" />
 				<input hidden type="text" asp-for="TakenOn" />
 				<label class="form-label fw-bold" asp-for="ClearanceAmount">Enter amount you would like to pay</label>
-				<input type="text" class="form-control" asp-for="ClearanceAmount" placeholder="Amount less than @Model.AmountLeftToPay">
+				<input type="text" class="form-control custom-pay-loan-input" asp-for="ClearanceAmount" placeholder="Amount less than @Model.AmountLeftToPay">
 			</div>
 			<div class="mb-3">
 				<input type="submit" class="btn btn-primary custom-bg-blue" value="submit" />

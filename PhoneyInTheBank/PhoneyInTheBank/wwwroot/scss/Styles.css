@@ -71,13 +71,6 @@
     width: 100%;
   }
 }
-.custom-body-child-container {
-  display: flex;
-  position: absolute;
-  height: 90%;
-  width: 100%;
-}
-
 .custom-user-info-offset {
   background-color: #36AE7C;
 }
@@ -96,7 +89,6 @@
 .custom-user-card {
   background: #187498;
   display: flex;
-  flex-direction: column;
 }
 
 .bounce {
@@ -117,6 +109,9 @@
   align-items: center;
 }
 
+/*--------------------------------------------------------
+Transaction/Earn - [START]
+--------------------------------------------------------*/
 .custom-earn-container {
   display: grid;
   grid-template-areas: "head head" "body1 body2";
@@ -149,9 +144,10 @@
 
 .custom-earn-table-container {
   text-align: center;
+  width: 50%;
 }
 
-@media screen and (max-width: 1199.98px) {
+@media screen and (max-width: 991.98px) {
   .custom-earn-container {
     display: flex;
     flex-direction: column;
@@ -175,15 +171,54 @@
     flex-direction: column;
   }
 }
-.custom-footer {
-  display: flex;
-  position: absolute;
-  justify-content: center;
-  align-items: center;
+/*--------------------------------------------------------
+Transaction/Loan - [START]
+--------------------------------------------------------*/
+.custom-loan-body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
   width: 100%;
-  height: 10%;
+  justify-content: space-between;
 }
 
+@media screen and (max-width: 1199.98px) {
+  .custom-loan-body {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 767.98px) {
+  .custom-loan-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+/*--------------------------------------------------------
+Transaction/PayLoan - [START]
+--------------------------------------------------------*/
+.custom-pay-loan-input {
+  width: 50%;
+}
+
+@media screen and (max-width: 767.98px) {
+  .custom-pay-loan-input {
+    width: 100%;
+  }
+}
+/*--------------------------------------------------------
+Transaction/Transfer - [START]
+--------------------------------------------------------*/
+.custom-transfer-container {
+  width: 50%;
+}
+
+@media screen and (max-width: 767.98px) {
+  .custom-transfer-container {
+    width: 100%;
+  }
+}
 .custom-container {
   display: flex;
   justify-content: center;
