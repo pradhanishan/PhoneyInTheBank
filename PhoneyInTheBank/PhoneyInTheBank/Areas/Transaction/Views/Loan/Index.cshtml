@@ -5,14 +5,15 @@
 
 <div class="container custom-loan-container">
 	<div class="custom-loan-child custom-loan-head mt-3">
-		<h1>
-			Request Loan
-		</h1>
+		<div class="custom-head">
+			<div><h1>Request Loan </h1></div>
+			<div><a class="btn btn-danger text-dedcoration-none text-white" asp-area="User" asp-controller="User" asp-action="Index"><i class="fa-solid fa-angle-left"></i> back</a></div>
+		</div>
 		<div class="custom-loan-child custom-loan-body mt-3">
 			@foreach (var loanType in Model)
 			{
 				<a class="text-decoration-none text-dark m-3" asp-area="Transaction" asp-controller="Loan" asp-action="ApplyLoan" asp-route-id="@loanType.Id">
-					<div class="card" style="width: 18rem;">
+					<div class="card custom-card" style="width: 18rem;">
 						@if (@loanType.LoanType == "Small Loan")
 						{
 							<img src="~/images/small-loan.jpg" class="card-img-top" alt="small-loan">

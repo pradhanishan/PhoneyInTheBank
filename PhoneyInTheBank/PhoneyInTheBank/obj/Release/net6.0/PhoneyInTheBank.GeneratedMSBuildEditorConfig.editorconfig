@@ -75,8 +75,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHJhbnNhY3Rpb25cVmlld3NcUHJlc2VudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Transaction/Views/Present/PresentTaken.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHJhbnNhY3Rpb25cVmlld3NcUHJlc2VudFxQcmVzZW50VGFrZW4uY3NodG1s
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Transaction/Views/Present/PresentUnavailable.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVHJhbnNhY3Rpb25cVmlld3NcUHJlc2VudFxQcmVzZW50VW5hdmFpbGFibGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Areas/Transaction/Views/Transfer/Index.cshtml]
@@ -109,6 +109,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Views/Shared/_Notification.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ob3RpZmljYXRpb24uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/development/PhoneyInTheBank/PhoneyInTheBank/PhoneyInTheBank/Views/Shared/_UserCard.cshtml]

@@ -4,8 +4,9 @@
 }
 
 <div class="container">
-	<div class="m-3">
-		<h1>Transfer phoney</h1>
+	<div class="m-3 custom-head">
+		<div><h1>Transfer phoney  </h1></div>
+		<div><a class="btn btn-danger text-dedcoration-none text-white" asp-area="User" asp-controller="User" asp-action="Index"><i class="fa-solid fa-angle-left"></i> back</a></div>
 	</div>
 	<div class="m-3">
 		<span>Donate your phoney to AI or transfer phoney between your Operative and Investment Account</span><hr />
@@ -14,7 +15,7 @@
 	<div class="custom-transfer-container m-3">
 		<form method="post" asp-area="Transaction" asp-controller="Transfer" asp-action="Index">
 
-			
+
 			<div class="mb-3 row">
 				<label class="col-form-label fw-bold" asp-for="Amount"></label>
 				<div class="col-sm-10">

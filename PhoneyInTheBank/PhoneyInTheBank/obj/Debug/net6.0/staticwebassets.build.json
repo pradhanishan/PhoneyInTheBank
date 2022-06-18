@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "iGc8bA+wssfSwf0r6wuL4xlGrYorlPdgRT2DxLLsreE=",
+  "Hash": "rrHAt9ZX8bNdXU8CevswD1pOXuE5zwL18ePwj9zfrEw=",
   "Source": "PhoneyInTheBank",
   "BasePath": "_content/PhoneyInTheBank",
   "Mode": "Default",
@@ -1188,6 +1188,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\legendary-present.jpg"
+    },
+    {
+      "Identity": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\PhoneyInTheBank\\wwwroot\\images\\present-unavailable.jpg",
+      "SourceId": "PhoneyInTheBank",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\PhoneyInTheBank\\wwwroot\\",
+      "BasePath": "_content/PhoneyInTheBank",
+      "RelativePath": "images/present-unavailable.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\present-unavailable.jpg"
     },
     {
       "Identity": "D:\\development\\PhoneyInTheBank\\PhoneyInTheBank\\PhoneyInTheBank\\wwwroot\\images\\rare-present.jpg",
