@@ -15,13 +15,13 @@ namespace Repository
         private readonly ApplicationDbContext _db;
         public PresentRepository(ApplicationDbContext db) : base(db)
         {
-
+            _db = db;
         }
 
         public void Update(Present Entity)
         {
 
-            throw new NotImplementedException();
+            _db.Update(Entity);
         }
     }
 }

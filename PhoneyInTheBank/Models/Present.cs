@@ -22,7 +22,7 @@ namespace Models
 
         [Required]
         [Display(Name = "Next Present Available On")]
-        public DateTimeOffset NextPresentAvailableDate { get; set; }
+        public DateTimeOffset NextPresentAvailableDate { get; set; } = DateTimeOffset.UtcNow;
 
         [Required]
         [Display(Name = "Is gift ready to collecct?")]

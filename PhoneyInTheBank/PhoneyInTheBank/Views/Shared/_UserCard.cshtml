@@ -4,58 +4,24 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-	<div class="custom-user-card px-3 text-white">
-		<a class="text-white text-decoration-none" asp-area="User" asp-controller="User" asp-action="Index">
-			<div class="row fw-bold text-md-center">
 
-				<i class="bi bi-graph-up-arrow m-1"></i>
-				<span class="m-2">  Details</span>
 
-			</div>
+	<li class="nav-item dropdown">
+		<a class="nav-link dropdown-toggle  text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+			Account
 		</a>
-		<a class="text-white text-decoration-none" asp-area="Transaction" asp-controller="Transfer" asp-action="Index">
-
-			<div class="row fw-bold text-md-center">
-				<i class="bi bi-arrow-left-right m-1"></i>
-				<span class="m-2"> Transfer</span>
-
-			</div>
-
-		</a>
-		<a class="text-white text-decoration-none" asp-area="Transaction" asp-controller="Earn" asp-action="Index">
-			<div class="row fw-bold text-md-center">
-				<i class="bi bi-coin m-1"></i>
-				<span class="m-2">  Earn</span>
-			</div>
-		</a>
-		<a class="text-white text-decoration-none" asp-area="Transaction" asp-controller="Loan" asp-action="Index">
-			<div class="row fw-bold text-md-center">
-				<i class="bi bi-bank m-1"></i>
-				<span class="m-2">  Loan</span>
-
-			</div>
-		</a>
-		<a class="text-white text-decoration-none" asp-area="Transaction" asp-controller="History" asp-action="Index" asp-route-startingNumber="0" asp-route-direction="">
-			<div class="row fw-bold text-md-center">
-				<i class="bi bi-clock-history m-1"></i>
-				<span class="m-2"> History</span>
-
-			</div>
-		</a>
-		<a class="text-white text-decoration-none" asp-area="Transaction" asp-controller="Present" asp-action="Index">
-			<div class="row fw-bold text-md-center">
-				<i class="bi bi-gift-fill m-1 bounce"></i>
-				<span class="m-2"> Present</span>
-
-			</div>
-		</a>
-		<div class="row fw-bold text-md-center">
-			<i class="bi bi-gear"></i>
-			<span class="m-2"> Settings</span>
-
-		</div>
-	</div>
+		<ul class="dropdown-menu custom-bg-blue" aria-labelledby="navbarDropdown">
+			<li><a class="text-white text-decoration-none dropdown-item" asp-area="User" asp-controller="User" asp-action="Index">Account Detail</a></li>
+			<li><a class="text-white text-decoration-none dropdown-item" asp-area="Transaction" asp-controller="Transfer" asp-action="Index">Transfer Phoney</a></li>
+			<li><a class="text-white text-decoration-none dropdown-item" asp-area="Transaction" asp-controller="Earn" asp-action="Index">Earn Phoney</a></li>
+			<li><a class="text-white text-decoration-none dropdown-item" asp-area="Transaction" asp-controller="Loan" asp-action="Index">Loan</a></li>
+			<li><a class="text-white text-decoration-none dropdown-item" asp-area="Transaction" asp-controller="History" asp-action="Index">Transaction History</a></li>
+			<li><a class="text-white text-decoration-none dropdown-item" asp-area="Transaction" asp-controller="Present" asp-action="Index">Collect Daily Present</a></li>
+			@*<li><a class="dropdown-item" href="#">Another action</a></li>
+			<li><hr class="dropdown-divider"></li>
+			<li><a class="dropdown-item" href="#">Something else here</a></li>*@
+		</ul>
+	</li>
 }
-
 
 

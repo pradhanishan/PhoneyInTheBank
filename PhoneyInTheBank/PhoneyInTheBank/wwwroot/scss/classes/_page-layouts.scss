@@ -1,4 +1,5 @@
 ﻿@import "../dependencies/variables/_breakpoint-variables.scss";
+@import "../dependencies/variables/_color-variables.scss";
 
 /*--------------------------------------------------------
 Transaction/Earn - [START]
@@ -9,7 +10,6 @@ Transaction/Earn - [START]
 .custom-earn-container {
     display: grid;
     grid-template-areas: "head head" "body1 body2";
-
 }
 
 .custom-earn-head {
@@ -24,8 +24,8 @@ Transaction/Earn - [START]
     grid-area: body2;
 }
 
-.custom-earm-money-input-container{
-    width:50%;
+.custom-earm-money-input-container {
+    width: 50%;
 }
 
 .custom-earn-buttons-container {
@@ -37,9 +37,9 @@ Transaction/Earn - [START]
     transform: scale(1.5);
 }
 
-.custom-earn-table-container{
-    text-align:center;
-    width:50%;
+.custom-earn-table-container {
+    text-align: center;
+    width: 50%;
 }
 
 
@@ -74,12 +74,21 @@ Transaction/Earn - [START]
 Transaction/Loan - [START]
 --------------------------------------------------------*/
 
-.custom-loan-body{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    grid-template-rows:auto;
-    width:100%;
-    justify-content:space-between;
+.custom-loan-body {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: auto;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.card{
+    overflow:hidden;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    border:2px solid $cyan;
 }
 
 @media screen and (max-width:$breakpoint-l-device) {
@@ -90,10 +99,10 @@ Transaction/Loan - [START]
 
 @media screen and (max-width:$breakpoint-s-device) {
     .custom-loan-body {
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 }
 
@@ -102,8 +111,8 @@ Transaction/PayLoan - [START]
 --------------------------------------------------------*/
 
 
-.custom-pay-loan-input{
-    width:50%;
+.custom-pay-loan-input {
+    width: 50%;
 }
 
 @media screen and (max-width:$breakpoint-s-device) {
@@ -117,7 +126,7 @@ Transaction/Transfer - [START]
 --------------------------------------------------------*/
 
 .custom-transfer-container {
-    width:50%;
+    width: 50%;
 }
 
 

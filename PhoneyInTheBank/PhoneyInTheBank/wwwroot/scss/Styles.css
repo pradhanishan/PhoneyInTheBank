@@ -182,6 +182,15 @@ Transaction/Loan - [START]
   justify-content: space-between;
 }
 
+.card {
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: scale(1.1);
+  border: 2px solid #37E2D5;
+}
+
 @media screen and (max-width: 1199.98px) {
   .custom-loan-body {
     grid-template-columns: repeat(2, 1fr);

@@ -38,18 +38,6 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
             if (present == null)
             {
-                DateTimeOffset dt = DateTimeOffset.UtcNow;
-
-                Present newPresent = new()
-                {
-                    ApplicationUser = user,
-                    LastCollectedDate = dt,
-                    NextPresentAvailableDate = dt.AddDays(1),
-                };
-
-                _unitOfWork.Present.Add(newPresent);
-                _unitOfWork.Save();
-
                 return RedirectToAction("GetPresent", "Present", new { area = "Transaction" });
 
             }
@@ -84,7 +72,10 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
             if (present == null)
             {
-                return NotFound();
+                present = new()
+                {
+                    ApplicationUser = user,
+                };
             }
 
             if (DateTime.UtcNow < present.NextPresentAvailableDate)
@@ -141,5 +132,6 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
         {
             return View();
         }
+
     }
 }
