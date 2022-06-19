@@ -18,7 +18,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var username = User.Identity?.Name;
             if (username == null)
@@ -26,14 +26,14 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid User");
                 return View();
             }
-            ApplicationUser user = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
+            ApplicationUser user = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
             if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "Invalid User");
                 return View();
             }
 
-            Present present = _unitOfWork.Present.GetFirstOrDefault(x => x.ApplicationUser == user);
+            Present present = await _unitOfWork.Present.GetFirstOrDefault(x => x.ApplicationUser == user);
 
 
             if (present == null)
@@ -49,7 +49,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             return RedirectToAction("GetPresent", "Present", new { area = "Transaction" });
         }
 
-        public IActionResult GetPresent()
+        public async Task<IActionResult> GetPresent()
         {
             var username = User.Identity?.Name;
             if (username == null)
@@ -57,7 +57,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid User");
                 return View();
             }
-            ApplicationUser user = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
+            ApplicationUser user = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
             if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "Invalid User");
@@ -68,7 +68,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             int presentNumber = r.Next(0, 99);
             PresentVM presentVM = new();
 
-            Present present = _unitOfWork.Present.GetFirstOrDefault(x => x.ApplicationUser == user);
+            Present present = await _unitOfWork.Present.GetFirstOrDefault(x => x.ApplicationUser == user);
 
             if (present == null)
             {
@@ -109,7 +109,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             present.LastCollectedDate = dt;
             present.NextPresentAvailableDate = dt.AddDays(1);
 
-            BankAccount bankAccount = _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
+            BankAccount bankAccount = await _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
             bankAccount.OperativeAmount += presentVM.PresentAmount;
 
             TransactionHistory trx = new()
@@ -122,8 +122,8 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
             _unitOfWork.Present.Update(present);
             _unitOfWork.BankAccount.Update(bankAccount);
-            _unitOfWork.TransactionHistory.Add(trx);
-            _unitOfWork.Save();
+            await _unitOfWork.TransactionHistory.Add(trx);
+            await _unitOfWork.Save();
 
             return View(presentVM);
         }

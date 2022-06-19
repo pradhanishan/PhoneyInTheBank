@@ -28,7 +28,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult Index(RockPaperScissorVM rps)
+        public async Task<IActionResult> Index(RockPaperScissorVM rps)
         {
 
             if (!ModelState.IsValid) return View();
@@ -45,13 +45,14 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 ModelState.AddModelError(string.Empty, "Invalid User");
                 return View();
             }
-            ApplicationUser user = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
+
+            ApplicationUser user = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
             if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "Invalid User");
                 return View();
             }
-            BankAccount bankAccount = _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
+            BankAccount bankAccount = await _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
             if (bankAccount == null)
             {
                 ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
@@ -169,8 +170,8 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             }
 
             _unitOfWork.BankAccount.Update(bankAccount);
-            _unitOfWork.TransactionHistory.Add(trx);
-            _unitOfWork.Save();
+            await _unitOfWork.TransactionHistory.Add(trx);
+            await _unitOfWork.Save();
 
             return View();
         }

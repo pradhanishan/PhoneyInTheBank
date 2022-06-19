@@ -18,16 +18,16 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var username = User.Identity?.Name;
-            ApplicationUser user = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
+            ApplicationUser user = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
             if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "Invalid User");
                 return View();
             }
-            BankAccount bankAccount = _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
+            BankAccount bankAccount = await _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
             if (bankAccount == null)
             {
                 ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
@@ -59,7 +59,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                     , TotalAmount=3 * bankAccount.OperativeAmount},
             };
 
-            Loan existingLoan = _unitOfWork.Loan.GetFirstOrDefault(x => x.BankAccount.Equals(bankAccount) && x.ActiveFlag);
+            Loan existingLoan = await _unitOfWork.Loan.GetFirstOrDefault(x => x.BankAccount.Equals(bankAccount) && x.ActiveFlag);
 
             if (existingLoan != null)
             {
@@ -70,16 +70,16 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
         }
 
         // Apply for loan if you do not have an existing loan
-        public IActionResult ApplyLoan(int? id)
+        public async Task<IActionResult> ApplyLoan(int? id)
         {
             var username = User.Identity?.Name;
-            ApplicationUser user = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
+            ApplicationUser user = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
             if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "Invalid User");
                 return View();
             }
-            BankAccount bankAccount = _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
+            BankAccount bankAccount = await _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
             if (bankAccount == null)
             {
                 ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
@@ -124,7 +124,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
             };
 
-            Loan existingLoan = _unitOfWork.Loan.GetFirstOrDefault(x => x.BankAccount.Equals(bankAccount) && x.ActiveFlag);
+            Loan existingLoan = await _unitOfWork.Loan.GetFirstOrDefault(x => x.BankAccount.Equals(bankAccount) && x.ActiveFlag);
 
             if (existingLoan != null)
             {
@@ -153,23 +153,23 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             return RedirectToAction("Index", "User", new { area = "User" });
         }
 
-        public IActionResult PayLoan()
+        public async Task<IActionResult> PayLoan()
         {
             var username = User.Identity?.Name;
-            ApplicationUser user = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
+            ApplicationUser user = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
             if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "Invalid User");
                 return View();
             }
-            BankAccount bankAccount = _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
+            BankAccount bankAccount = await _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
             if (bankAccount == null)
             {
                 ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
                 return View();
             }
 
-            Loan existingLoan = _unitOfWork.Loan.GetFirstOrDefault(x => x.BankAccount.Equals(bankAccount) && x.ActiveFlag);
+            Loan existingLoan = await _unitOfWork.Loan.GetFirstOrDefault(x => x.BankAccount.Equals(bankAccount) && x.ActiveFlag);
 
             LoanPaymentVM loanPayment = new()
             {
@@ -185,7 +185,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
         [HttpPost]
         [AutoValidateAntiforgeryToken]
-        public IActionResult PayLoan(LoanPaymentVM loanPayment)
+        public async Task<IActionResult> PayLoan(LoanPaymentVM loanPayment)
         {
 
             if (!ModelState.IsValid)
@@ -194,20 +194,20 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             }
 
             var username = User.Identity?.Name;
-            ApplicationUser user = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
+            ApplicationUser user = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
             if (user == null)
             {
                 ModelState.AddModelError(string.Empty, "Invalid User");
                 return View(loanPayment);
             }
-            BankAccount bankAccount = _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
+            BankAccount bankAccount = await _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
             if (bankAccount == null)
             {
                 ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
                 return View(loanPayment);
             }
 
-            Loan existingLoan = _unitOfWork.Loan.GetFirstOrDefault(x => x.BankAccount.Equals(bankAccount) && x.ActiveFlag);
+            Loan existingLoan = await _unitOfWork.Loan.GetFirstOrDefault(x => x.BankAccount.Equals(bankAccount) && x.ActiveFlag);
 
             if (loanPayment.ClearanceAmount > existingLoan.LeftToPayWithInterest)
             {
@@ -245,8 +245,8 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
             _unitOfWork.BankAccount.Update(bankAccount);
             _unitOfWork.Loan.Update(existingLoan);
-            _unitOfWork.TransactionHistory.Add(trx);
-            _unitOfWork.Save();
+            await _unitOfWork.TransactionHistory.Add(trx);
+            await _unitOfWork.Save();
 
             TempData["Success"] = "Payment Completed.";
 

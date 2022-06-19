@@ -57,6 +57,17 @@
     justify-content:center;
     align-items:center;
     text-align:center;
+    border-radius:8px;
+}
+
+.custom-present{
+    position:relative;
+}
+
+.custom-present-notification{
+    position:absolute;
+    top:5%;
+    right:-3%;
 }
 
 @media screen and (max-width:$breakpoint-m-device) {

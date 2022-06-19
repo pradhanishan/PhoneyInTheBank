@@ -229,6 +229,46 @@ namespace DataContext.Migrations
                     b.ToTable("Presents", (string)null);
                 });
 
+            modelBuilder.Entity("Models.Score", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Bankrupt")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("FinancialScore")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GoodWillScore")
+                        .HasColumnType("int");
+
+                    b.Property<int>("LuckScore")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrustScore")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("UpdatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Scores", (string)null);
+                });
+
             modelBuilder.Entity("Models.TransactionHistory", b =>
                 {
                     b.Property<int>("Id")
@@ -493,6 +533,17 @@ namespace DataContext.Migrations
                 });
 
             modelBuilder.Entity("Models.Present", b =>
+                {
+                    b.HasOne("PhoneyInTheBank.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("Models.Score", b =>
                 {
                     b.HasOne("PhoneyInTheBank.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()

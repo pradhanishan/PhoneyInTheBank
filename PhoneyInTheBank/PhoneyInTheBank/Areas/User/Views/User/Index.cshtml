@@ -47,17 +47,22 @@
 			</div>
 		</a>
 		<a asp-area="Transaction" asp-controller="History" asp-action="Index" class="text-decoration-none text-dark">
-			<div class="m-3 custom-dashboard-navigation-child custom-bg-cyan">
+			<div class="m-3 custom-dashboard-navigation-child custom-bg-red">
 				<i class="fa-solid fa-clock-rotate-left" style="font-size:40px;"></i>
 				<hr />
 				<span class="fw-bold">History</span>
 			</div>
 		</a>
 		<a asp-area="Transaction" asp-controller="Present" asp-action="Index" class="text-decoration-none text-dark">
-			<div class="m-3 custom-dashboard-navigation-child  custom-bg-red">
+			<div class="m-3 custom-dashboard-navigation-child  custom-bg-cyan custom-present">
 				<i class="fa-solid fa-gift" style="font-size:40px;"></i>
 				<hr />
 				<span class="fw-bold">Daily Present</span>
+				@if (Model.PresentAvailable)
+				{
+					<div><i class="fa-solid fa-circle custom-text-red custom-present-notification bounce"></i></div>
+				}
+
 
 			</div>
 		</a>
@@ -70,6 +75,67 @@
 		</a>
 	</div>
 	<div class="m-3 custom-dashboard-child custom-dashboard-statistics">
-		<span class="fw-bold text-danger"> [TO DO ] - User Statistics </span>
+		<table class="table table-borderless text-md-start">
+			<thead>
+				<tr>
+					<th><span class="custom-table-text">Your financial statistics</span></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="border-bottom">
+					<td><span class="custom-table-text">Luck</span></td>
+					<td>
+						<span class="custom-table-star">
+							<i class="fa-solid fa-star custom-text-yellow"></i>
+							<i class="fa-solid fa-star custom-text-yellow"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+						</span>
+					</td>
+				</tr>
+				<tr class="border-bottom">
+					<td><span class="custom-table-text">Goodwill</span></td>
+					<td>
+						<span class="custom-table-star">
+							<i class="fa-solid fa-star  custom-text-yellow"></i>
+							<i class="fa-solid fa-star  custom-text-yellow"></i>
+							<i class="fa-solid fa-star  custom-text-yellow"></i>
+							<i class="fa-solid fa-star  custom-text-yellow"></i>
+							<i class="fa-solid fa-star  custom-text-yellow"></i>
+						</span>
+					</td>
+				</tr>
+				<tr class="border-bottom">
+					<td><span class="custom-table-text">Trustworthiness</span></td>
+					<td>
+						<span class="custom-table-star">
+							<i class="fa-solid fa-star  custom-text-yellow"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+						</span>
+					</td>
+				</tr>
+				<tr class="border-bottom">
+					<td><span class="custom-table-text">Financial Status</span></td>
+					<td>
+						<span class="custom-table-star">
+							<i class="fa-solid fa-star  custom-text-yellow"></i>
+							<i class="fa-solid fa-star  custom-text-yellow"></i>
+							<i class="fa-solid fa-star  custom-text-yellow"></i>
+							<i class="fa-solid fa-star"></i>
+							<i class="fa-solid fa-star"></i>
+						</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<span class="fw-bold text-danger">
+
+
+
+		</span>
 	</div>
 </div>

@@ -49,6 +49,10 @@ namespace ViewModels
         public bool ActiveUserFlag { get; set; } = true;
 
         [Required]
+
+        public bool PresentAvailable { get; set; } = false;
+
+        [Required]
         public DateTimeOffset UserCreatedDate { get; set; } = DateTimeOffset.Now;
 
         [Required]

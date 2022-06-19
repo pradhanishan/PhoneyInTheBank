@@ -21,20 +21,20 @@ namespace Repository
             dbSet = _db.Set<T>();
         }
 
-        public void Add(T Entity)
+        public async Task Add(T Entity)
         {
-            dbSet.Add(Entity);
+            await dbSet.AddAsync(Entity);
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
 
-            return dbSet.ToList();
+            return await dbSet.ToListAsync();
         }
 
-        public T GetFirstOrDefault(Expression<Func<T, bool>> filter)
+        public async Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter)
         {
-            return dbSet.Where(filter).FirstOrDefault();
+            return await dbSet.Where(filter).FirstOrDefaultAsync();
         }
 
         public void Remove(T Entity)
