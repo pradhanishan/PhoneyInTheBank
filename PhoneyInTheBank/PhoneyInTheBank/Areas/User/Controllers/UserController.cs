@@ -35,10 +35,12 @@ namespace PhoneyInTheBank.Areas.User.Controllers
                 return RedirectToAction("CreateBankAccount", "User", new { area = "User" });
             }
 
+            Score score = await _unitOfWork.Score.GetFirstOrDefault(x => x.ApplicationUser == user);
 
 
 
-            UserBankAccountVM userBankAccount = new()
+
+            UserDashboardVM userBankAccount = new()
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
@@ -50,7 +52,7 @@ namespace PhoneyInTheBank.Areas.User.Controllers
                 OperativeAmount = bankAccount.OperativeAmount,
                 LoanAmount = bankAccount.LoanAmount,
                 InvestmentAmount = bankAccount.InvestmentAmount,
-                BankruptFlag = bankAccount.BankruptFlag,
+                BankruptFlag = bankAccount.OperativeAmount ==0 && bankAccount.InvestmentAmount ==0? true:false,
                 ActiveUserFlag = user.ActiveFlag,
                 ActiveAccountFlag = bankAccount.ActiveFlag,
                 UserCreatedDate = user.CreatedDate,

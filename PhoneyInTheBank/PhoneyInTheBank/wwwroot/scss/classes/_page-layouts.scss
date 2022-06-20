@@ -40,16 +40,14 @@
     grid-area: stat;
 }
 
-.custom-dashboard-navigation-child{
-    padding:20px;
-    text-align:center;
-    border-radius:8px;
+.custom-dashboard-navigation-child, .custom-dashboard-navigation-child-disabled {
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
 }
 
 .custom-dashboard-navigation-child:hover, .custom-dashboard-navigation-child:focus {
     filter: brightness(150%);
-    transform: scale(1.1);
-    border: 3px solid $purple;
 }
 
 .custom-dashboard-statistics{

@@ -1,4 +1,4 @@
-﻿@model ViewModels.UserBankAccountVM;
+﻿@model ViewModels.UserDashboardVM;
 @{
 	ViewData["Title"] = "User-Home";
 }
@@ -24,118 +24,337 @@
 			</tbody>
 		</table>
 	</div>
+	@if (Model.BankruptFlag)
+	{
+		<div class="m-3 custom-dashboard-child custom-dashboard-navigation">
+			<a class="text-decoration-none text-dark disabled">
+				<div class="m-3 custom-dashboard-navigation-child-disabled custom-bg-disabled text-white">
+					<i class="fa-solid fa-money-bill-transfer" style="font-size:40px;"></i>
+					<hr />
+					<span class="fw-bold">Transfer</span>
+				</div>
+			</a>
+			<a class="text-decoration-none text-dark">
+				<div class="m-3 custom-dashboard-navigation-child-disabled custom-bg-disabled text-white">
+					<i class="fa-solid fa-plus" style="font-size:40px;"></i><hr />
+					<span class="fw-bold">Earn</span>
+				</div>
+			</a>
 
-	<div class="m-3 custom-dashboard-child custom-dashboard-navigation">
-		<a asp-area="Transaction" asp-controller="Transfer" asp-action="Index" class="text-decoration-none text-dark">
-			<div class="m-3 custom-dashboard-navigation-child  custom-bg-green">
-				<i class="fa-solid fa-money-bill-transfer" style="font-size:40px;"></i>
-				<hr />
-				<span class="fw-bold">Transfer</span>
-			</div>
-		</a>
-		<a asp-area="Transaction" asp-controller="Earn" asp-action="Index" class="text-decoration-none text-dark">
-			<div class="m-3 custom-dashboard-navigation-child custom-bg-purple">
-				<i class="fa-solid fa-plus" style="font-size:40px;"></i><hr />
-				<span class="fw-bold">Earn</span>
-			</div>
-		</a>
-		<a asp-area="Transaction" asp-controller="Loan" asp-action="Index" class="text-decoration-none text-dark">
-			<div class="m-3 custom-dashboard-navigation-child custom-bg-yellow">
-				<i class="fa-solid fa-sack-dollar" style="font-size:40px;"></i>
-				<hr />
-				<span class="fw-bold">Loan</span>
-			</div>
-		</a>
-		<a asp-area="Transaction" asp-controller="History" asp-action="Index" class="text-decoration-none text-dark">
-			<div class="m-3 custom-dashboard-navigation-child custom-bg-red">
-				<i class="fa-solid fa-clock-rotate-left" style="font-size:40px;"></i>
-				<hr />
-				<span class="fw-bold">History</span>
-			</div>
-		</a>
-		<a asp-area="Transaction" asp-controller="Present" asp-action="Index" class="text-decoration-none text-dark">
-			<div class="m-3 custom-dashboard-navigation-child  custom-bg-cyan custom-present">
-				<i class="fa-solid fa-gift" style="font-size:40px;"></i>
-				<hr />
-				<span class="fw-bold">Daily Present</span>
-				@if (Model.PresentAvailable)
-				{
-					<div><i class="fa-solid fa-circle custom-text-red custom-present-notification bounce"></i></div>
-				}
+			<a class="text-decoration-none text-dark">
+				<div class="m-3  custom-dashboard-navigation-child-disabled custom-bg-disabled text-white">
+					<i class="fa-solid fa-sack-dollar" style="font-size:40px;"></i>
+					<hr />
+					<span class="fw-bold">Loan</span>
+				</div>
+			</a>
 
 
-			</div>
-		</a>
-		<a asp-area="Transaction" asp-controller="Transfer" asp-action="Index" class="text-decoration-none text-dark">
-			<div class="m-3 custom-dashboard-navigation-child  custom-bg-grey">
-				<i class="fa-solid fa-user-pen" style="font-size:40px;"></i>
-				<hr />
-				<span class="fw-bold">Edit Info</span>
-			</div>
-		</a>
-	</div>
-	<div class="m-3 custom-dashboard-child custom-dashboard-statistics">
-		<table class="table table-borderless text-md-start">
-			<thead>
-				<tr>
-					<th><span class="custom-table-text">Your financial statistics</span></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr class="border-bottom">
-					<td><span class="custom-table-text">Luck</span></td>
-					<td>
-						<span class="custom-table-star">
-							<i class="fa-solid fa-star custom-text-yellow"></i>
-							<i class="fa-solid fa-star custom-text-yellow"></i>
-							<i class="fa-solid fa-star"></i>
-							<i class="fa-solid fa-star"></i>
-							<i class="fa-solid fa-star"></i>
-						</span>
-					</td>
-				</tr>
-				<tr class="border-bottom">
-					<td><span class="custom-table-text">Goodwill</span></td>
-					<td>
-						<span class="custom-table-star">
-							<i class="fa-solid fa-star  custom-text-yellow"></i>
-							<i class="fa-solid fa-star  custom-text-yellow"></i>
-							<i class="fa-solid fa-star  custom-text-yellow"></i>
-							<i class="fa-solid fa-star  custom-text-yellow"></i>
-							<i class="fa-solid fa-star  custom-text-yellow"></i>
-						</span>
-					</td>
-				</tr>
-				<tr class="border-bottom">
-					<td><span class="custom-table-text">Trustworthiness</span></td>
-					<td>
-						<span class="custom-table-star">
-							<i class="fa-solid fa-star  custom-text-yellow"></i>
-							<i class="fa-solid fa-star"></i>
-							<i class="fa-solid fa-star"></i>
-							<i class="fa-solid fa-star"></i>
-							<i class="fa-solid fa-star"></i>
-						</span>
-					</td>
-				</tr>
-				<tr class="border-bottom">
-					<td><span class="custom-table-text">Financial Status</span></td>
-					<td>
-						<span class="custom-table-star">
-							<i class="fa-solid fa-star  custom-text-yellow"></i>
-							<i class="fa-solid fa-star  custom-text-yellow"></i>
-							<i class="fa-solid fa-star  custom-text-yellow"></i>
-							<i class="fa-solid fa-star"></i>
-							<i class="fa-solid fa-star"></i>
-						</span>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<span class="fw-bold text-danger">
+			<a asp-area="Transaction" asp-controller="History" asp-action="Index" class="text-decoration-none text-dark">
+				<div class="m-3 custom-dashboard-navigation-child custom-bg-red">
+					<i class="fa-solid fa-clock-rotate-left" style="font-size:40px;"></i>
+					<hr />
+					<span class="fw-bold">History</span>
+				</div>
+			</a>
+			<a asp-area="Transaction" asp-controller="Present" asp-action="Index" class="text-decoration-none text-dark">
+				<div class="m-3 custom-dashboard-navigation-child  custom-bg-cyan custom-present">
+					<i class="fa-solid fa-gift" style="font-size:40px;"></i>
+					<hr />
+					<span class="fw-bold">Daily Present</span>
+					@if (Model.PresentAvailable)
+					{
+						<div><i class="fa-solid fa-circle custom-text-red custom-present-notification bounce"></i></div>
+					}
+
+
+				</div>
+			</a>
+			<a asp-area="Transaction" asp-controller="Transfer" asp-action="Index" class="text-decoration-none text-dark">
+				<div class="m-3 custom-dashboard-navigation-child  custom-bg-grey">
+					<i class="fa-solid fa-user-pen" style="font-size:40px;"></i>
+					<hr />
+					<span class="fw-bold">Edit Info</span>
+				</div>
+			</a>
+		</div>
+		<div class="m-3 custom-dashboard-child custom-dashboard-statistics">
+			<table class="table table-borderless text-md-start">
+				<thead>
+					<tr>
+						<th><span class="custom-table-text">Your financial statistics</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="fw-bold text-danger">
+							You are bankrupt!, wait to collect your next daily present.
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<span class="fw-bold text-danger">
 
 
 
-		</span>
-	</div>
+			</span>
+		</div>
+	}
+	@if (!Model.BankruptFlag)
+	{
+		<div class="m-3 custom-dashboard-child custom-dashboard-navigation">
+			<a asp-area="Transaction" asp-controller="Transfer" asp-action="Index" class="text-decoration-none text-dark">
+				<div class="m-3 custom-dashboard-navigation-child  custom-bg-green">
+					<i class="fa-solid fa-money-bill-transfer" style="font-size:40px;"></i>
+					<hr />
+					<span class="fw-bold">Transfer</span>
+				</div>
+			</a>
+			<a asp-area="Transaction" asp-controller="Earn" asp-action="Index" class="text-decoration-none text-dark">
+				<div class="m-3 custom-dashboard-navigation-child custom-bg-purple">
+					<i class="fa-solid fa-plus" style="font-size:40px;"></i><hr />
+					<span class="fw-bold">Earn</span>
+				</div>
+			</a>
+			<a asp-area="Transaction" asp-controller="Loan" asp-action="Index" class="text-decoration-none text-dark">
+				<div class="m-3 custom-dashboard-navigation-child custom-bg-yellow">
+					<i class="fa-solid fa-sack-dollar" style="font-size:40px;"></i>
+					<hr />
+					<span class="fw-bold">Loan</span>
+				</div>
+			</a>
+			<a asp-area="Transaction" asp-controller="History" asp-action="Index" class="text-decoration-none text-dark">
+				<div class="m-3 custom-dashboard-navigation-child custom-bg-red">
+					<i class="fa-solid fa-clock-rotate-left" style="font-size:40px;"></i>
+					<hr />
+					<span class="fw-bold">History</span>
+				</div>
+			</a>
+			<a asp-area="Transaction" asp-controller="Present" asp-action="Index" class="text-decoration-none text-dark">
+				<div class="m-3 custom-dashboard-navigation-child  custom-bg-cyan custom-present">
+					<i class="fa-solid fa-gift" style="font-size:40px;"></i>
+					<hr />
+					<span class="fw-bold">Daily Present</span>
+					@if (Model.PresentAvailable)
+					{
+						<div><i class="fa-solid fa-circle custom-text-red custom-present-notification bounce"></i></div>
+					}
+
+
+				</div>
+			</a>
+			<a asp-area="Transaction" asp-controller="Transfer" asp-action="Index" class="text-decoration-none text-dark">
+				<div class="m-3 custom-dashboard-navigation-child  custom-bg-grey">
+					<i class="fa-solid fa-user-pen" style="font-size:40px;"></i>
+					<hr />
+					<span class="fw-bold">Edit Info</span>
+				</div>
+			</a>
+		</div>
+		<div class="m-3 custom-dashboard-child custom-dashboard-statistics">
+			<table class="table table-borderless text-md-start">
+				<thead>
+					<tr>
+						<th><span class="custom-table-text">Your financial statistics</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="border-bottom">
+						<td><span class="custom-table-text">Luck</span></td>
+						<td>
+							<span class="custom-table-star">
+								@if (Model.LoanAmount >= 0 && Model.LoanAmount <= 20)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+								@if (Model.LoanAmount > 20 && Model.LoanAmount <= 40)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+								@if (Model.LoanAmount > 40 && Model.LoanAmount <= 60)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+								@if (Model.LoanAmount > 60 && Model.LoanAmount <= 80)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+								@if (Model.LoanAmount > 80)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+							</span>
+						</td>
+					</tr>
+					<tr class="border-bottom">
+						<td><span class="custom-table-text">Goodwill</span></td>
+						<td>
+							<span class="custom-table-star">
+								@if (Model.CharityScore >= 0 && Model.CharityScore <= 20)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+								@if (Model.CharityScore > 20 && Model.CharityScore <= 40)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+								@if (Model.CharityScore > 40 && Model.CharityScore <= 60)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+								@if (Model.CharityScore > 60 && Model.CharityScore <= 80)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+								@if (Model.CharityScore > 80)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+							</span>
+						</td>
+					</tr>
+					<tr class="border-bottom">
+						<td><span class="custom-table-text">Trustworthiness</span></td>
+						<td>
+							<span class="custom-table-star">
+								@if (Model.TrustScore >= 0 && Model.TrustScore <= 20)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+								@if (Model.TrustScore > 20 && Model.TrustScore <= 40)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+								@if (Model.TrustScore > 40 && Model.TrustScore <= 60)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+								@if (Model.TrustScore > 60 && Model.TrustScore <= 80)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+								@if (Model.TrustScore > 80)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+							</span>
+						</td>
+					</tr>
+					<tr class="border-bottom">
+						<td><span class="custom-table-text">Financial Status</span></td>
+						<td>
+							<span class="custom-table-star">
+								@if (Model.FinancialStatusScore >= 0 && Model.FinancialStatusScore <= 20)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+								@if (Model.FinancialStatusScore > 20 && Model.FinancialStatusScore <= 40)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+								@if (Model.FinancialStatusScore > 40 && Model.FinancialStatusScore <= 60)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+								@if (Model.FinancialStatusScore > 60 && Model.FinancialStatusScore <= 80)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+								@if (Model.FinancialStatusScore > 80)
+								{
+									<i class="fa-solid fa-star custom-text-yellow"></i>
+								}
+								else
+								{
+									<i class="fa-solid fa-star"></i>
+								}
+							</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<span class="fw-bold text-danger">
+
+
+
+			</span>
+		</div>
+	}
+
 </div>

@@ -20,8 +20,34 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
         }
 
         // Earn money by playing rock paper scissors
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+
+            var username = User.Identity?.Name;
+            if (username == null)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid User");
+                return View();
+            }
+            ApplicationUser user = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid User");
+                return View();
+            }
+
+            BankAccount bankAccount = await _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
+            if (bankAccount == null)
+            {
+                ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
+                return View();
+            }
+
+            if (bankAccount.OperativeAmount == 0 && bankAccount.InvestmentAmount == 0)
+            {
+                return RedirectToAction("Index", "User", new { Area = "User" });
+            }
+
             //TODO -[Not So Important] Design Rock Paper Scissor UI
             return View();
         }

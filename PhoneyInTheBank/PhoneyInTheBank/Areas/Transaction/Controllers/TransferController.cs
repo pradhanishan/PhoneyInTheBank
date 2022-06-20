@@ -18,8 +18,32 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var username = User.Identity?.Name;
+            if (username == null)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid User");
+                return View();
+            }
+            ApplicationUser user = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
+            if (user == null)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid User");
+                return View();
+            }
+
+            BankAccount bankAccount = await _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
+            if (bankAccount == null)
+            {
+                ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
+                return View();
+            }
+
+            if (bankAccount.OperativeAmount == 0 && bankAccount.InvestmentAmount == 0)
+            {
+                return RedirectToAction("Index", "User", new { Area = "User" });
+            }
             return View();
         }
 
@@ -50,6 +74,11 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             {
                 ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
                 return View();
+            }
+
+            if (bankAccount.OperativeAmount == 0 && bankAccount.InvestmentAmount == 0)
+            {
+                return RedirectToAction("Index", "User", new { Area = "User" });
             }
 
             Score score = await _unitOfWork.Score.GetFirstOrDefault(x => x.ApplicationUser == user);
