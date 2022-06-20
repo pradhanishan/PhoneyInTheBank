@@ -32,9 +32,9 @@ namespace Models
         [Required]
         public bool Bankrupt { get; set; } = false;
 
-        public DateTimeOffset CreatedDate { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset CreatedDate { get; set; } = DateTimeOffset.UtcNow;
 
-        public DateTimeOffset UpdatedDate { get; set; } = DateTimeOffset.Now;
+        public DateTimeOffset UpdatedDate { get; set; } = DateTimeOffset.UtcNow;
 
 
 

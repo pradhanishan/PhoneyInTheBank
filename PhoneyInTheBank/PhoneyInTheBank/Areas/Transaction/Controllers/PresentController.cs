@@ -64,6 +64,13 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 return View();
             }
 
+            Score score = await _unitOfWork.Score.GetFirstOrDefault(x => x.ApplicationUser == user);
+            if (score == null)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid Score");
+                return View();
+            }
+
             Random r = new();
             int presentNumber = r.Next(0, 99);
             PresentVM presentVM = new();
@@ -88,22 +95,27 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             {
                 presentVM.PresentAmount = 100000;
                 presentVM.PresentType = "Legendary";
+                _unitOfWork.Score.IncreaseLuck(score, 10);
             }
             if (presentNumber >= 1 && presentNumber <= 10)
             {
                 presentVM.PresentAmount = 30000;
                 presentVM.PresentType = "Epic";
+                _unitOfWork.Score.DecreaseLuck(score, 3);
             }
             if (presentNumber >= 11 && presentNumber <= 30)
             {
                 presentVM.PresentAmount = 10000;
                 presentVM.PresentType = "Rare";
+                _unitOfWork.Score.DecreaseLuck(score, 1);
             }
             if (presentNumber > 30)
             {
                 presentVM.PresentAmount = 1000;
                 presentVM.PresentType = "Common";
             }
+
+
 
             DateTimeOffset dt = DateTime.UtcNow;
             present.LastCollectedDate = dt;
@@ -112,6 +124,19 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             BankAccount bankAccount = await _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
             bankAccount.OperativeAmount += presentVM.PresentAmount;
 
+            if ((presentVM.PresentAmount / bankAccount.OperativeAmount) * 100 >= 5 && (presentVM.PresentAmount / bankAccount.OperativeAmount) * 100 < 5)
+            {
+                _unitOfWork.Score.IncreaseFinancialStatus(score, 1);
+            }
+            if ((presentVM.PresentAmount / bankAccount.OperativeAmount) * 100 >= 10 && (presentVM.PresentAmount / bankAccount.OperativeAmount) * 100 < 50)
+            {
+                _unitOfWork.Score.IncreaseFinancialStatus(score, 3);
+            }
+            if ((presentVM.PresentAmount / bankAccount.OperativeAmount) * 100 >= 50)
+            {
+                _unitOfWork.Score.IncreaseFinancialStatus(score, 10);
+            }
+
             TransactionHistory trx = new()
             {
                 ReceivedAmount = presentVM.PresentAmount,
@@ -119,6 +144,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 User = User.Identity.Name,
                 Message = "Collected a " + presentVM.PresentType.ToString() + " present of " + presentVM.PresentAmount.ToString() + " phonies."
             };
+
 
             _unitOfWork.Present.Update(present);
             _unitOfWork.BankAccount.Update(bankAccount);

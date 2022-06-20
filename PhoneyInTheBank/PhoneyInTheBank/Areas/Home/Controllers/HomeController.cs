@@ -16,7 +16,7 @@ namespace PhoneyInTheBank.Areas.Home.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return User.Identity.IsAuthenticated ? RedirectToAction("Index", "User", new { Area = "User" }) : View();
         }
 
         public IActionResult AboutUs()

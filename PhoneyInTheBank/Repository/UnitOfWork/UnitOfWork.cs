@@ -20,6 +20,8 @@ namespace Repository.UnitOfWork
 
         public IPresentRepository Present { get; private set; }
 
+        public IScoreRepository Score { get; private set; }
+
         private readonly ApplicationDbContext _db;
 
         public UnitOfWork(ApplicationDbContext db)
@@ -30,6 +32,7 @@ namespace Repository.UnitOfWork
             Loan = new LoanRepository(_db);
             TransactionHistory = new TransactionHistoryRepository(_db);
             Present = new PresentRepository(_db);
+            Score = new ScoreRepository(_db);
 
         }
 

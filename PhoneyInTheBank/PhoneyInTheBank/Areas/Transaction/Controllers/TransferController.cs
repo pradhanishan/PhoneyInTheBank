@@ -52,6 +52,8 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 return View();
             }
 
+            Score score = await _unitOfWork.Score.GetFirstOrDefault(x => x.ApplicationUser == user);
+
 
             TransactionHistory trx = new()
             {
@@ -70,9 +72,28 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                     ModelState.AddModelError(string.Empty, "You do not have enough funds to process this requrest.");
                     return View();
                 }
+
+                if ((transfer.Amount / bankAccount.OperativeAmount) * 100 >= 5 && (transfer.Amount / bankAccount.OperativeAmount) * 100 < 10)
+                {
+                    _unitOfWork.Score.IncreaseGoodwill(score, 1);
+                    _unitOfWork.Score.DecreaseFinancialStatus(score, 1);
+                }
+                if ((transfer.Amount / bankAccount.OperativeAmount) * 100 >= 10 && (transfer.Amount / bankAccount.OperativeAmount) * 100 < 50)
+                {
+                    _unitOfWork.Score.IncreaseGoodwill(score, 3);
+                    _unitOfWork.Score.DecreaseFinancialStatus(score, 3);
+                }
+                if ((transfer.Amount / bankAccount.OperativeAmount) * 100 >= 50)
+                {
+                    _unitOfWork.Score.IncreaseGoodwill(score, 10);
+                    _unitOfWork.Score.DecreaseFinancialStatus(score, 10);
+                }
+
                 trx.TransactionType = "D";
                 trx.Message = "Donated " + transfer.Amount.ToString() + " phonies to AI";
                 bankAccount.OperativeAmount -= transfer.Amount;
+
+
             }
 
 

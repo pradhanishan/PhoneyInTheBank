@@ -86,6 +86,14 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 return View();
             }
 
+            Score score = await _unitOfWork.Score.GetFirstOrDefault(x => x.ApplicationUser == user);
+            if (score == null)
+            {
+                ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
+                return View();
+
+            }
+
             IEnumerable<LoanVM> loanTypes = new List<LoanVM>()
             {
                 new LoanVM {
@@ -124,6 +132,19 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
             };
 
+            if ((loan.LoanAmount / bankAccount.OperativeAmount) * 100 >= 5 && (loan.LoanAmount / bankAccount.OperativeAmount) * 100 < 5)
+            {
+                _unitOfWork.Score.IncreaseFinancialStatus(score, 1);
+            }
+            if ((loan.LoanAmount / bankAccount.OperativeAmount) * 100 >= 10 && (loan.LoanAmount / bankAccount.OperativeAmount) * 100 < 50)
+            {
+                _unitOfWork.Score.IncreaseFinancialStatus(score, 3);
+            }
+            if ((loan.LoanAmount / bankAccount.OperativeAmount) * 100 >= 50)
+            {
+                _unitOfWork.Score.IncreaseFinancialStatus(score, 10);
+            }
+
             Loan existingLoan = await _unitOfWork.Loan.GetFirstOrDefault(x => x.BankAccount.Equals(bankAccount) && x.ActiveFlag);
 
             if (existingLoan != null)
@@ -134,7 +155,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             bankAccount.OperativeAmount += loan.LoanAmount;
             bankAccount.LoanAmount = loan.LoanAmountWithInterest;
 
-            _unitOfWork.Loan.Add(loan);
+            await _unitOfWork.Loan.Add(loan);
             _unitOfWork.BankAccount.Update(bankAccount);
 
             TransactionHistory trx = new()
@@ -145,8 +166,8 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 User = User.Identity.Name,
                 Message = "Took a " + selectedLoanType.LoanType + " of " + selectedLoanType.LoanAmount.ToString() + " phonies ",
             };
-            _unitOfWork.TransactionHistory.Add(trx);
-            _unitOfWork.Save();
+            await _unitOfWork.TransactionHistory.Add(trx);
+            await _unitOfWork.Save();
 
             TempData["Success"] = "Loan processing completed.";
 
@@ -168,6 +189,8 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
                 return View();
             }
+
+
 
             Loan existingLoan = await _unitOfWork.Loan.GetFirstOrDefault(x => x.BankAccount.Equals(bankAccount) && x.ActiveFlag);
 
@@ -207,6 +230,14 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 return View(loanPayment);
             }
 
+            Score score = await _unitOfWork.Score.GetFirstOrDefault(x => x.ApplicationUser == user);
+            if (score == null)
+            {
+                ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
+                return View(loanPayment);
+
+            }
+
             Loan existingLoan = await _unitOfWork.Loan.GetFirstOrDefault(x => x.BankAccount.Equals(bankAccount) && x.ActiveFlag);
 
             if (loanPayment.ClearanceAmount > existingLoan.LeftToPayWithInterest)
@@ -228,8 +259,22 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             existingLoan.LeftToPayWithInterest -= loanPayment.ClearanceAmount;
             loanPayment.AmountLeftToPay -= loanPayment.ClearanceAmount;
 
+            if ((loanPayment.ClearanceAmount / bankAccount.OperativeAmount) * 100 >= 5 && (loanPayment.ClearanceAmount / bankAccount.OperativeAmount) * 100 < 5)
+            {
+                _unitOfWork.Score.DecreaseFinancialStatus(score, 1);
+            }
+            if ((loanPayment.ClearanceAmount / bankAccount.OperativeAmount) * 100 >= 10 && (loanPayment.ClearanceAmount / bankAccount.OperativeAmount) * 100 < 50)
+            {
+                _unitOfWork.Score.DecreaseFinancialStatus(score, 3);
+            }
+            if ((loanPayment.ClearanceAmount / bankAccount.OperativeAmount) * 100 >= 50)
+            {
+                _unitOfWork.Score.DecreaseFinancialStatus(score, 10);
+            }
+
             if (existingLoan.LeftToPayWithInterest == 0)
             {
+                _unitOfWork.Score.IncreaseTrust(score, 10);
                 existingLoan.ActiveFlag = false;
             }
             existingLoan.UpdatedDate = DateTimeOffset.Now;

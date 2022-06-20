@@ -80,8 +80,14 @@ namespace PhoneyInTheBank.Areas.User.Controllers
                 ApplicationUser = user,
             };
 
+            Score score = new()
+            {
+                ApplicationUser = user,
+            };
+
 
             await _unitOfWork.BankAccount.Add(bankAccount);
+            await _unitOfWork.Score.Add(score);
             await _unitOfWork.Save();
             return RedirectToAction("Index", "User", new { area = "User" });
         }

@@ -18,6 +18,8 @@ namespace Repository.UnitOfWork
         ITransactionHistoryRepository TransactionHistory { get; }
 
         IPresentRepository Present { get; }
+
+        IScoreRepository Score { get; }
         Task Save();
     }
 }

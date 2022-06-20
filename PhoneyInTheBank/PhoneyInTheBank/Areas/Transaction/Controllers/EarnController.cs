@@ -59,6 +59,14 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 return View();
             }
 
+            Score score = await _unitOfWork.Score.GetFirstOrDefault(x => x.ApplicationUser == user);
+            if (score == null)
+            {
+                ModelState.AddModelError(string.Empty, "This user does not have a score catalog!");
+                return View();
+            }
+
+
             if (bankAccount.OperativeAmount < 0 || bankAccount.OperativeAmount < rps.WagerValue)
             {
                 ModelState.AddModelError(string.Empty, "You do not have enough funds to process this requrest.");
@@ -160,12 +168,42 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 trx.ReceivedAmount = trx.SentAmount;
                 trx.SentAmount = 0;
                 trx.Message = "Earned " + trx.ReceivedAmount.ToString() + " phonies by playing rock paper scissors.";
+                _unitOfWork.Score.IncreaseLuck(score, 1);
+
+                if ((rps.WagerValue / bankAccount.OperativeAmount) * 100 >= 5 && (rps.WagerValue / bankAccount.OperativeAmount) * 100 < 5)
+                {
+                    _unitOfWork.Score.IncreaseFinancialStatus(score, 1);
+                }
+                if ((rps.WagerValue / bankAccount.OperativeAmount) * 100 >= 10 && (rps.WagerValue / bankAccount.OperativeAmount) * 100 < 50)
+                {
+                    _unitOfWork.Score.IncreaseFinancialStatus(score, 3);
+                }
+                if ((rps.WagerValue / bankAccount.OperativeAmount) * 100 >= 50)
+                {
+                    _unitOfWork.Score.IncreaseFinancialStatus(score, 10);
+                }
+
                 bankAccount.OperativeAmount += rps.WagerValue;
             }
 
             if (!rps.TieFlag && !rps.VictoryFlag)
             {
                 trx.Message = "Lost " + trx.SentAmount.ToString() + " phonies by playing rock paper scissors.";
+                _unitOfWork.Score.DecreaseLuck(score, 1);
+
+                if ((rps.WagerValue / bankAccount.OperativeAmount) * 100 >= 5 && (rps.WagerValue / bankAccount.OperativeAmount) * 100 < 5)
+                {
+                    _unitOfWork.Score.DecreaseFinancialStatus(score, 1);
+                }
+                if ((rps.WagerValue / bankAccount.OperativeAmount) * 100 >= 10 && (rps.WagerValue / bankAccount.OperativeAmount) * 100 < 50)
+                {
+                    _unitOfWork.Score.DecreaseFinancialStatus(score, 3);
+                }
+                if ((rps.WagerValue / bankAccount.OperativeAmount) * 100 >= 50)
+                {
+                    _unitOfWork.Score.DecreaseFinancialStatus(score, 10);
+                }
+
                 bankAccount.OperativeAmount -= rps.WagerValue;
             }
 
