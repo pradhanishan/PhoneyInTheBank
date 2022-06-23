@@ -315,6 +315,36 @@ Transaction/Transfer - [START]
     width: 100%;
   }
 }
+/*--------------------------------------------------------
+Home/Home/About - [START]
+--------------------------------------------------------*/
+.custom-carousel-item-container {
+  border-radius: 8px;
+  height: 50vh;
+}
+
+.custom-carousel-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-carousel-content-wrapper {
+  display: flex;
+}
+
+@media screen and (max-width: 767.98px) {
+  .custom-carousel-content {
+    justify-content: flex-start;
+  }
+
+  .custom-carousel-content-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}
 .custom-container {
   display: flex;
   justify-content: center;

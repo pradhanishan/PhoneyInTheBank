@@ -5,9 +5,10 @@
 
 <div class="container custom-payloan-container">
 	<div class=" custom-pay-loan-child m-3">
-		<h1 class="text-danger">
-			You have an open loan to clear.
-		</h1>
+		<div class="custom-head">
+			<div><h1 class="text-danger">Can't apply! </h1></div>
+			<div><a class="btn btn-danger text-dedcoration-none text-white" asp-area="User" asp-controller="User" asp-action="Index"><i class="fa-solid fa-angle-left"></i> back</a></div>
+		</div>
 	</div>
 	<div class=" custom-pay-loan-child m-3">
 		<table class="table table-bordered table-striped">
@@ -32,11 +33,8 @@
 		</table>
 	</div>
 	<div class="custom-pay-loan-child m-3">
-		<h2 class="text-danger text-decoration-underline">
-			House Rules!
-		</h2>
-		<p>
-			Clear your current loan before applying for another
+		<p class="text-danger">
+			You already have an open loan. Please, clear your current loan before applying for another.
 		</p>
 		<hr />
 	</div>
