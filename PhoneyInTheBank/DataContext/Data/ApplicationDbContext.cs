@@ -22,6 +22,10 @@ namespace DataContext.Data
 
         public DbSet<Score> Score { get; set; }
 
+        public DbSet<Organization> Organization { get; set; }
+
+        public DbSet<Investment> Investment { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -31,6 +35,8 @@ namespace DataContext.Data
             modelBuilder.Entity<TransactionHistory>().ToTable("TransactionHistories");
             modelBuilder.Entity<Present>().ToTable("Presents");
             modelBuilder.Entity<Score>().ToTable("Scores");
+            modelBuilder.Entity<Organization>().ToTable("Organizations");
+            modelBuilder.Entity<Investment>().ToTable("Investment");
         }
     }
 }

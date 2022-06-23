@@ -159,6 +159,48 @@ namespace DataContext.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Models.Investment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<float>("InvestmentAmount")
+                        .HasColumnType("real");
+
+                    b.Property<DateTimeOffset>("LastCollectedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<float>("Loss")
+                        .HasColumnType("real");
+
+                    b.Property<int>("OrganizationId")
+                        .HasColumnType("int");
+
+                    b.Property<float>("Profit")
+                        .HasColumnType("real");
+
+                    b.Property<DateTimeOffset>("UpdatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("OrganizationId");
+
+                    b.ToTable("Investment", (string)null);
+                });
+
             modelBuilder.Entity("Models.Loan", b =>
                 {
                     b.Property<int>("Id")
@@ -199,6 +241,29 @@ namespace DataContext.Migrations
                     b.HasIndex("BankAccountId");
 
                     b.ToTable("Loans", (string)null);
+                });
+
+            modelBuilder.Entity("Models.Organization", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTimeOffset>("CreatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("UpdatedDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Organizations", (string)null);
                 });
 
             modelBuilder.Entity("Models.Present", b =>
@@ -519,6 +584,25 @@ namespace DataContext.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Models.Investment", b =>
+                {
+                    b.HasOne("PhoneyInTheBank.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.Organization", "Organization")
+                        .WithMany()
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Organization");
                 });
 
             modelBuilder.Entity("Models.Loan", b =>
