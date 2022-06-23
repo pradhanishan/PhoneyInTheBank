@@ -40,7 +40,7 @@ namespace PhoneyInTheBank.Areas.User.Controllers
 
 
 
-            UserDashboardVM userBankAccount = new()
+            UserDashboardVM userVM = new()
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
@@ -59,16 +59,21 @@ namespace PhoneyInTheBank.Areas.User.Controllers
                 UserUpdatedDate = user.LastUpdatedDate,
                 AccountCreatedDate = bankAccount.CreatedDate,
                 AccountUpdatedDate = bankAccount.UpdatedDate,
+                LuckScore = score.LuckScore,
+                CharityScore = score.GoodWillScore,
+                TrustScore = score.TrustScore,
+                FinancialStatusScore = score.FinancialScore,
+
             };
 
             Present present = await _unitOfWork.Present.GetFirstOrDefault(x => x.ApplicationUser == user);
 
             if (present == null || present.NextPresentAvailableDate < DateTimeOffset.UtcNow)
             {
-                userBankAccount.PresentAvailable = true;
+                userVM.PresentAvailable = true;
             }
 
-            return View(userBankAccount);
+            return View(userVM);
         }
 
         public async Task<IActionResult> CreateBankAccount()

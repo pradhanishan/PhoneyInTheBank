@@ -163,7 +163,7 @@
 						<td><span class="custom-table-text">Luck</span></td>
 						<td>
 							<span class="custom-table-star">
-								@if (Model.LoanAmount >= 0 && Model.LoanAmount <= 20)
+								@if (Model.LuckScore >= 0)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -171,7 +171,7 @@
 								{
 									<i class="fa-solid fa-star"></i>
 								}
-								@if (Model.LoanAmount > 20 && Model.LoanAmount <= 40)
+								@if (Model.LuckScore >= 20)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -179,7 +179,7 @@
 								{
 									<i class="fa-solid fa-star"></i>
 								}
-								@if (Model.LoanAmount > 40 && Model.LoanAmount <= 60)
+								@if (Model.LuckScore >= 40)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -187,7 +187,7 @@
 								{
 									<i class="fa-solid fa-star"></i>
 								}
-								@if (Model.LoanAmount > 60 && Model.LoanAmount <= 80)
+								@if (Model.LuckScore >= 60)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -195,7 +195,7 @@
 								{
 									<i class="fa-solid fa-star"></i>
 								}
-								@if (Model.LoanAmount > 80)
+								@if (Model.LuckScore >= 80)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -210,7 +210,7 @@
 						<td><span class="custom-table-text">Goodwill</span></td>
 						<td>
 							<span class="custom-table-star">
-								@if (Model.CharityScore >= 0 && Model.CharityScore <= 20)
+								@if (Model.CharityScore >= 0)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -218,7 +218,7 @@
 								{
 									<i class="fa-solid fa-star"></i>
 								}
-								@if (Model.CharityScore > 20 && Model.CharityScore <= 40)
+								@if (Model.CharityScore >= 20)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -226,7 +226,7 @@
 								{
 									<i class="fa-solid fa-star"></i>
 								}
-								@if (Model.CharityScore > 40 && Model.CharityScore <= 60)
+								@if (Model.CharityScore >= 40)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -234,7 +234,7 @@
 								{
 									<i class="fa-solid fa-star"></i>
 								}
-								@if (Model.CharityScore > 60 && Model.CharityScore <= 80)
+								@if (Model.CharityScore >= 60)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -242,7 +242,7 @@
 								{
 									<i class="fa-solid fa-star"></i>
 								}
-								@if (Model.CharityScore > 80)
+								@if (Model.CharityScore >= 80)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -257,7 +257,7 @@
 						<td><span class="custom-table-text">Trustworthiness</span></td>
 						<td>
 							<span class="custom-table-star">
-								@if (Model.TrustScore >= 0 && Model.TrustScore <= 20)
+								@if (Model.TrustScore >= 0)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -265,7 +265,7 @@
 								{
 									<i class="fa-solid fa-star"></i>
 								}
-								@if (Model.TrustScore > 20 && Model.TrustScore <= 40)
+								@if (Model.TrustScore >= 20)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -273,7 +273,7 @@
 								{
 									<i class="fa-solid fa-star"></i>
 								}
-								@if (Model.TrustScore > 40 && Model.TrustScore <= 60)
+								@if (Model.TrustScore >= 40)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -281,7 +281,7 @@
 								{
 									<i class="fa-solid fa-star"></i>
 								}
-								@if (Model.TrustScore > 60 && Model.TrustScore <= 80)
+								@if (Model.TrustScore >= 60)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -289,7 +289,7 @@
 								{
 									<i class="fa-solid fa-star"></i>
 								}
-								@if (Model.TrustScore > 80)
+								@if (Model.TrustScore >= 80)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -304,7 +304,7 @@
 						<td><span class="custom-table-text">Financial Status</span></td>
 						<td>
 							<span class="custom-table-star">
-								@if (Model.FinancialStatusScore >= 0 && Model.FinancialStatusScore <= 20)
+								@if (Model.FinancialStatusScore >= 0)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -312,7 +312,7 @@
 								{
 									<i class="fa-solid fa-star"></i>
 								}
-								@if (Model.FinancialStatusScore > 20 && Model.FinancialStatusScore <= 40)
+								@if (Model.FinancialStatusScore >= 20)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -320,7 +320,7 @@
 								{
 									<i class="fa-solid fa-star"></i>
 								}
-								@if (Model.FinancialStatusScore > 40 && Model.FinancialStatusScore <= 60)
+								@if (Model.FinancialStatusScore >= 40)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -328,7 +328,7 @@
 								{
 									<i class="fa-solid fa-star"></i>
 								}
-								@if (Model.FinancialStatusScore > 60 && Model.FinancialStatusScore <= 80)
+								@if (Model.FinancialStatusScore >= 60)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
@@ -336,7 +336,7 @@
 								{
 									<i class="fa-solid fa-star"></i>
 								}
-								@if (Model.FinancialStatusScore > 80)
+								@if (Model.FinancialStatusScore >= 80)
 								{
 									<i class="fa-solid fa-star custom-text-yellow"></i>
 								}
