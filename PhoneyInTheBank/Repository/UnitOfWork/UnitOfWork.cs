@@ -22,6 +22,9 @@ namespace Repository.UnitOfWork
 
         public IScoreRepository Score { get; private set; }
 
+        public IInvestmentRepository Investment { get; private set; }
+
+
         private readonly ApplicationDbContext _db;
 
         public UnitOfWork(ApplicationDbContext db)
@@ -33,6 +36,7 @@ namespace Repository.UnitOfWork
             TransactionHistory = new TransactionHistoryRepository(_db);
             Present = new PresentRepository(_db);
             Score = new ScoreRepository(_db);
+            Investment = new InvestmentRepository(_db);
 
         }
 

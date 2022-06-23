@@ -20,6 +20,9 @@ namespace Repository.UnitOfWork
         IPresentRepository Present { get; }
 
         IScoreRepository Score { get; }
+
+        IInvestmentRepository Investment { get; }
+
         Task Save();
     }
 }
