@@ -24,6 +24,8 @@ namespace Repository.UnitOfWork
 
         public IInvestmentRepository Investment { get; private set; }
 
+        public IOrganizationRepository Organization { get; private set; }
+
 
         private readonly ApplicationDbContext _db;
 
@@ -37,6 +39,7 @@ namespace Repository.UnitOfWork
             Present = new PresentRepository(_db);
             Score = new ScoreRepository(_db);
             Investment = new InvestmentRepository(_db);
+            Organization = new OrganizationRepository(_db);
 
         }
 

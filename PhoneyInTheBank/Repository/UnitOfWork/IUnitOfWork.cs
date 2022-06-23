@@ -23,6 +23,8 @@ namespace Repository.UnitOfWork
 
         IInvestmentRepository Investment { get; }
 
+        IOrganizationRepository Organization { get; }
+
         Task Save();
     }
 }

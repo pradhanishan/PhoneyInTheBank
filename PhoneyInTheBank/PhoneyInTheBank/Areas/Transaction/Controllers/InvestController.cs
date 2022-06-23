@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Models;
+using PhoneyInTheBank.Models;
 using Repository.UnitOfWork;
+using ViewModels;
 
 namespace PhoneyInTheBank.Areas.Transaction.Controllers
 {
@@ -17,7 +20,38 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View();
+
+            var user = User.Identity?.Name;
+            ApplicationUser applicationUser = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.UserName == user);
+            if (user == null) return NotFound();
+
+            // Auto create organizations that don't exist in deatabase
+            await _unitOfWork.Organization.Seed();
+            await _unitOfWork.Save();
+
+            IEnumerable<Investment> investments = _unitOfWork.Investment.GetUserInvestments(x => x.ApplicationUser == applicationUser);
+
+            IEnumerable<Organization> organizations = await _unitOfWork.Organization.GetAll();
+
+            List<InvestVM> investmentsVM = new List<InvestVM>();
+
+            foreach (var organization in organizations)
+            {
+                var investVM = new InvestVM() { OrganizationName = organization.Name };
+                investmentsVM.Add(investVM);
+            }
+
+            if (!investments.Any())
+            {
+                ViewData["NotInvested"] = "Y";
+            }
+
+            if (investments.Any())
+            {
+                // [TODO] - Important : [Fetch stock range statistics]
+            }
+
+            return View(investmentsVM.AsEnumerable());
         }
 
     }
