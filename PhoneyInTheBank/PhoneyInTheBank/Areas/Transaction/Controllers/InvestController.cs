@@ -118,6 +118,9 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             ApplicationUser applicationUser = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == user);
             if (applicationUser == null) return NotFound();
 
+            BankAccount bankAccount = await _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == applicationUser);
+            if (bankAccount == null) return NotFound();
+
             Organization organization = await _unitOfWork.Organization.GetFirstOrDefault(x => x.Name == investment.Organization);
 
             Investment newInvestment = new()
@@ -128,8 +131,18 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             };
 
 
-
+            bankAccount.InvestmentAmount -= investment.InvestmentAmount;
             await _unitOfWork.Investment.Add(newInvestment);
+            _unitOfWork.BankAccount.Update(bankAccount);
+
+            TransactionHistory trx = new()
+            {
+                User = user,
+                SentAmount = investment.InvestmentAmount,
+                Message = "invested in " + organization.Name,
+            };
+
+            await _unitOfWork.TransactionHistory.Add(trx);
             await _unitOfWork.Save();
 
             TempData["Success"] = "Investment completed successfully";
