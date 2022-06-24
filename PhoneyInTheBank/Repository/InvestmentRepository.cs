@@ -18,6 +18,18 @@ namespace Repository
             _db = db;
         }
 
+        public Task CancelInvestment(string user, string organization)
+        {
+            Investment investment = _db.Investment.FirstOrDefault(x => x.ApplicationUser.Email == user && x.Organization.Name == organization);
+            investment.ActiveFlag = false;
+
+
+
+            return Task.CompletedTask;
+
+        }
+
+
         public IEnumerable<Investment> GetUserInvestments(Expression<Func<Investment, bool>> filter)
         {
             return _db.Investment.Where(filter).AsEnumerable();
@@ -25,6 +37,8 @@ namespace Repository
 
         public void Update(Investment Entity)
         {
+            Entity.LastCollectedDate = DateTimeOffset.UtcNow;
+            Entity.UpdatedDate = DateTimeOffset.UtcNow;
             _db.Update(Entity);
         }
     }

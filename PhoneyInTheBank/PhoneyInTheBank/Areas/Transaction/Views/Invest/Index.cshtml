@@ -26,10 +26,16 @@
 						Investment
 					</th>
 					<th>
+						Days invested for
+					</th>
+					<th>
 						Profit
 					</th>
 					<th>
 						Loss
+					</th>
+					<th>
+						Stop Investing
 					</th>
 				</tr>
 			</thead>
@@ -44,10 +50,16 @@
 							@investment.InvestmentAmount
 						</td>
 						<td>
+							@investment.DaysInvested
+						</td>
+						<td>
 							@investment.Profit
 						</td>
 						<td>
 							@investment.Loss
+						</td>
+						<td>
+							<a asp-area="Transaction" asp-controller="Invest" asp-action="CancelInvestment" asp-route-organization=@investment.OrganizationName class=" text-decoration-none btn btn-danger">stop</a>
 						</td>
 					</tr>
 				}

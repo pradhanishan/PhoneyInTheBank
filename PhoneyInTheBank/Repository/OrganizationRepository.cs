@@ -21,7 +21,7 @@ namespace Repository
         public IEnumerable<Organization> GetUninvestedOrganizations(string user)
         {
 
-            var investedOrganizations = _db.Organization.Join(_db.Investment.Where(x => x.ApplicationUser.Email == user), o => o.Name, i => i.Organization.Name, (o, i) => o);
+            var investedOrganizations = _db.Organization.Join(_db.Investment.Where(x => x.ApplicationUser.Email == user && x.ActiveFlag), o => o.Name, i => i.Organization.Name, (o, i) => o);
 
             List<Organization> uninvestedOrganizations = new List<Organization>();
 

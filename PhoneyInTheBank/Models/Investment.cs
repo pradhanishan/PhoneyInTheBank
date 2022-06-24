@@ -31,6 +31,17 @@ namespace Models
         public float Loss { get; set; }
 
         [Required]
+
+        public int DaysInvested { get; set; }
+
+
+        [Required]
+
+        public bool ActiveFlag { get; set; } = true;
+
+
+
+        [Required]
         public DateTimeOffset LastCollectedDate { get; set; } = DateTimeOffset.UtcNow;
 
         [Required]
@@ -41,6 +52,7 @@ namespace Models
 
         public DateTimeOffset UpdatedDate { get; set; } = DateTimeOffset.UtcNow;
 
+     
 
 
     }

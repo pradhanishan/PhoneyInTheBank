@@ -20,19 +20,65 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
         public async Task<IActionResult> Index()
         {
-
             var user = User.Identity?.Name;
             ApplicationUser applicationUser = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.UserName == user);
             if (user == null) return NotFound();
 
+            BankAccount bankAccount = await _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == applicationUser);
+            if (bankAccount == null) return NotFound();
+
             // Auto create organizations that don't exist in deatabase
             await _unitOfWork.Organization.Seed();
+
+
+
             await _unitOfWork.Save();
 
 
             List<InvestVM> investmentsVM = new List<InvestVM>();
 
-            IEnumerable<Investment> investments = _unitOfWork.Investment.GetUserInvestments(x => x.ApplicationUser == applicationUser);
+            IEnumerable<Investment> investments = _unitOfWork.Investment.GetUserInvestments(x => x.ApplicationUser == applicationUser && x.ActiveFlag);
+
+            // Generate Profit or Loss for each investment
+
+
+            foreach (var investment in investments)
+            {
+                TimeSpan ROISpan = DateTimeOffset.UtcNow - investment.LastCollectedDate;
+
+                for (int i = 0; i < ROISpan.Days; i++)
+                {
+                    Random r = new();
+                    int profitOrLoss = r.Next(0, 100);
+                    if (profitOrLoss < 50)
+                    {
+                        // Loss
+                        float lossAmount = (r.Next(1, 101) * investment.InvestmentAmount) / 100;
+                        investment.Loss += lossAmount;
+                        if (bankAccount.InvestmentAmount - investment.Loss < 0) bankAccount.InvestmentAmount = 0;
+                        else bankAccount.InvestmentAmount -= lossAmount;
+
+
+
+                    }
+                    if (profitOrLoss >= 50)
+                    {
+                        // Profit
+                        float profitAmount = (r.Next(1, 101) * investment.InvestmentAmount) / 100;
+                        investment.Profit += profitAmount;
+                        bankAccount.InvestmentAmount += profitAmount;
+
+                    }
+
+                }
+                investment.DaysInvested += ROISpan.Days;
+
+                _unitOfWork.Investment.Update(investment);
+                _unitOfWork.BankAccount.Update(bankAccount);
+
+
+            }
+            await _unitOfWork.Save();
 
             foreach (var investment in investments)
             {
@@ -45,6 +91,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                     Loss = investment.Loss,
                     Profit = investment.Profit,
                     InvestmentAmount = investment.InvestmentAmount,
+                    DaysInvested = investment.DaysInvested,
                 };
 
                 investmentsVM.Add(iv);
@@ -113,7 +160,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 return View(investInOrganizationVM);
             }
 
-            var user = User.Identity.Name;
+            var user = User.Identity?.Name;
 
             ApplicationUser applicationUser = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == user);
             if (applicationUser == null) return NotFound();
@@ -123,17 +170,32 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
             Organization organization = await _unitOfWork.Organization.GetFirstOrDefault(x => x.Name == investment.Organization);
 
-            Investment newInvestment = new()
+
+            Investment existingInvestment = await _unitOfWork.Investment.GetFirstOrDefault(x => x.ApplicationUser.Email == user && x.Organization.Name == organization.Name);
+
+            if (existingInvestment != null)
             {
-                ApplicationUser = applicationUser,
-                Organization = organization,
-                InvestmentAmount = investment.InvestmentAmount,
-            };
+                existingInvestment.ActiveFlag = true;
+                existingInvestment.InvestmentAmount = investment.InvestmentAmount;
 
+                _unitOfWork.Investment.Update(existingInvestment);
+                _unitOfWork.BankAccount.Update(bankAccount);
 
-            bankAccount.InvestmentAmount -= investment.InvestmentAmount;
-            await _unitOfWork.Investment.Add(newInvestment);
-            _unitOfWork.BankAccount.Update(bankAccount);
+            }
+
+            if (existingInvestment == null)
+            {
+                Investment newInvestment = new()
+                {
+                    ApplicationUser = applicationUser,
+                    Organization = organization,
+                    InvestmentAmount = investment.InvestmentAmount,
+                };
+
+                bankAccount.InvestmentAmount -= investment.InvestmentAmount;
+                await _unitOfWork.Investment.Add(newInvestment);
+                _unitOfWork.BankAccount.Update(bankAccount);
+            }
 
             TransactionHistory trx = new()
             {
@@ -150,6 +212,13 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
             return RedirectToAction("Index", "Invest", new { Area = "Transaction" });
 
+        }
+
+        public async Task<IActionResult> CancelInvestment(string organization)
+        {
+            await _unitOfWork.Investment.CancelInvestment(User.Identity.Name, organization);
+            await _unitOfWork.Save();
+            return RedirectToAction("Index", "Invest", new { Area = "Transaction" });
         }
 
     }

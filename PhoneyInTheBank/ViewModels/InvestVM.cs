@@ -22,5 +22,8 @@ namespace ViewModels
 
         public DateTimeOffset LastCollectedDate { get; set; }
 
+        public int DaysInvested { get; set; }
+
+
     }
 }

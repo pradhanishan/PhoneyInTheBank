@@ -36,7 +36,7 @@ namespace DataContext.Data
             modelBuilder.Entity<Present>().ToTable("Presents");
             modelBuilder.Entity<Score>().ToTable("Scores");
             modelBuilder.Entity<Organization>().ToTable("Organizations");
-            modelBuilder.Entity<Investment>().ToTable("Investment");
+            modelBuilder.Entity<Investment>().ToTable("Investments");
         }
     }
 }

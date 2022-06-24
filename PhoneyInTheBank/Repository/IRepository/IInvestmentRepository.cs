@@ -13,5 +13,8 @@ namespace Repository.IRepository
         public void Update(Investment Entity);
 
         public IEnumerable<Investment> GetUserInvestments(Expression<Func<Investment, bool>> filter);
+
+        public Task CancelInvestment(string user, string organization);
+
     }
 }

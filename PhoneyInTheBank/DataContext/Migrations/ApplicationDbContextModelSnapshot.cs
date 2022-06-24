@@ -167,12 +167,18 @@ namespace DataContext.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<bool>("ActiveFlag")
+                        .HasColumnType("bit");
+
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTimeOffset>("CreatedDate")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("DaysInvested")
+                        .HasColumnType("int");
 
                     b.Property<float>("InvestmentAmount")
                         .HasColumnType("real");
@@ -198,7 +204,7 @@ namespace DataContext.Migrations
 
                     b.HasIndex("OrganizationId");
 
-                    b.ToTable("Investment", (string)null);
+                    b.ToTable("Investments", (string)null);
                 });
 
             modelBuilder.Entity("Models.Loan", b =>
