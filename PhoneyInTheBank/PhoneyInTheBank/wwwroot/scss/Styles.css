@@ -316,6 +316,18 @@ Transaction/Transfer - [START]
   }
 }
 /*--------------------------------------------------------
+Transaction/Invest/InvestInOrganization - [START]
+--------------------------------------------------------*/
+.custom-invest-in-organization-container {
+  width: 50%;
+}
+
+@media screen and (max-width: 991.98px) {
+  .custom-invest-in-organization-container {
+    width: 100%;
+  }
+}
+/*--------------------------------------------------------
 Home/Home/About - [START]
 --------------------------------------------------------*/
 .custom-carousel-item-container {

@@ -14,53 +14,63 @@
 			Invest in businesses
 		</span><hr />
 	</div>
-	@if (ViewData["NotInvested"] == null)
-	{
-		<div class="custom-invest-child custom-invest-child-body m-3">
-			<table class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th>
-							S.No
-						</th>
-						<th>
-							Organization
-						</th>
-						<th>
-							Investment
-						</th>
-						<th>
-							Profit
-						</th>
-						<th>
-							Loss
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-				</tbody>
-			</table>
-		</div>
-	}
-	@if (ViewData["NotInvested"] != null)
-	{
-		<div class="custom-invest-child col-6">
-			<h3>Invest in the following businesses</h3>
-			<table class="table table-borderless">
-				<tbody>
-					@foreach (var investment in Model)
-					{
-						<tr>
-							<td class="fw-bold">@investment.OrganizationName</td>
-							<td><a class="fw-bold text-decoration-none btn btn-success">invest</a></td>
-						</tr>
-					}
 
-				</tbody>
-			</table>
-			<ul>
-			</ul>
-		</div>
-	}
+	<div class="custom-invest-child custom-invest-child-body m-3">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>
+						Organization
+					</th>
+					<th>
+						Investment
+					</th>
+					<th>
+						Profit
+					</th>
+					<th>
+						Loss
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var investment in Model.Where(x => x.InvestedFlag))
+				{
+					<tr>
+						<td>
+							@investment.OrganizationName
+						</td>
+						<td>
+							@investment.InvestmentAmount
+						</td>
+						<td>
+							@investment.Profit
+						</td>
+						<td>
+							@investment.Loss
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="custom-invest-child col-6">
+		<h3>Invest in the following businesses</h3>
+		<table class="table table-borderless">
+			<tbody>
+				@foreach (var investment in Model.Where(x => !x.InvestedFlag))
+				{
+					<tr>
+						<td class="fw-bold">@investment.OrganizationName</td>
+						<td><a asp-area="Transaction" asp-controller="Invest" asp-action="InvestInOrganization" asp-route-organization=@investment.OrganizationName class="fw-bold text-decoration-none btn btn-success">invest</a></td>
+					</tr>
+				}
+
+			</tbody>
+		</table>
+		<ul>
+		</ul>
+	</div>
 
 </div>
