@@ -11,5 +11,8 @@ namespace Repository.IRepository
     {
         public void Update(BankAccount Entity);
         public int GenerateAccountNumber();
+
+        public Task<BankAccount> GetUserBankAccount(string user);
+
     }
 }

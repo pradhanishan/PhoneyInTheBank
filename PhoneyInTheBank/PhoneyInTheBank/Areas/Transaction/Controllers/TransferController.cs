@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using PhoneyInTheBank.Models;
 using Repository.UnitOfWork;
+using Utilities;
 using ViewModels;
 
 namespace PhoneyInTheBank.Areas.Transaction.Controllers
@@ -20,31 +21,21 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var username = User.Identity?.Name;
-            if (username == null)
+            try
             {
-                ModelState.AddModelError(string.Empty, "Invalid User");
+                BankAccount bankAccount = await _unitOfWork.BankAccount.GetUserBankAccount(User.Identity.Name);
+
+                if (bankAccount.OperativeAmount == 0 && bankAccount.InvestmentAmount == 0)
+                {
+                    return RedirectToAction("Index", "User", new { Area = "User" });
+                }
                 return View();
             }
-            ApplicationUser user = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
-            if (user == null)
+            catch
             {
-                ModelState.AddModelError(string.Empty, "Invalid User");
-                return View();
+                return RedirectToAction("Error", "Error", new { Area = "Home" });
             }
 
-            BankAccount bankAccount = await _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
-            if (bankAccount == null)
-            {
-                ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
-                return View();
-            }
-
-            if (bankAccount.OperativeAmount == 0 && bankAccount.InvestmentAmount == 0)
-            {
-                return RedirectToAction("Index", "User", new { Area = "User" });
-            }
-            return View();
         }
 
         [HttpPost]
@@ -52,120 +43,112 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
         public async Task<IActionResult> Index(TransferVM transfer)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View();
-            }
-
-            var username = User.Identity?.Name;
-            if (username == null)
-            {
-                ModelState.AddModelError(string.Empty, "Invalid User");
-                return View();
-            }
-            ApplicationUser user = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
-            if (user == null)
-            {
-                ModelState.AddModelError(string.Empty, "Invalid User");
-                return View();
-            }
-            BankAccount bankAccount = await _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == user);
-            if (bankAccount == null)
-            {
-                ModelState.AddModelError(string.Empty, "This user does not have an active bank account!");
-                return View();
-            }
-
-            if (bankAccount.OperativeAmount == 0 && bankAccount.InvestmentAmount == 0)
-            {
-                return RedirectToAction("Index", "User", new { Area = "User" });
-            }
-
-            Score score = await _unitOfWork.Score.GetFirstOrDefault(x => x.ApplicationUser == user);
-
-
-            TransactionHistory trx = new()
-            {
-                User = User.Identity.Name,
-                SentAmount = transfer.Amount,
-                ReceivedAmount = 0,
-                TransactionDate = DateTimeOffset.Now,
-            };
-
-
-            // If Donate To AI is selected then subtract from operative Account
-            if (transfer.DonateToAI)
-            {
-                if (bankAccount.OperativeAmount < 0 || bankAccount.OperativeAmount < transfer.Amount)
+                if (!ModelState.IsValid)
                 {
-                    ModelState.AddModelError(string.Empty, "You do not have enough funds to process this requrest.");
                     return View();
                 }
 
-                if ((transfer.Amount / bankAccount.OperativeAmount) * 100 >= 5 && (transfer.Amount / bankAccount.OperativeAmount) * 100 < 10)
+                BankAccount bankAccount = await _unitOfWork.BankAccount.GetUserBankAccount(User.Identity?.Name);
+
+                if (bankAccount.OperativeAmount == 0 && bankAccount.InvestmentAmount == 0)
                 {
-                    _unitOfWork.Score.IncreaseGoodwill(score, 1);
-                    _unitOfWork.Score.DecreaseFinancialStatus(score, 1);
-                }
-                if ((transfer.Amount / bankAccount.OperativeAmount) * 100 >= 10 && (transfer.Amount / bankAccount.OperativeAmount) * 100 < 50)
-                {
-                    _unitOfWork.Score.IncreaseGoodwill(score, 3);
-                    _unitOfWork.Score.DecreaseFinancialStatus(score, 3);
-                }
-                if ((transfer.Amount / bankAccount.OperativeAmount) * 100 >= 50)
-                {
-                    _unitOfWork.Score.IncreaseGoodwill(score, 10);
-                    _unitOfWork.Score.DecreaseFinancialStatus(score, 10);
+                    return RedirectToAction("Index", "User", new { Area = "User" });
                 }
 
-                trx.TransactionType = "D";
-                trx.Message = "Donated " + transfer.Amount.ToString() + " phonies to AI";
-                bankAccount.OperativeAmount -= transfer.Amount;
+                Score score = await _unitOfWork.Score.GetFirstOrDefault(x => x.ApplicationUser.Email == User.Identity.Name);
 
 
-            }
-
-
-            // If Donate to AI is not selected, transfer money between Operative and Investment account.
-            if (!transfer.DonateToAI)
-            {
-                if (transfer.TransferType != "oti" && transfer.TransferType != "ito")
+                TransactionHistory trx = new()
                 {
-                    ModelState.AddModelError(String.Empty, " Invalid Transfer Type");
-                    return View();
-                }
-                if (transfer.TransferType == "oti")
+                    User = User.Identity.Name,
+                    SentAmount = transfer.Amount,
+                    ReceivedAmount = 0,
+                    TransactionDate = DateTimeOffset.Now,
+                };
+
+
+                // If Donate To AI is selected then subtract from operative Account
+                if (transfer.DonateToAI)
                 {
                     if (bankAccount.OperativeAmount < 0 || bankAccount.OperativeAmount < transfer.Amount)
                     {
-                        ModelState.AddModelError(string.Empty, "You do not have enough funds to process this requrest.");
+                        ModelState.AddModelError(string.Empty, CModelError.InvalidTransferTypeError);
                         return View();
                     }
-                    trx.TransactionType = "OI";
-                    trx.Message = "Transferred " + transfer.Amount.ToString() + " phonies from operative to investment account.";
-                    bankAccount.OperativeAmount -= transfer.Amount;
-                    bankAccount.InvestmentAmount += transfer.Amount;
-                }
-                if (transfer.TransferType == "ito")
-                {
-                    if (bankAccount.InvestmentAmount < 0 || bankAccount.InvestmentAmount < transfer.Amount)
+
+                    if ((transfer.Amount / bankAccount.OperativeAmount) * 100 >= 5 && (transfer.Amount / bankAccount.OperativeAmount) * 100 < 10)
                     {
-                        ModelState.AddModelError(string.Empty, "You do not have enough funds to process this requrest.");
+                        _unitOfWork.Score.IncreaseGoodwill(score, 1);
+                        _unitOfWork.Score.DecreaseFinancialStatus(score, 1);
+                    }
+                    if ((transfer.Amount / bankAccount.OperativeAmount) * 100 >= 10 && (transfer.Amount / bankAccount.OperativeAmount) * 100 < 50)
+                    {
+                        _unitOfWork.Score.IncreaseGoodwill(score, 3);
+                        _unitOfWork.Score.DecreaseFinancialStatus(score, 3);
+                    }
+                    if ((transfer.Amount / bankAccount.OperativeAmount) * 100 >= 50)
+                    {
+                        _unitOfWork.Score.IncreaseGoodwill(score, 10);
+                        _unitOfWork.Score.DecreaseFinancialStatus(score, 10);
+                    }
+
+                    trx.TransactionType = CTransaction.TRXTypeDonate;
+                    trx.Message = CTransaction.GetDonatedLog(transfer.Amount);
+                    bankAccount.OperativeAmount -= transfer.Amount;
+
+
+                }
+
+
+                // If Donate to AI is not selected, transfer money between Operative and Investment account.
+                if (!transfer.DonateToAI)
+                {
+                    if (transfer.TransferType != CTransferType.OperativeToInvestment && transfer.TransferType != CTransferType.InvestmentToOperative)
+                    {
+                        ModelState.AddModelError(String.Empty, CModelError.InvalidTransferTypeError);
                         return View();
                     }
-                    trx.TransactionType = "IO";
-                    trx.Message = "Transferred " + transfer.Amount.ToString() + " phonies from investment to operative account.";
-                    bankAccount.OperativeAmount += transfer.Amount;
-                    bankAccount.InvestmentAmount -= transfer.Amount;
+                    if (transfer.TransferType == CTransferType.OperativeToInvestment)
+                    {
+                        if (bankAccount.OperativeAmount < 0 || bankAccount.OperativeAmount < transfer.Amount)
+                        {
+                            ModelState.AddModelError(string.Empty, CModelError.InsufficientFundError);
+                            return View();
+                        }
+                        trx.TransactionType = "OI";
+                        trx.Message = CTransaction.GetOperativeToInvestmentTransferLog(transfer.Amount);
+                        bankAccount.OperativeAmount -= transfer.Amount;
+                        bankAccount.InvestmentAmount += transfer.Amount;
+                    }
+                    if (transfer.TransferType == CTransferType.InvestmentToOperative)
+                    {
+                        if (bankAccount.InvestmentAmount < 0 || bankAccount.InvestmentAmount < transfer.Amount)
+                        {
+                            ModelState.AddModelError(string.Empty, CModelError.InsufficientFundError);
+                            return View();
+                        }
+                        trx.TransactionType = CTransaction.TRXTypeInvestmentToOperativeTransfer;
+                        trx.Message = CTransaction.GetInvestmentToOperativeTransferLog(transfer.Amount);
+                        bankAccount.OperativeAmount += transfer.Amount;
+                        bankAccount.InvestmentAmount -= transfer.Amount;
+                    }
                 }
+
+                _unitOfWork.BankAccount.Update(bankAccount);
+                await _unitOfWork.TransactionHistory.Add(trx);
+                await _unitOfWork.Save();
+                TempData["Success"] = CTransaction.TransferComplete;
+
+                return RedirectToAction("Index", "User", new { area = "User" });
             }
 
-            _unitOfWork.BankAccount.Update(bankAccount);
-            await _unitOfWork.TransactionHistory.Add(trx);
-            await _unitOfWork.Save();
-            TempData["Success"] = "Transfer complete.";
 
-            return RedirectToAction("Index", "User", new { area = "User" });
+            catch
+            {
+                return RedirectToAction("Error", "Error", new { Area = "Home" });
+            }
         }
 
     }

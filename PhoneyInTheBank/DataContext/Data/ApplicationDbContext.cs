@@ -25,6 +25,7 @@ namespace DataContext.Data
         public DbSet<Organization> Organization { get; set; }
 
         public DbSet<Investment> Investment { get; set; }
+        public IEnumerable<object> ApplicationUser { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
