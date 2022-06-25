@@ -234,12 +234,55 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             }
         }
 
-        public async Task<IActionResult> CancelInvestment(string organization)
+        public async Task<IActionResult> CollectROI(string organization)
         {
             try
             {
+
+                Investment investment = await _unitOfWork.Investment.GetFirstOrDefault(x => x.ApplicationUser.Email == User.Identity.Name && x.Organization.Name == organization && x.ActiveFlag);
+
+
+                BankAccount bankAccount = await _unitOfWork.BankAccount.GetUserBankAccount(User.Identity.Name);
+
+                bankAccount.InvestmentAmount = investment.Profit - investment.Loss;
+
+
+                Score score = await _unitOfWork.Score.GetFirstOrDefault(x => x.ApplicationUser.Email == User.Identity.Name);
+
+                if ((bankAccount.InvestmentAmount / bankAccount.OperativeAmount) * 100 >= 5 && (bankAccount.InvestmentAmount / bankAccount.OperativeAmount) * 100 < 5)
+                {
+                    _unitOfWork.Score.IncreaseFinancialStatus(score, 1);
+                }
+                if ((bankAccount.InvestmentAmount / bankAccount.OperativeAmount) * 100 >= 10 && (bankAccount.InvestmentAmount / bankAccount.OperativeAmount) * 100 < 50)
+                {
+                    _unitOfWork.Score.IncreaseFinancialStatus(score, 3);
+                }
+                if ((bankAccount.InvestmentAmount / bankAccount.OperativeAmount) * 100 >= 50)
+                {
+                    _unitOfWork.Score.IncreaseFinancialStatus(score, 10);
+                }
+
+                bankAccount.OperativeAmount += bankAccount.InvestmentAmount;
+                
+
+                _unitOfWork.Score.Update(score);
                 await _unitOfWork.Investment.CancelInvestment(User.Identity.Name, organization);
+
+                TransactionHistory trx = new()
+                {
+                    Message = "Received return of investment of " + bankAccount.InvestmentAmount.ToString() + " from " + organization,
+                    ReceivedAmount = bankAccount.InvestmentAmount,
+                    User = User.Identity.Name,
+                };
+
+
+                bankAccount.InvestmentAmount = 0;
+                _unitOfWork.BankAccount.Update(bankAccount);
+                await _unitOfWork.TransactionHistory.Add(trx);
                 await _unitOfWork.Save();
+
+                TempData["Success"] = "Investment refunded successfully";
+
                 return RedirectToAction("Index", "Invest", new { Area = "Transaction" });
             }
             catch

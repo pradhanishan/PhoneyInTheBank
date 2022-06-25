@@ -21,6 +21,7 @@ namespace Repository
         public Task CancelInvestment(string user, string organization)
         {
             Investment investment = _db.Investment.FirstOrDefault(x => x.ApplicationUser.Email == user && x.Organization.Name == organization);
+            investment.Profit = investment.Loss = investment.InvestmentAmount = 0;
             investment.ActiveFlag = false;
 
 
