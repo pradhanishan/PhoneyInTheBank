@@ -1,0 +1,14 @@
+﻿@import "classes/_color-classes.scss";
+@import "classes/_layout-classes.scss";
+@import "classes/_offset-classes.scss";
+@import "classes/_user-card.scss";
+@import "classes//_containers.scss";
+@import "classes/_page-layouts.scss";
+
+
+.custom-container{
+    display:flex;
+    justify-content:center;
+    width:100%;
+
+}

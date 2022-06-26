@@ -1,0 +1,12 @@
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Utilities\bin\Debug\net6.0\Utilities.deps.json
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Utilities\bin\Debug\net6.0\Utilities.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Utilities\bin\Debug\net6.0\Utilities.pdb
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Utilities\obj\Debug\net6.0\Utilities.csproj.AssemblyReference.cache
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Utilities\obj\Debug\net6.0\Utilities.GeneratedMSBuildEditorConfig.editorconfig
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Utilities\obj\Debug\net6.0\Utilities.AssemblyInfoInputs.cache
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Utilities\obj\Debug\net6.0\Utilities.AssemblyInfo.cs
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Utilities\obj\Debug\net6.0\Utilities.csproj.CoreCompileInputs.cache
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Utilities\obj\Debug\net6.0\Utilities.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Utilities\obj\Debug\net6.0\refint\Utilities.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Utilities\obj\Debug\net6.0\Utilities.pdb
+D:\development\PhoneyInTheBank\PhoneyInTheBank\Utilities\obj\Debug\net6.0\ref\Utilities.dll

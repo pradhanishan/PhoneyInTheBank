@@ -1,0 +1,32 @@
+﻿@import "../dependencies/variables/_color-variables.scss";
+@import "../dependencies/variables/_breakpoint-variables.scss";
+@import "../dependencies/variables/_border-variables.scss";
+
+@keyframes updown {
+    0% {
+        transform: translateY(-100%);
+    }
+
+    50% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+.custom-user-card {
+    background: $blue;
+    display: flex;
+}
+
+.bounce {
+    animation: updown 2s ease infinite;
+}
+
+@media screen and (max-width:$breakpoint-s-device) {
+    .custom-user-card {
+        display: none;
+    }
+}

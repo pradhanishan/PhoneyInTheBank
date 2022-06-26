@@ -1,0 +1,60 @@
+﻿@model ViewModels.LoanPaymentVM;
+@{
+	ViewData["Title"] = "Pay Loan";
+}
+
+<div class="container custom-payloan-container">
+	<div class=" custom-pay-loan-child m-3">
+		<div class="custom-head">
+			<div><h1 class="text-danger">Can't apply! </h1></div>
+			<div><a class="btn btn-danger text-dedcoration-none text-white" asp-area="User" asp-controller="User" asp-action="Index"><i class="fa-solid fa-angle-left"></i> back</a></div>
+		</div>
+	</div>
+	<div class=" custom-pay-loan-child m-3">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Amount Taken</th>
+					<th>Interest Rate</th>
+					<th>Amount with interest</th>
+					<th>Amount left to pay</th>
+					<th>Taken on</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>@Model.AmountTaken</td>
+					<td>@Model.InterestRate</td>
+					<td>@Model.AmountWithInterest</td>
+					<td>@Model.AmountLeftToPay</td>
+					<td>@Model.TakenOn</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="custom-pay-loan-child m-3">
+		<p class="text-danger">
+			You already have an open loan. Please, clear your current loan before applying for another.
+		</p>
+		<hr />
+	</div>
+	<div class="custom-pay-loan-child m-3">
+		<form method="post" asp-area="Transaction" asp-controller="Loan" asp-action="PayLoan">
+			<div class="mb-3">
+				<input hidden type="text" asp-for="AmountTaken" />
+				<input hidden type="text" asp-for="InterestRate" />
+				<input hidden type="text" asp-for="AmountWithInterest" />
+				<input hidden type="text" asp-for="AmountLeftToPay" />
+				<input hidden type="text" asp-for="TakenOn" />
+				<label class="form-label fw-bold" asp-for="ClearanceAmount">Enter amount you would like to pay</label>
+				<br/><span class="text-success">Your current balance is : @Model.OperativeAmount phonies</span><br/><br/>
+				<input type="text" class="form-control custom-pay-loan-input" asp-for="ClearanceAmount">
+			</div>
+			<div asp-validation-summary="All" class="text-danger"></div>
+			<div class="mb-3">
+				<input type="submit" class="btn btn-primary custom-bg-blue" value="submit" />
+			</div>
+		</form>
+	</div>
+
+</div>

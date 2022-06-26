@@ -1,0 +1,364 @@
+﻿.custom-bg-blue {
+  background-color: #187498;
+}
+
+.custom-bg-red {
+  background-color: #EB5353;
+}
+
+.custom-bg-yellow {
+  background-color: #F9D923;
+}
+
+.custom-bg-green {
+  background-color: #36AE7C;
+}
+
+.custom-bg-cyan {
+  background-color: #37E2D5;
+}
+
+.custom-bg-purple {
+  background-color: #BD4291;
+}
+
+.custom-bg-grey {
+  background-color: #EEEEEE;
+}
+
+.custom-bg-disabled {
+  background-color: #7F8487;
+}
+
+.custom-text-blue {
+  color: #187498;
+}
+
+.custom-text-red {
+  color: #EB5353;
+}
+
+.custom-text-yellow {
+  color: #F9D923;
+}
+
+.custom-text-green {
+  color: #36AE7C;
+}
+
+.custom-home-child-container {
+  margin-top: 8%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 5%;
+  grid-template-rows: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 991.98px) {
+  .custom-home-child-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 767.98px) {
+  .custom-home-child-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.custom-registration-form-container {
+  width: 50%;
+}
+
+@media screen and (max-width: 991.98px) {
+  .custom-registration-form-container {
+    width: 100%;
+  }
+}
+.custom-login-form-container {
+  width: 50%;
+}
+
+@media screen and (max-width: 991.98px) {
+  .custom-login-form-container {
+    width: 100%;
+  }
+}
+.custom-user-info-offset {
+  background-color: #36AE7C;
+}
+
+@keyframes updown {
+  0% {
+    transform: translateY(-100%);
+  }
+  50% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+.custom-user-card {
+  background: #187498;
+  display: flex;
+}
+
+.bounce {
+  animation: updown 2s ease infinite;
+}
+
+@media screen and (max-width: 767.98px) {
+  .custom-user-card {
+    display: none;
+  }
+}
+.custom-center-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*--------------------------------------------------------
+/User/User - [START]
+--------------------------------------------------------*/
+.custom-dashboard-navigation {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+.custom-dashboard-container {
+  display: grid;
+  grid-template-areas: "detail detail" "stat nav";
+}
+
+.custom-dashboard-account-detail {
+  grid-area: detail;
+}
+
+.custom-dashboard-navigation {
+  grid-area: nav;
+}
+
+.custom-dashboard-statistics {
+  grid-area: stat;
+}
+
+.custom-dashboard-navigation-child, .custom-dashboard-navigation-child-disabled {
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.custom-dashboard-navigation-child:hover, .custom-dashboard-navigation-child:focus {
+  filter: brightness(150%);
+}
+
+.custom-dashboard-statistics {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.custom-present {
+  position: relative;
+}
+
+.custom-present-notification {
+  position: absolute;
+  top: 5%;
+  right: -3%;
+}
+
+@media screen and (max-width: 991.98px) {
+  .custom-dashboard-container {
+    display: grid;
+    grid-template-areas: "detail" "stat" "nav";
+  }
+
+  .custom-dashboard-navigation {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+/*--------------------------------------------------------
+Transaction/Earn - [START]
+--------------------------------------------------------*/
+.custom-earn-container {
+  display: grid;
+  grid-template-areas: "head head" "body1 body2";
+}
+
+.custom-earn-head {
+  grid-area: head;
+}
+
+.custom-earn-body-1 {
+  grid-area: body1;
+}
+
+.custom-earn-body-2 {
+  grid-area: body2;
+}
+
+.custom-earm-money-input-container {
+  width: 50%;
+}
+
+.custom-earn-buttons-container {
+  display: flex;
+}
+
+.custom-earn-button:hover {
+  filter: brightness(150%);
+  transform: scale(1.5);
+}
+
+.custom-earn-table-container {
+  text-align: center;
+  width: 50%;
+}
+
+@media screen and (max-width: 991.98px) {
+  .custom-earn-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .custom-earm-money-input-container {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 991.98px) {
+  .custom-home-child-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 767.98px) {
+  .custom-home-child-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+/*--------------------------------------------------------
+Transaction/Loan - [START]
+--------------------------------------------------------*/
+.custom-loan-body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.card {
+  overflow: hidden;
+}
+
+.custom-card:hover {
+  transform: scale(1.1);
+  border: 2px solid #37E2D5;
+}
+
+@media screen and (max-width: 1199.98px) {
+  .custom-loan-body {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: 767.98px) {
+  .custom-loan-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+/*--------------------------------------------------------
+Transaction/PayLoan - [START]
+--------------------------------------------------------*/
+.custom-pay-loan-input {
+  width: 50%;
+}
+
+@media screen and (max-width: 767.98px) {
+  .custom-pay-loan-input {
+    width: 100%;
+  }
+}
+/*--------------------------------------------------------
+Transaction/Transfer - [START]
+--------------------------------------------------------*/
+.custom-transfer-container {
+  width: 50%;
+}
+
+@media screen and (max-width: 767.98px) {
+  .custom-transfer-container {
+    width: 100%;
+  }
+}
+/*--------------------------------------------------------
+Transaction/Invest/InvestInOrganization - [START]
+--------------------------------------------------------*/
+.custom-invest-in-organization-container {
+  width: 50%;
+}
+
+@media screen and (max-width: 991.98px) {
+  .custom-invest-in-organization-container {
+    width: 100%;
+  }
+}
+/*--------------------------------------------------------
+Home/Home/About - [START]
+--------------------------------------------------------*/
+.custom-carousel-item-container {
+  border-radius: 8px;
+  height: 50vh;
+}
+
+.custom-carousel-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-carousel-content-wrapper {
+  display: flex;
+}
+
+@media screen and (max-width: 767.98px) {
+  .custom-carousel-content {
+    justify-content: flex-start;
+  }
+
+  .custom-carousel-content-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.custom-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

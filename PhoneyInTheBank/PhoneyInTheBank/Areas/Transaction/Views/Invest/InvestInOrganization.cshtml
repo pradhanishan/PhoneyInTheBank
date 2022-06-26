@@ -1,0 +1,35 @@
+﻿@model ViewModels.InvestInOrganizationVM;
+@{
+	ViewData["Title"] = "Invest In Organization";
+}
+<div class="container custom-invest-in-organization-container">
+	<form asp-area="Transaction" asp-controller="Invest" asp-action="InvestInOrganization" method="post">
+
+	
+		<div class="m-3">
+			<div class="custom-head">
+			<div><h1>Invest in @Model.Organization  </h1></div>
+			<div><a class="btn btn-danger text-dedcoration-none text-white" asp-area="User" asp-controller="User" asp-action="Index"><i class="fa-solid fa-angle-left"></i> back</a></div>
+		</div>
+			<span class="fw-bold text-success">Your investment balance is @Model.InvestmentBalance Phonies</span>
+		</div>
+		<div class="m-3">
+			<label class="form-label" asp-for="InvestmentAmount"></label>
+			<input type="text" class="form-control" asp-for="InvestmentAmount" placeholder="Between 1 and @Model.InvestmentBalance Phonies" />
+		</div>
+		<div class="m-3">
+			<input type="submit" class="btn btn-primary custom-bg-blue" value="Submit" />
+		</div>
+			<div class="m-3">
+			<div asp-validation-summary="All" class="text-danger"></div>
+			<input type="text" hidden asp-for="Organization" />
+			<input type="text" hidden asp-for="InvestmentBalance" />
+		</div>
+	</form>
+</div>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial"></partial>
+	}
+	}
