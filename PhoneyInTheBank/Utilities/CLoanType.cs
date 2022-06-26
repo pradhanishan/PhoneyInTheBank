@@ -10,7 +10,7 @@ namespace Utilities
     {
         public static string SmallLoan = "Small Loan";
         public static string AveragelLoan = "Average Loan";
-        public static string LargeLoan = "LargeLoan";
+        public static string LargeLoan = "Large Loan";
         public static int SmallLoanInterestRate = 25;
         public static int AverageLoanInterestRate = 50;
         public static int LargeLoanInterestRate = 100;

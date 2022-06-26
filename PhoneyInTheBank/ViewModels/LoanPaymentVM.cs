@@ -19,5 +19,8 @@ namespace ViewModels
         public DateTimeOffset TakenOn { get; set; } = DateTimeOffset.Now;
 
         public float ClearanceAmount { get; set; }
+
+        public float OperativeAmount { get; set; }
+
     }
 }

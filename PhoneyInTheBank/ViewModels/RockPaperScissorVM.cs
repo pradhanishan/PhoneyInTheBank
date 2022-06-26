@@ -20,5 +20,7 @@ namespace ViewModels
         public bool VictoryFlag { get; set; } = false;
 
         public bool TieFlag { get; set; } = false;
+
+
     }
 }

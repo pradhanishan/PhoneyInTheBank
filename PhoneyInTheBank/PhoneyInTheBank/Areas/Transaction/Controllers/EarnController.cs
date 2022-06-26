@@ -32,6 +32,9 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                     return RedirectToAction("Index", "User", new { Area = "User" });
                 }
 
+
+                ViewData["BankBalance"] = bankAccount.OperativeAmount;
+
                 //TODO -[Not So Important] Design Rock Paper Scissor UI
                 return View();
             }

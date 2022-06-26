@@ -29,6 +29,12 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 BankAccount bankAccount = await _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser == applicationUser);
                 if (bankAccount == null) return NotFound();
 
+                if(bankAccount.OperativeAmount ==0 && bankAccount.InvestmentAmount == 0)
+                {
+                    return RedirectToAction("Index", "User", new { Area = "User" });
+                }
+
+
                 // Auto create organizations that don't exist in deatabase
                 await _unitOfWork.Organization.Seed();
 
@@ -39,47 +45,13 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
                 List<InvestVM> investmentsVM = new List<InvestVM>();
 
-                IEnumerable<Investment> investments = _unitOfWork.Investment.GetUserInvestments(x => x.ApplicationUser == applicationUser && x.ActiveFlag);
+                IEnumerable<Investment> investments = await GenerateROI();
 
                 // Generate Profit or Loss for each investment
 
 
-                foreach (var investment in investments)
-                {
-                    TimeSpan ROISpan = DateTimeOffset.UtcNow - investment.LastCollectedDate;
-
-                    for (int i = 0; i < ROISpan.Days; i++)
-                    {
-                        Random r = new();
-                        int profitOrLoss = r.Next(0, 100);
-                        if (profitOrLoss < 50)
-                        {
-                            // Loss
-                            float lossAmount = (r.Next(1, 101) * investment.InvestmentAmount) / 100;
-                            investment.Loss += lossAmount;
-                            if (bankAccount.InvestmentAmount - investment.Loss < 0) bankAccount.InvestmentAmount = 0;
-                            else bankAccount.InvestmentAmount -= lossAmount;
 
 
-
-                        }
-                        if (profitOrLoss >= 50)
-                        {
-                            // Profit
-                            float profitAmount = (r.Next(1, 101) * investment.InvestmentAmount) / 100;
-                            investment.Profit += profitAmount;
-                            bankAccount.InvestmentAmount += profitAmount;
-
-                        }
-
-                    }
-                    investment.DaysInvested += ROISpan.Days;
-
-                    _unitOfWork.Investment.Update(investment);
-                    _unitOfWork.BankAccount.Update(bankAccount);
-
-
-                }
                 await _unitOfWork.Save();
 
                 foreach (var investment in investments)
@@ -193,6 +165,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 {
                     existingInvestment.ActiveFlag = true;
                     existingInvestment.InvestmentAmount = investment.InvestmentAmount;
+                    bankAccount.InvestmentAmount -= investment.InvestmentAmount;
 
                     _unitOfWork.Investment.Update(existingInvestment);
                     _unitOfWork.BankAccount.Update(bankAccount);
@@ -244,7 +217,10 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
                 BankAccount bankAccount = await _unitOfWork.BankAccount.GetUserBankAccount(User.Identity.Name);
 
-                bankAccount.InvestmentAmount = investment.Profit - investment.Loss;
+                if (bankAccount.InvestmentAmount + investment.Profit - investment.Loss < 0) bankAccount.InvestmentAmount = 0;
+
+                if (bankAccount.InvestmentAmount + investment.Profit - investment.Loss >= 0)
+                    bankAccount.InvestmentAmount = bankAccount.InvestmentAmount + investment.Profit - investment.Loss;
 
 
                 Score score = await _unitOfWork.Score.GetFirstOrDefault(x => x.ApplicationUser.Email == User.Identity.Name);
@@ -263,7 +239,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 }
 
                 bankAccount.OperativeAmount += bankAccount.InvestmentAmount;
-                
+
 
                 _unitOfWork.Score.Update(score);
                 await _unitOfWork.Investment.CancelInvestment(User.Identity.Name, organization);
@@ -289,6 +265,57 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
             {
                 return RedirectToAction("Error", "Error", new { Area = "Home" });
             }
+        }
+
+        public async Task<IEnumerable<Investment>> GenerateROI()
+        {
+
+            BankAccount bankAccount = await _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser.Email == User.Identity.Name);
+
+            IEnumerable<Investment> investments = _unitOfWork.Investment.GetUserInvestments(x => x.ApplicationUser.Email == User.Identity.Name && x.ActiveFlag);
+
+            foreach (var investment in investments)
+            {
+                TimeSpan ROISpan = DateTimeOffset.UtcNow - investment.LastCollectedDate;
+
+                if (ROISpan.Days > 0) TempData["RevenueGenerated"] = "Y";
+
+                for (int i = 0; i < ROISpan.Days; i++)
+                {
+                    Random r = new();
+                    int profitOrLoss = r.Next(0, 100);
+                    if (profitOrLoss < 50)
+                    {
+                        // Loss
+                        float lossAmount = (r.Next(1, 101) * investment.InvestmentAmount) / 100;
+                        investment.Loss += lossAmount;
+                        if (bankAccount.InvestmentAmount - investment.Loss < 0) bankAccount.InvestmentAmount = 0;
+                        else bankAccount.InvestmentAmount -= lossAmount;
+
+
+
+                    }
+                    if (profitOrLoss >= 50)
+                    {
+                        // Profit
+                        float profitAmount = (r.Next(1, 101) * investment.InvestmentAmount) / 100;
+                        investment.Profit += profitAmount;
+                        bankAccount.InvestmentAmount += profitAmount;
+
+                    }
+
+                }
+
+
+                _unitOfWork.Investment.Update(investment);
+                _unitOfWork.BankAccount.Update(bankAccount);
+
+            }
+            await _unitOfWork.Save();
+
+
+
+            return investments;
         }
 
     }

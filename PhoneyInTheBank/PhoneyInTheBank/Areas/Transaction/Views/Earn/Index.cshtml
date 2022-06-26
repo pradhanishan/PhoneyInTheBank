@@ -20,6 +20,7 @@
 				<div class="mb-3 custom-earm-money-input-container">
 					<label asp-for="WagerValue" class="form-label fw-bold"></label>
 					<input type="text" class="form-control" placeholder="Enter wager amount here" asp-for="WagerValue" />
+					<br/><span class="text-success">Your current balance is @ViewData["BankBalance"] phonies</span><br/>
 				</div>
 				<input type="text" id="rps-text" asp-for="UserChoice" value="" hidden />
 				<label class="form-label fw-bold" asp-for="UserChoice"></label><br />

@@ -43,3 +43,14 @@
 		swal("Its a tie!", '@TempData["Tie"]', "warning");
 	</script>
 }
+
+
+@if (TempData["RevenueGenerated"] != null)
+{
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript">
+		swal("New Revenue!", "Your investments have generated revenue for you.");
+	</script>
+
+}

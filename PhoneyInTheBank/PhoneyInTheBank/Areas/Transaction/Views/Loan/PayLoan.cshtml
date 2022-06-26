@@ -47,8 +47,10 @@
 				<input hidden type="text" asp-for="AmountLeftToPay" />
 				<input hidden type="text" asp-for="TakenOn" />
 				<label class="form-label fw-bold" asp-for="ClearanceAmount">Enter amount you would like to pay</label>
-				<input type="text" class="form-control custom-pay-loan-input" asp-for="ClearanceAmount" placeholder="Amount less than @Model.AmountLeftToPay">
+				<br/><span class="text-success">Your current balance is : @Model.OperativeAmount phonies</span><br/><br/>
+				<input type="text" class="form-control custom-pay-loan-input" asp-for="ClearanceAmount">
 			</div>
+			<div asp-validation-summary="All" class="text-danger"></div>
 			<div class="mb-3">
 				<input type="submit" class="btn btn-primary custom-bg-blue" value="submit" />
 			</div>

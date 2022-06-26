@@ -17,5 +17,7 @@ namespace Utilities
         public static string InvalidRockPaperScisorChoiceError = "Invalid Choice.";
 
         public static string PayingMoreThanOweError = "You are paying more than you owe!";
+
+        public static string NinetyPercentLoanPaymentThresholdError = "You can't pay more than 90 percent of your balance.";
     }
 }

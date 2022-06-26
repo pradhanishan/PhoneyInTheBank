@@ -115,6 +115,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                     LoanAmountWithInterest = selectedLoanType.TotalAmount,
                     LeftToPayWithInterest = selectedLoanType.TotalAmount,
 
+
                 };
 
                 if ((loan.LoanAmount / bankAccount.OperativeAmount) * 100 >= 5 && (loan.LoanAmount / bankAccount.OperativeAmount) * 100 < 5)
@@ -177,6 +178,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                     AmountWithInterest = existingLoan.LoanAmountWithInterest,
                     AmountLeftToPay = existingLoan.LeftToPayWithInterest,
                     TakenOn = existingLoan.CreatedDate,
+                    OperativeAmount = bankAccount.OperativeAmount,
                 };
 
                 return View(loanPayment);
@@ -219,6 +221,12 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                 if (bankAccount.OperativeAmount < loanPayment.ClearanceAmount)
                 {
                     ModelState.AddModelError(string.Empty, CModelError.InsufficientFundError);
+                    return View(loanPayment);
+                }
+
+                if ((loanPayment.ClearanceAmount / bankAccount.OperativeAmount) * 100 > 90)
+                {
+                    ModelState.AddModelError(string.Empty, CModelError.NinetyPercentLoanPaymentThresholdError);
                     return View(loanPayment);
                 }
 
