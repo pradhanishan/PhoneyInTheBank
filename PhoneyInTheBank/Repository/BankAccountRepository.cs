@@ -1,4 +1,6 @@
 ﻿using DataContext.Data;
+using Microsoft.EntityFrameworkCore;
+using Models;
 using PhoneyInTheBank.Models;
 using Repository.IRepository;
 using System;
@@ -29,6 +31,12 @@ namespace Repository
                 return 1000000000;
             }
             return _db.BankAccount.Max(x => x.AccountNumber) + 1;
+        }
+
+        public async Task<BankAccount> GetUserBankAccount(string user)
+        {
+            ApplicationUser applicationUser = await _db.Users.Where(x => x.Email == user).FirstOrDefaultAsync();
+            return await _db.BankAccount.Where(x => x.ApplicationUser == applicationUser).FirstOrDefaultAsync();
         }
     }
 }

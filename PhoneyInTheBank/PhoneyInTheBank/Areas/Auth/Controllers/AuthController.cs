@@ -36,47 +36,54 @@ namespace PhoneyInTheBank.Areas.Auth.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Register(RegisterVM obj)
         {
-
-            ViewBag.Countries = Utilities.Dropdown.GetCountries();
-            if (!ModelState.IsValid)
+            try
             {
-                return View(obj);
-            }
-
-            if (obj.Password != obj.ConfirmPassword)
-            {
-                ModelState.AddModelError(string.Empty, "Passwords do not match");
-                return View(obj);
-            }
-
-            var user = new ApplicationUser
-            {
-                UserName = obj.Email,
-                FirstName = obj.FirstName,
-                LastName = obj.LastName,
-                Email = obj.Email,
-                City = obj.City,
-                PhoneNumber = obj.PhoneNumber,
-                Country = obj.Country,
-                Age = obj.Age,
-            };
-
-            var result = await _userManager.CreateAsync(user, obj.Password);
-
-            if (result.Succeeded)
-            {
-                // TODO [Important!] -> Email Verification Code
-
-
-                return RedirectToAction("Index", "User", new { area = "User" });
-            }
-            else
-            {
-                foreach (var error in result.Errors)
+                ViewBag.Countries = Utilities.Dropdown.GetCountries();
+                if (!ModelState.IsValid)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    return View(obj);
                 }
-                return View();
+
+                if (obj.Password != obj.ConfirmPassword)
+                {
+                    ModelState.AddModelError(string.Empty, "Passwords do not match");
+                    return View(obj);
+                }
+
+                var user = new ApplicationUser
+                {
+                    UserName = obj.Email,
+                    FirstName = obj.FirstName,
+                    LastName = obj.LastName,
+                    Email = obj.Email,
+                    City = obj.City,
+                    PhoneNumber = obj.PhoneNumber,
+                    Country = obj.Country,
+                    Age = obj.Age,
+                };
+
+                var result = await _userManager.CreateAsync(user, obj.Password);
+
+                if (result.Succeeded)
+                {
+                    // TODO [Important!] -> Email Verification Code
+
+                    TempData["Success"] = "Registered successfully, Login to continue.";
+                    return RedirectToAction("Index", "User", new { area = "User" });
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                    TempData["Success"] = "Registered failed.";
+                    return View();
+                }
+            }
+            catch
+            {
+                return RedirectToAction("Error", "Error", new { Area = "Home" });
             }
         }
 
@@ -90,30 +97,41 @@ namespace PhoneyInTheBank.Areas.Auth.Controllers
 
         public async Task<IActionResult> Login(LoginVM obj)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View();
-            }
-
-            //ApplicationUser signedUser =await _userManager.FindByEmailAsync(obj.Email);
-
-            var result = await _signInManager.PasswordSignInAsync(obj.Email, obj.Password, obj.RememberMe, false);
-
-            if (result.Succeeded)
-            {
-                return RedirectToAction("Index", "User", new { area = "User" });
-            }
-            else
-            {
-                if (result.IsLockedOut)
+                if (!ModelState.IsValid)
                 {
-                    ModelState.AddModelError("Login", "You are locked out.");
+                    return View();
+                }
+
+                //ApplicationUser signedUser =await _userManager.FindByEmailAsync(obj.Email);
+
+                var result = await _signInManager.PasswordSignInAsync(obj.Email, obj.Password, obj.RememberMe, false);
+
+
+                if (result.Succeeded)
+                {
+                    TempData["Success"] = "Welcome " + obj.Email;
+                    return RedirectToAction("Index", "User", new { area = "User" });
                 }
                 else
                 {
-                    ModelState.AddModelError("Login", "Failed To Login.");
+                    if (result.IsLockedOut)
+                    {
+                        TempData["Error"] = "Your email is locked.";
+                        ModelState.AddModelError("Login", "You are locked out.");
+                    }
+                    else
+                    {
+                        TempData["Error"] = "Invalid login credentials.";
+                        ModelState.AddModelError("Login", "Failed To Login.");
+                    }
+                    return View();
                 }
-                return View();
+            }
+            catch
+            {
+                return RedirectToAction("Error", "Error", new { Area = "Home" });
             }
 
         }
@@ -123,8 +141,17 @@ namespace PhoneyInTheBank.Areas.Auth.Controllers
 
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home", new { area = "Home" });
+            try
+            {
+                await _signInManager.SignOutAsync();
+                TempData["Success"] = "Logged out successfully";
+                return RedirectToAction("Index", "Home", new { area = "Home" });
+            }
+            catch
+            {
+                return RedirectToAction("Error", "Error", new { Area = "Home" });
+            }
+
         }
     }
 }

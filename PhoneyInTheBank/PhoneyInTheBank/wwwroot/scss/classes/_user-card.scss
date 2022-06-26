@@ -19,13 +19,11 @@
 .custom-user-card {
     background: $blue;
     display: flex;
-    flex-direction: column;
 }
 
 .bounce {
     animation: updown 2s ease infinite;
 }
-
 
 @media screen and (max-width:$breakpoint-s-device) {
     .custom-user-card {

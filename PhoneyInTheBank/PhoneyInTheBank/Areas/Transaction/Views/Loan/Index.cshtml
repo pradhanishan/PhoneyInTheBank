@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ViewModels.LoanVM>;
+@{
+	ViewData["Title"] = "Loan";
+}
+
+<div class="container custom-loan-container">
+	<div class="custom-loan-child custom-loan-head mt-3">
+		<div class="custom-head">
+			<div><h1>Request Loan </h1></div>
+			<div><a class="btn btn-danger text-dedcoration-none text-white" asp-area="User" asp-controller="User" asp-action="Index"><i class="fa-solid fa-angle-left"></i> back</a></div>
+		</div>
+		<div class="custom-loan-child custom-loan-body mt-3">
+			@foreach (var loanType in Model)
+			{
+				<a class="text-decoration-none text-dark m-3" asp-area="Transaction" asp-controller="Loan" asp-action="ApplyLoan" asp-route-id="@loanType.Id">
+					<div class="card custom-card" style="width: 18rem;">
+						@if (@loanType.LoanType == "Small Loan")
+						{
+							<img src="~/images/small-loan.jpg" class="card-img-top" alt="small-loan">
+						}
+						@if (@loanType.LoanType == "Average Loan")
+						{
+							<img src="~/images/average-loan.jpg" class="card-img-top" alt="small-loan">
+						}
+						@if (@loanType.LoanType == "Large Loan")
+						{
+							<img src="~/images/large-loan.jpg" class="card-img-top" alt="small-loan">
+						}
+
+						<div class="card-body">
+							<h5 class="card-title">@loanType.LoanType</h5>
+							<p class="card-text">
+								@if (@loanType.LoanType == "Small Loan")
+								{
+									<span>A small loan of 1.25 times your current balance with 25 % interest rate</span>
+								}
+								@if (@loanType.LoanType == "Average Loan")
+								{
+									<span>An average loan of 1.5 times your current balance with 50 % interest rate</span>
+								}
+								@if (@loanType.LoanType == "Large Loan")
+								{
+									<span>A large loan of 2 times your current balance with 100 % interest rate</span>
+								}
+							</p>
+						</div>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item">Your current balance : @loanType.OperativeAmount</li>
+							<li class="list-group-item">Amount you will receive : @loanType.LoanAmount</li>
+							<li class="list-group-item"> Loan interest rate : @loanType.InterestRate</li>
+							<li class="list-group-item">Amount you will pay : @loanType.TotalAmount</li>
+						</ul>
+						@*<div class="card-body">
+					<a class="btn btn-primary custom-bg-blue text-light" asp-area="Transaction" asp-controller="Loan" asp-action="ApplyLoan" asp-route-id="@loanType.Id">
+					Apply <i class="bi bi-plus"></i>
+					</a>
+					</div>*@
+					</div>
+				</a>
+			}
+		</div>
+
+	</div>
+</div>
+
+

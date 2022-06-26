@@ -10,10 +10,11 @@ html {
 
 html {
   position: relative;
-  min-height: 100%;
+  height: 100%;
 }
 
 body {
   margin-bottom: 60px;
-  
+  position:relative;
+  min-height:100%;
 }

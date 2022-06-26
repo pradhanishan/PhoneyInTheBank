@@ -10,11 +10,11 @@ namespace Repository.IRepository
     public interface IRepository<T> where T : class
     {
 
-        T GetFirstOrDefault(Expression<Func<T, bool>> filter);
+        Task<T> GetFirstOrDefault(Expression<Func<T, bool>> filter);
 
-        IEnumerable<T> GetAll();
+        Task<IEnumerable<T>> GetAll();
 
-        void Add(T Entity);
+        Task Add(T Entity);
 
         void Remove(T Entity);
 

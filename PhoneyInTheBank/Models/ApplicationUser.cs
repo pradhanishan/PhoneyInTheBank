@@ -29,6 +29,7 @@ namespace PhoneyInTheBank.Models
         [Required]
         public DateTimeOffset LastUpdatedDate { get; set; } = DateTimeOffset.Now;
 
+
         [Required]
 
         public bool ActiveFlag { get; set; } = true;

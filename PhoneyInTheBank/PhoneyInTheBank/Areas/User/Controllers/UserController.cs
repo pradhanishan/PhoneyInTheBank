@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using PhoneyInTheBank.Models;
 using Repository.UnitOfWork;
 using ViewModels;
+using Models;
 
 namespace PhoneyInTheBank.Areas.User.Controllers
 {
@@ -19,58 +20,96 @@ namespace PhoneyInTheBank.Areas.User.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-
-            var username = User.Identity?.Name;
-            ApplicationUser? user = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
-
-            if (user == null) return NotFound();
-
-            BankAccount bankAccount = _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser.Id == user.Id);
-
-            if (bankAccount == null)
+            try
             {
-                return RedirectToAction("CreateBankAccount", "User", new { area = "User" });
+                var username = User.Identity?.Name;
+                ApplicationUser? user = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
+
+                if (user == null) return NotFound();
+
+                BankAccount bankAccount = await _unitOfWork.BankAccount.GetFirstOrDefault(x => x.ApplicationUser.Id == user.Id);
+
+                if (bankAccount == null)
+                {
+                    return RedirectToAction("CreateBankAccount", "User", new { area = "User" });
+                }
+
+                Score score = await _unitOfWork.Score.GetFirstOrDefault(x => x.ApplicationUser == user);
+
+
+
+
+                UserDashboardVM userVM = new()
+                {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Age = user.Age,
+                    Country = user.Country,
+                    City = user.City,
+                    PhoneNumber = user.PhoneNumber,
+                    AccountNumber = bankAccount.AccountNumber,
+                    OperativeAmount = bankAccount.OperativeAmount,
+                    LoanAmount = bankAccount.LoanAmount,
+                    InvestmentAmount = bankAccount.InvestmentAmount,
+                    BankruptFlag = bankAccount.OperativeAmount == 0 && bankAccount.InvestmentAmount == 0 ? true : false,
+                    ActiveUserFlag = user.ActiveFlag,
+                    ActiveAccountFlag = bankAccount.ActiveFlag,
+                    UserCreatedDate = user.CreatedDate,
+                    UserUpdatedDate = user.LastUpdatedDate,
+                    AccountCreatedDate = bankAccount.CreatedDate,
+                    AccountUpdatedDate = bankAccount.UpdatedDate,
+                    LuckScore = score.LuckScore,
+                    CharityScore = score.GoodWillScore,
+                    TrustScore = score.TrustScore,
+                    FinancialStatusScore = score.FinancialScore,
+
+                };
+
+                Present present = await _unitOfWork.Present.GetFirstOrDefault(x => x.ApplicationUser == user);
+
+                if (present == null || present.NextPresentAvailableDate < DateTimeOffset.UtcNow)
+                {
+                    userVM.PresentAvailable = true;
+                }
+
+                return View(userVM);
             }
-
-            UserBankAccountVM userBankAccount = new()
+            catch
             {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Age = user.Age,
-                Country = user.Country,
-                City = user.City,
-                PhoneNumber = user.PhoneNumber,
-                AccountNumber = bankAccount.AccountNumber,
-                OperativeAmount = bankAccount.OperativeAmount,
-                LoanAmount = bankAccount.LoanAmount,
-                InvestmentAmount = bankAccount.InvestmentAmount,
-                BankruptFlag = bankAccount.BankruptFlag,
-                ActiveUserFlag = user.ActiveFlag,
-                ActiveAccountFlag = bankAccount.ActiveFlag,
-                UserCreatedDate = user.CreatedDate,
-                UserUpdatedDate = user.LastUpdatedDate,
-                AccountCreatedDate = bankAccount.CreatedDate,
-                AccountUpdatedDate = bankAccount.UpdatedDate,
-            };
-
-            return View(userBankAccount);
+                return RedirectToAction("Error", "Error", new { Area = "Home" });
+            }
         }
 
-        public IActionResult CreateBankAccount()
+        public async Task<IActionResult> CreateBankAccount()
         {
-            var username = User.Identity?.Name;
-            ApplicationUser? user = _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
-
-            BankAccount bankAccount = new()
+            try
             {
-                AccountNumber = _unitOfWork.BankAccount.GenerateAccountNumber(),
-                ApplicationUser = user,
-            };
-            _unitOfWork.BankAccount.Add(bankAccount);
-            _unitOfWork.Save();
-            return RedirectToAction("Index", "User", new { area = "User" });
+                var username = User.Identity?.Name;
+                ApplicationUser? user = await _unitOfWork.ApplicationUser.GetFirstOrDefault(x => x.Email == username);
+
+                BankAccount bankAccount = new()
+                {
+                    AccountNumber = _unitOfWork.BankAccount.GenerateAccountNumber(),
+                    ApplicationUser = user,
+                };
+
+                Score score = new()
+                {
+                    ApplicationUser = user,
+                };
+
+
+                await _unitOfWork.BankAccount.Add(bankAccount);
+                await _unitOfWork.Score.Add(score);
+                await _unitOfWork.Save();
+                return RedirectToAction("Index", "User", new { area = "User" });
+            }
+            catch
+            {
+                return RedirectToAction("Error", "Error", new { Area = "Home" });
+            }
         }
 
     }

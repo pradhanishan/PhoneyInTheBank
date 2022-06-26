@@ -12,6 +12,19 @@ namespace Repository.UnitOfWork
         IBankAccountRepository BankAccount { get; }
 
         IApplicationUserRepository ApplicationUser { get; }
-        void Save();
+
+        ILoanRepository Loan { get; }
+
+        ITransactionHistoryRepository TransactionHistory { get; }
+
+        IPresentRepository Present { get; }
+
+        IScoreRepository Score { get; }
+
+        IInvestmentRepository Investment { get; }
+
+        IOrganizationRepository Organization { get; }
+
+        Task Save();
     }
 }

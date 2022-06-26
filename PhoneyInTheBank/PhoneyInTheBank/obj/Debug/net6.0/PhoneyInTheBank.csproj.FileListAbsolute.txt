@@ -42,12 +42,7 @@ D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\
 D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
 D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
 D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
-D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
-D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
-D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\obj\Debug\net6.0\PhoneyInTheBank.csproj.AssemblyReference.cache
 D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\obj\Debug\net6.0\PhoneyInTheBank.GeneratedMSBuildEditorConfig.editorconfig
 D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\obj\Debug\net6.0\PhoneyInTheBank.AssemblyInfoInputs.cache
@@ -284,3 +279,8 @@ D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\
 D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\Utilities.pdb
 D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\Repository.dll
 D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\Repository.pdb
+D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\development\PhoneyInTheBank\PhoneyInTheBank\PhoneyInTheBank\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll

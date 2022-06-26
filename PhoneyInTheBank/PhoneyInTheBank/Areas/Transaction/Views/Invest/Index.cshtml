@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ViewModels.InvestVM>;
+
+@{
+	ViewData["Title"] = "Invest";
+}
+
+<div class="container custom-invest-container">
+	<div class="custom-invest-child m-3">
+		<div class="custom-head">
+			<div><h1>Invest  </h1></div>
+			<div><a class="btn btn-danger text-dedcoration-none text-white" asp-area="User" asp-controller="User" asp-action="Index"><i class="fa-solid fa-angle-left"></i> back</a></div>
+		</div>
+		<span>
+			Invest in businesses
+		</span><hr />
+	</div>
+
+	<div class="custom-invest-child custom-invest-child-body m-3">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>
+						Organization
+					</th>
+					<th>
+						Investment
+					</th>
+					<th>
+						Days invested for
+					</th>
+					<th>
+						Profit
+					</th>
+					<th>
+						Loss
+					</th>
+					<th>
+						Stop Investing
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var investment in Model.Where(x => x.InvestedFlag))
+				{
+					<tr>
+						<td>
+							@investment.OrganizationName
+						</td>
+						<td>
+							@investment.InvestmentAmount
+						</td>
+						<td>
+							@investment.DaysInvested
+						</td>
+						<td>
+							@investment.Profit
+						</td>
+						<td>
+							@investment.Loss
+						</td>
+						<td>
+							<a asp-area="Transaction" asp-controller="Invest" asp-action="CollectROI" asp-route-organization=@investment.OrganizationName class=" text-decoration-none btn btn-danger">stop</a>
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+
+	<div class="custom-invest-child col-6">
+		<h3>Invest in the following businesses</h3>
+		<table class="table table-borderless">
+			<tbody>
+				@foreach (var investment in Model.Where(x => !x.InvestedFlag))
+				{
+					<tr>
+						<td class="fw-bold">@investment.OrganizationName</td>
+						<td><a asp-area="Transaction" asp-controller="Invest" asp-action="InvestInOrganization" asp-route-organization=@investment.OrganizationName class="fw-bold text-decoration-none btn btn-success">invest</a></td>
+					</tr>
+				}
+
+			</tbody>
+		</table>
+		<ul>
+		</ul>
+	</div>
+
+</div>
