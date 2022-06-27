@@ -266,3 +266,27 @@ Home/Home/About - [START]
         flex-direction: column;
     }
 }
+
+/*--------------------------------------------------------
+/ - [START]
+--------------------------------------------------------*/
+
+.custom-home-container {
+    display:flex;
+    justify-content:space-around;
+    align-items:stretch;
+}
+
+.custom-home-child {
+    border-radius: 8px;
+    flex-basis:100%;
+}
+
+
+@media screen and (max-width:$breakpoint-s-device) {
+
+    .custom-home-container {
+        flex-direction:column;
+    }
+
+}
