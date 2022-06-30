@@ -1,4 +1,4 @@
-﻿@import "../dependencies/variables/_color-variables.scss";
+﻿@import "../variables/_color-variables.scss";
 
 // Background Colors
 
@@ -18,8 +18,8 @@
     background-color: $green;
 }
 
-.custom-bg-cyan{
-    background-color:$cyan;
+.custom-bg-cyan {
+    background-color: $cyan;
 }
 
 .custom-bg-purple {
@@ -30,14 +30,43 @@
     background-color: $grey;
 }
 
-.custom-bg-disabled{
-    background-color:$disabled;
+.custom-bg-disabled {
+    background-color: $disabled;
 }
+
+.custom-bg-l-red{
+    background-color:$l-red;
+}
+.custom-bg-l-yellow {
+    background-color: $l-yellow;
+}
+.custom-bg-l-light-green {
+    background-color: $l-light-green;
+}
+.custom-bg-l-green {
+    background-color: $l-green;
+}
+.custom-bg-l-orange {
+    background-color: $l-orange;
+}
+.custom-bg-l-maroon {
+    background-color: $l-maroon;
+}
+.custom-bg-l-purple {
+    background-color: $l-purple;
+}
+.custom-bg-l-pink {
+    background-color: $l-pink;
+}
+.custom-bg-l-blue {
+    background-color: $l-blue;
+}
+
 
 // Text Colors
 
-.custom-text-blue{
-    color:$blue;
+.custom-text-blue {
+    color: $blue;
 }
 
 .custom-text-red {
@@ -51,4 +80,3 @@
 .custom-text-green {
     color: $green;
 }
-
