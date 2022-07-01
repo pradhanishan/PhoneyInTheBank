@@ -424,3 +424,9 @@ Home/Home/About - [START]
   justify-content: center;
   width: 100%;
 }
+
+@media screen and (max-width: 767.98px) {
+  .custom-hide-on-mobile {
+    display: none;
+  }
+}

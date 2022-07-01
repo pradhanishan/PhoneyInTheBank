@@ -64,6 +64,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
                         LastCollectedDate = investment.LastCollectedDate,
                         Loss = investment.Loss,
                         Profit = investment.Profit,
+                        Net = investment.Profit - investment.Loss,
                         InvestmentAmount = investment.InvestmentAmount,
                         DaysInvested = investment.DaysInvested,
                     };
@@ -306,7 +307,7 @@ namespace PhoneyInTheBank.Areas.Transaction.Controllers
 
                 }
 
-
+                investment.DaysInvested += ROISpan.Days;
                 _unitOfWork.Investment.Update(investment);
                 _unitOfWork.BankAccount.Update(bankAccount);
 

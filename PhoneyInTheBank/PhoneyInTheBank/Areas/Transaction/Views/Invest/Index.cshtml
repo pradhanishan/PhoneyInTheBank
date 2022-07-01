@@ -16,23 +16,26 @@
 	</div>
 
 	<div class="custom-invest-child custom-invest-child-body m-3">
-		<table class="table table-bordered table-striped">
+		<table class="table table-bordered table-striped text-center">
 			<thead>
 				<tr>
 					<th>
 						Organization
 					</th>
-					<th>
+					<th class="custom-hide-on-mobile">
 						Investment
 					</th>
-					<th>
+					<th class="custom-hide-on-mobile">
 						Days invested for
 					</th>
-					<th>
+					<th class="custom-hide-on-mobile">
 						Profit
 					</th>
-					<th>
+					<th class="custom-hide-on-mobile">
 						Loss
+					</th>
+					<th class="custom-hide-on-mobile">
+						Net
 					</th>
 					<th>
 						Stop Investing
@@ -46,18 +49,39 @@
 						<td>
 							@investment.OrganizationName
 						</td>
-						<td>
+						<td class="custom-hide-on-mobile">
 							@investment.InvestmentAmount
 						</td>
-						<td>
+						<td class="custom-hide-on-mobile">
 							@investment.DaysInvested
 						</td>
-						<td>
+						<td class="custom-hide-on-mobile">
 							@investment.Profit
 						</td>
-						<td>
+						<td class="custom-hide-on-mobile">
 							@investment.Loss
 						</td>
+
+						@if (@investment.Net < 0)
+						{
+							<td class="custom-hide-on-mobile text-danger fw-bold">
+								@investment.Net <i class="mx-3 fa-solid fa-arrow-down"></i>
+							</td>
+						}
+
+						@if (@investment.Net > 0)
+						{
+							<td class="custom-hide-on-mobile text-success fw-bold">
+								@investment.Net <i class=" mx-3 fa-solid fa-arrow-up"></i>
+							</td>
+						}
+						@if (@investment.Net == 0)
+						{
+							<td class="custom-hide-on-mobile">
+								@investment.Net
+							</td>
+						}
+
 						<td>
 							<a asp-area="Transaction" asp-controller="Invest" asp-action="CollectROI" asp-route-organization=@investment.OrganizationName class=" text-decoration-none btn btn-danger">stop</a>
 						</td>
@@ -68,7 +92,10 @@
 	</div>
 
 	<div class="custom-invest-child col-6">
-		<h3>Invest in the following businesses</h3>
+		@if (Model.Where(x => !x.InvestedFlag).Count() > 0)
+		{
+			<h3>Invest in the following businesses</h3>
+		}
 		<table class="table table-borderless">
 			<tbody>
 				@foreach (var investment in Model.Where(x => !x.InvestedFlag))

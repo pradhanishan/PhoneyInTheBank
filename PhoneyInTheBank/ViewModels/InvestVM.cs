@@ -20,6 +20,8 @@ namespace ViewModels
 
         public float Loss { get; set; }
 
+        public float Net { get; set; }
+
         public DateTimeOffset LastCollectedDate { get; set; }
 
         public int DaysInvested { get; set; }

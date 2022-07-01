@@ -11,3 +11,10 @@
     justify-content: center;
     width: 100%;
 }
+
+
+@media screen and (max-width:$breakpoint-s-device) {
+    .custom-hide-on-mobile {
+        display: none;
+    }
+}
